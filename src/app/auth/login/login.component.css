@@ -1,0 +1,233 @@
+.form-group.label-static label.control-label-login, .form-group.label-placeholder label.control-label-login, .form-group.label-floating label.control-label-login {
+  position: absolute;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+.form-group.label-floating label.control-label-login {
+  will-change: left, top, contents;
+}
+.form-group.label-placeholder:not(.is-empty) label.control-label-login {
+  display: none;
+}
+
+.form-group label.control-label-login {
+  font-size: 11px;
+  line-height: 1.07143;
+  color: #ffffff;
+  font-weight: 400;
+  margin: 16px 0 0 0;
+}
+
+.form-group.label-floating label.control-label-login, .form-group.label-placeholder label.control-label-login {
+  top: -7px;
+  font-size: 14px;
+  line-height: 1.42857;
+}
+
+.form-group.label-static label.control-label-login, .form-group.label-floating.is-focused label.control-label-login, .form-group.label-floating:not(.is-empty) label.control-label-login {
+  top: -28px;
+  left: 0;
+  font-size: 11px;
+  line-height: 1.07143;
+}
+.form-group.label-floating input.form-control:-webkit-autofill ~ label.control-label-login label.control-label-login {
+  top: -28px;
+  left: 0;
+  font-size: 11px;
+  line-height: 1.07143;
+}
+
+.form-group.form-group-sm.label-floating label.control-label-login, .form-group.form-group-sm.label-placeholder label.control-label-login {
+  top: -11px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.form-group.form-group-sm.label-static label.control-label-login, .form-group.form-group-sm.label-floating.is-focused label.control-label-login, .form-group.form-group-sm.label-floating:not(.is-empty) label.control-label-login {
+  top: -25px;
+  left: 0;
+  font-size: 9px;
+  line-height: 1.125;
+}
+.form-group.form-group-sm.label-floating input.form-control:-webkit-autofill ~ label.control-label-login label.control-label-login {
+  top: -25px;
+  left: 0;
+  font-size: 9px;
+  line-height: 1.125;
+}
+
+.form-group.form-group-lg.label-floating label.control-label-login, .form-group.form-group-lg.label-placeholder label.control-label-login {
+  top: -5px;
+  font-size: 18px;
+  line-height: 1.33333;
+}
+.form-group.form-group-lg.label-static label.control-label-login, .form-group.form-group-lg.label-floating.is-focused label.control-label-login, .form-group.form-group-lg.label-floating:not(.is-empty) label.control-label-login {
+  top: -32px;
+  left: 0;
+  font-size: 14px;
+  line-height: 1.0;
+}
+.form-group.form-group-lg.label-floating input.form-control:-webkit-autofill ~ label.control-label-login label.control-label-login {
+  top: -32px;
+  left: 0;
+  font-size: 14px;
+  line-height: 1.0;
+}
+
+
+.card [data-background-color="red-reyes"] {
+  background: linear-gradient(60deg, #fa6563, #ff423e);
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(244, 67, 54, 0.4);
+}
+
+.subtitulo-login {
+  color: #fff;
+}
+
+
+.btn.btn-rose{
+  background-color: #ff423e;
+  color: #FFFFFF;
+}
+
+.btn.btn-rose.btn-simple{
+  background-color: transparent;
+  color: #ff423e;
+  box-shadow: none;
+}
+.btn.btn-rose.btn-simple:hover, .btn.btn-rose.btn-simple:focus, .btn.btn-rose.btn-simple:active{
+  background-color: transparent;
+  color: #ff423e;
+}
+
+.btn-group.open > .dropdown-toggle.btn.btn-rose,
+.btn-group-vertical.open > .dropdown-toggle.btn.btn-rose {
+  background-color: #ff423e;
+}
+
+
+.logo-login{
+  width: 120px; height: 120px;
+}
+
+.card .card-login-content {
+  padding: 15px 20px;
+  position: relative;
+}
+
+/* .card .card-header.card-header-icon + .card-loging-content .card-title {
+  padding-bottom: 15px;
+}
+
+.card-login .card-loging-content {
+  padding: 0px 30px 0px 10px;
+} */
+
+
+
+
+.Iam {
+
+  padding: 2em 5em;
+  font: normal 40px/50px Montserrat, sans-serif;
+  color: rgb(255, 255, 255);
+}
+.Iam p {
+  height: 50px;
+  float: left;
+  margin-right: 0.3em;
+}
+.Iam b {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  height: 50px;
+  top: 10px;
+}
+.Iam .innerIam {
+  display: inline-block;
+  color: #ffa55c;
+  position: relative;
+  white-space: nowrap;
+  top: 0;
+  left: 0;
+
+
+/*animation*/
+-webkit-animation:move 5s;
+   -moz-animation:move 5s;
+    -ms-animation:move 5s;
+     -o-animation:move 5s;
+        animation:move 5s;
+/*animation-iteration-count*/
+-webkit-animation-iteration-count:infinite;
+   -moz-animation-iteration-count:infinite;
+    -ms-animation-iteration-count:infinite;
+     -o-animation-iteration-count:infinite;
+        animation-iteration-count:infinite;
+/*animation-delay*/
+-webkit-animation-delay:1s;
+   -moz-animation-delay:1s;
+    -ms-animation-delay:1s;
+     -o-animation-delay:1s;
+        animation-delay:1s;
+}
+@keyframes move{
+0%  { top: 0px; }
+20% { top: -50px; }
+40% { top: -100px; }
+60% { top: -150px; }
+80% { top: -200px; }
+}
+
+@-webkit-keyframes move {
+    0%  { top: 0px; }
+    20% { top: -50px; }
+    40% { top: -100px; }
+    60% { top: -150px; }
+    80% { top: -200px; }
+}
+@-moz-keyframes move {
+    0%  { top: 0px; }
+    20% { top: -50px; }
+    40% { top: -100px; }
+    60% { top: -150px; }
+    80% { top: -200px; }
+}
+@-o-keyframes move {
+    0%  { top: 0px; }
+    20% { top: -50px; }
+    40% { top: -100px; }
+    60% { top: -150px; }
+    80% { top: -200px; }
+}
+@keyframes move {
+    0%  { top: 0px; }
+    20% { top: -50px; }
+    40% { top: -100px; }
+    60% { top: -150px; }
+    80% { top: -200px; }
+}
+
+@media only screen and (max-width: 991px) {
+  .Iam {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .Iam p {
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .Iam p {
+    height: 90px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .Iam p {
+    height: 50px;
+  }
+}

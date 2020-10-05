@@ -1,0 +1,28 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Gestión de Usuarios
+                        </h4>
+                    </div>
+                    <div class="card-content">
+                        <ul class="nav nav-pills nav-pills-simple">
+                            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                <a routerLink="/principal/dashboard/usuarios">Listar</a>
+                            </li>
+                            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                <a routerLink="/principal/dashboard/usuarios/form">{{accion}}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <router-outlet></router-outlet>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

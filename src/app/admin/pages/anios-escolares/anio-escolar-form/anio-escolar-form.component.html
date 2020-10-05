@@ -1,0 +1,43 @@
+<form [formGroup]="anioEscolarForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+
+    <div class="row espacio">
+        <div class="col-md-4">
+            <div class="form-group" [ngClass]="campoValido('anio')?'has-error':''">
+               
+                <label class="control-label">Año*</label>
+                <input type="year" class="form-control" formControlName="anio" required />
+                <ng-container *ngIf="campoValido('anio')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("anio") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group " [ngClass]="campoValido('fecha_inicio')?'has-error':''">
+                <label class="control-label">Fecha inicio*</label>
+                <input type="date" class="form-control" formControlName="fecha_inicio" required />
+                <ng-container *ngIf="campoValido('fecha_inicio')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("fecha_inicio") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group " [ngClass]="campoValido('fecha_fin')?'has-error':''">
+                <label class="control-label">Fecha inicio*</label>
+                <input type="date" class="form-control" formControlName="fecha_fin" required />
+                <ng-container *ngIf="campoValido('fecha_fin')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("fecha_fin") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" [disabled]="anioEscolarForm.invalid"
+                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+                Guardar</button>
+        </div>
+    </div>
+
+
+</form>

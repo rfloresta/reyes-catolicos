@@ -1,0 +1,133 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group label-floating" [ngClass]="campoValido('dni')?'has-error':''">
+                <label class="control-label">DNI*</label>
+                <input type="text" class="form-control" formControlName="dni" required />
+                <ng-container *ngIf="campoValido('dni')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("dni") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="form-group label-floating" [ngClass]="campoValido('primer_nombre')?'has-error':''">
+                <label class="control-label">Primer Nombre*</label>
+                <input type="text" class="form-control" formControlName="primer_nombre" required />
+                <ng-container *ngIf="campoValido('primer_nombre')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("primer_nombre") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="form-group label-floating" [ngClass]="campoValido('segundo_nombre')?'has-error':''">
+                <label class="control-label">Segundo Nombre</label>
+                <input type="text" class="form-control" formControlName="segundo_nombre" />
+                <ng-container *ngIf="campoValido('segundo_nombre')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("segundo_nombre") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="form-group label-floating" [ngClass]="campoValido('apellido_paterno')?'has-error':''">
+                <label class="control-label">Apellido Paterno*</label>
+                <input type="text" class="form-control" formControlName="apellido_paterno" required />
+                <ng-container *ngIf="campoValido('apellido_paterno')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("apellido_paterno") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row espacio">
+        <div class="col-md-3 ">
+            <div class="form-group label-floating" [ngClass]="campoValido('apellido_materno')?'has-error':''">
+                <label class="control-label">Apellido Materno</label>
+                <input type="text" class="form-control" formControlName="apellido_materno" />
+                <ng-container *ngIf="campoValido('apellido_materno')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("apellido_materno") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="form-group label-floating is-focused" [ngClass]="campoValido('fecha_nacimiento')?'has-error':''">
+                <label class="control-label">Fecha de Nacimiento*</label>
+                <input type="date" class="form-control" formControlName="fecha_nacimiento" required />
+            </div>
+            <ng-container *ngIf="campoValido('fecha_nacimiento')" class="text-danger">
+                <span class="error-message">{{ mensajeError("fecha_nacimiento") }}</span>
+            </ng-container>
+        </div>
+        <div class="col-md-3 checkbox-radios ">
+            <div class="radio">
+                <label>
+                    <input type="radio" formControlName="sexo" [value]=1> Masculino
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio"  formControlName="sexo" [value]=2> Femenino
+                </label>
+            </div>
+            <ng-container *ngIf="campoValido('sexo')" class="text-danger">
+                <span class="error-message">{{ mensajeError("sexo") }}</span>
+            </ng-container>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group label-floating" [ngClass]="campoValido('email')?'has-error':''">
+                <label class="control-label">Email*</label>
+                <input type="text" class="form-control" formControlName="email" required />
+
+                <ng-container *ngIf="campoValido('email')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("email") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row espacio">
+        <div class="col-md-4" *ngIf="tipoUsuarios">
+            <div class="form-group label-floating" [ngClass]="campoValido('tipo_usuario_id')?'has-error':''">
+               
+                <label class="control-label">Tipo de Usuario*</label>
+
+                <select  class="selectpicker" data-style="select-with-transition" formControlName="tipo_usuario_id" 
+                     data-size="7">
+                    <option disabled selected value="">Seleccione</option>
+                    <option *ngFor="let tipo of tipoUsuarios" [value]="tipo.id">
+                        {{tipo.nombre}}
+                    </option>
+                </select>
+                <ng-container *ngIf="campoValido('tipo_usuario_id')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("tipo_usuario_id") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-5 ">
+            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                <div class="fileinput-new thumbnail img-circle">
+                    <img src="../../../../../assets/img/placeholder.jpg" alt="...">
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+                <div>
+                    <span class="btn btn-round btn-simple btn-file">
+                        <span class="fileinput-new">Foto</span>
+                        <span class="fileinput-exists">Cambiar</span>
+                        <input type="file" name="..." />
+                    </span>
+                    <a href="#pablo" class="btn btn-simple btn-round fileinput-exists" data-dismiss="fileinput"><i
+                            class="fa fa-times"></i>Quitar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+        <div class="col-md-12">
+            <button type="submit" [disabled]="usuarioForm.invalid"
+                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+                Guardar</button>
+        </div>
+    </div>
+    </div>
+
+
+</form>

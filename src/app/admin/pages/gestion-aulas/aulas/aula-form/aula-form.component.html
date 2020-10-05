@@ -1,0 +1,93 @@
+<form [formGroup]="aulaForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+    <div class="row">
+        <div class="col-md-4" *ngIf="grados">
+            <div class="form-group label-floating" [ngClass]="campoValido('grado_id')?'has-error':''">
+               
+                <label class="control-label">Grado*</label>
+
+                <select  class="selectpicker" data-style="select-with-transition" formControlName="grado_id" 
+                     data-size="7">
+                    <option disabled selected value="">Seleccione</option>
+                    <option *ngFor="let grado of grados" [value]="grado.id">
+                        {{grado.nombre}}
+                    </option>
+                </select>
+                <ng-container *ngIf="campoValido('grado_id')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("grado_id") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-4" *ngIf="secciones">
+            <div class="form-group label-floating" [ngClass]="campoValido('seccion_id')?'has-error':''">
+               
+                <label class="control-label">Seccion*</label>
+
+                <select  class="selectpicker" data-style="select-with-transition" formControlName="seccion_id" 
+                     data-size="7">
+                    <option disabled selected value="">Seleccione</option>
+                    <option *ngFor="let seccion of secciones" [value]="seccion.id">
+                        {{seccion.nombre}}
+                    </option>
+                </select>
+                <ng-container *ngIf="campoValido('seccion_id')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("seccion_id") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-4" *ngIf="niveles">
+            <div class="form-group label-floating" [ngClass]="campoValido('nivel_id')?'has-error':''">
+               
+                <label class="control-label">Nivel*</label>
+
+                <select  class="selectpicker" data-style="select-with-transition" formControlName="nivel_id" 
+                     data-size="7">
+                    <option disabled selected value="">Seleccione</option>
+                    <option *ngFor="let nivel of niveles" [value]="nivel.id">
+                        {{nivel.nombre}}
+                    </option>
+                </select>
+                <ng-container *ngIf="campoValido('nivel_id')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("nivel_id") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row espacio">
+        <div class="col-md-6" *ngIf="turnos">
+            <div class="form-group label-floating" [ngClass]="campoValido('turno_id')?'has-error':''">
+               
+                <label class="control-label">Turnos*</label>
+
+                <select  class="selectpicker" data-style="select-with-transition" formControlName="turno_id" 
+                     data-size="7">
+                    <option disabled selected value="">Seleccione</option>
+                    <option *ngFor="let turno of turnos" [value]="turno.id">
+                        {{turno.nombre}}
+                    </option>
+                </select>
+                <ng-container *ngIf="campoValido('turno_id')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("turno_id") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group label-floating" [ngClass]="campoValido('capacidad')?'has-error':''">
+                <label class="control-label">Capacidad*</label>
+                <input type="number" class="form-control" formControlName="capacidad" required />
+                <ng-container *ngIf="campoValido('capacidad')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("capacidad") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" [disabled]="aulaForm.invalid"
+                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+                Guardar</button>
+        </div>
+    </div>
+
+
+</form>
