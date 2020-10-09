@@ -8,7 +8,7 @@ registerLocaleData(localeEsPE, 'es-PE');
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AnioEscolarRoutingModule } from '@pages/anios-escolares/anio-escolar-routing.module';
+import { AnioEscolarRoutingModule } from '@pages/anios-escolares/anio-routing.module';
 
 import { DataTablesModule  } from "angular-datatables";
 import { CargaModule } from "@shared/carga/carga.module";

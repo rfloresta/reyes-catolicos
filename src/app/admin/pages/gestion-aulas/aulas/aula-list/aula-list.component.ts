@@ -4,7 +4,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Aula } from '@models/aula';
 import { FlujoService } from '@services/flujo.service';
-import { AulaService } from '@services/gestion-aula/aula/aula.service';
+import { AulaService } from '@services/aula/aula.service';
 import Swal from 'sweetalert2'
 
 @Component({

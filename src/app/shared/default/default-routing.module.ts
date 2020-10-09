@@ -17,6 +17,7 @@ export const routes: Routes = [
       { path: 'dashboard/administracion/turnos', loadChildren: () => import('@pages/turnos/turno.module').then(m => m.TurnoModule) },
       { path: 'dashboard/usuarios', loadChildren: () => import('@pages/usuarios/usuario.module').then(m => m.UsuarioModule) },
       { path: 'dashboard/gestion-aulas/aulas', loadChildren: () => import('@pages/gestion-aulas/aulas/aula.module').then(m => m.AulaModule) },
+      { path: 'dashboard/gestion-aulas/aulas-en-curso', loadChildren: () => import('@pages/gestion-aulas/aulas-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) },
       { path: 'dashboard/anios-escolares', loadChildren: () => import('@pages/anios-escolares/anio-escolar.module').then(m => m.AnioEscolarModule) }
     ]
   }

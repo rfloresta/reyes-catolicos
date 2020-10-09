@@ -11,8 +11,8 @@ export class UsuarioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listar(): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios`);
+  listar(tipoUsuarioId: string): Observable<Usuario[]>{
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/${tipoUsuarioId}`);
   }
 
   registrar(Usuario: Usuario){

@@ -12,7 +12,7 @@ import { AulaFormComponent } from './aula-form/aula-form.component';
 import { AulaListComponent } from './aula-list/aula-list.component';
 import { AulaComponent } from './aula.component';
 import { FlujoService } from '@services/flujo.service';
-import { AulaService } from '@services/gestion-aula/aula/aula.service';
+import { AulaService } from '@services/aula/aula.service';
 // import { TipoAulaService } from '@services/tipo-aula/tipo-aula.service';
 import { ToastrModule } from 'ngx-toastr';
 import { GradoService } from '@services/grado/grado.service';

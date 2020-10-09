@@ -1,0 +1,26 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row espacio">
+            <div class="col-md-12">
+                <div class="card card-stats"> 
+                    <div class="card-content">
+                        <div class="stats">
+                            <ul class="nav nav-pills nav-pills-simple">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a routerLink="/principal/dashboard/gestion-aulas/aulas-en-curso">Listar</a>
+                                </li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <a routerLink="/principal/dashboard/gestion-aulas/aulas-en-curso/form">{{accion}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <router-outlet></router-outlet>
+
+        </div>
+    </div>
+

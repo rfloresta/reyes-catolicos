@@ -41,7 +41,6 @@
               "src/assets/js/core/arrive.js",
               "src/assets/js/core/material.min.js",
               "src/assets/js/core/perfect-scrollbar.jquery.min.js",
-              "src/assets/js/plugins/moment.min.js",
               "src/assets/js/plugins/jquery.select-bootstrap.js",
               "src/assets/js/plugins/jquery.datatables.js",
               "src/assets/js/plugins/jasny-bootstrap.min.js",

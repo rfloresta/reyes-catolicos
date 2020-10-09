@@ -1,0 +1,33 @@
+<div class="row">
+    <app-carga *ngIf="cargando"></app-carga>
+    <ng-container *ngIf="!cargando">
+
+    <div class="col-md-4" *ngFor="let aulaEnCurso of aulasEnCursoHijo">
+        <div class="card card-profile">
+            <div class="card-avatar">
+                <a href="#pablo">
+                    <img class="img" src="../../../../../../assets/img/faces/marc.jpg" />
+                </a>
+            </div>
+            <div class="card-content">
+                <h6 class="category text-gray">{{ aulaEnCurso.profesor }}</h6>
+                <h4 class="card-title">{{aulaEnCurso.aula}}</h4>
+                <p class="description">
+                    Estudiantes: {{ aulaEnCurso.cantidad_estudiantes }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-orange btn-round" rel="tooltip" type="button" data-original-title="Ver" title="Ver">
+                    <i class="material-icons">person</i>
+                <div class="ripple-container"></div></button>
+                <button class="btn btn-primary btn-round" rel="tooltip" type="button" data-original-title="Editar" title="Editar">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="btn btn-rose btn-round" rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    </ng-container>
+</div>

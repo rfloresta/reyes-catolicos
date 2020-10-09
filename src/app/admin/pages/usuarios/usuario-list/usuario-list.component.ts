@@ -23,6 +23,7 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
 
   //Para el formulario
   usuarioHijo: Usuario = {
+    dni: null,
     persona_id: null,
     tipo_usuario_id: null,
     primer_nombre: null,
@@ -59,7 +60,7 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
     this.cargando = true;
     // (async () => {
     //   await this.delay(1000);
-    this.usuarioService.listar().subscribe(
+    this.usuarioService.listar('todos').subscribe(
       (res: Usuario[]) => {
         setTimeout(() => {
           this.usuariosHijo = res;

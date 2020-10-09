@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { TipoUsuarioService } from 'src/app/services/tipo-usuario/tipo-usuario.service';
 import { TipoUsuario } from 'src/app/models/TipoUsuario';
 import { UsuarioComponent } from '../usuario.component';
-import initDatetimepickers from'../../../../../assets/js/init/initDatetimepickers.js';
 
 declare var $:any;
 @Component({
@@ -42,7 +41,6 @@ export class UsuarioFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    initDatetimepickers();
     
     this.tipoUsuarioService.listar().subscribe((res) => {
       setTimeout(() => {
@@ -53,9 +51,7 @@ export class UsuarioFormComponent implements OnInit {
 
     this.usuarioSuscription$ = this.flujoService.enviarObjeto$
       .subscribe((res: Usuario) => {
-        console.log(res);
         this.usuarioHijo = res;
-        
       });
 
       this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accionHijo=accion)
@@ -100,6 +96,8 @@ export class UsuarioFormComponent implements OnInit {
     this.usuarioService.registrar(usuario).subscribe(
       res => {
         if(res){
+          console.log(res);
+          
           this.toastr.success("Nuevo usuario registrado");
         }
       },

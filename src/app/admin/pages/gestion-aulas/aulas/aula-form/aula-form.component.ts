@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { Aula } from '@models/aula';
 import { FlujoService } from '@services/flujo.service';
-import { AulaService } from '@services/gestion-aula/aula/aula.service';
+import { AulaService } from '@services/aula/aula.service';
 import { ToastrService } from 'ngx-toastr';
 import { GradoService } from '@services/grado/grado.service';
 import { SeccionService } from '@services/seccion/seccion.service';

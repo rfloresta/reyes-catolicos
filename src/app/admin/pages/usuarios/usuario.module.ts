@@ -14,7 +14,6 @@ import { UsuarioComponent } from './usuario.component';
 import { FlujoService } from 'src/app/services/flujo.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { TipoUsuarioService } from 'src/app/services/tipo-usuario/tipo-usuario.service';
-import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
