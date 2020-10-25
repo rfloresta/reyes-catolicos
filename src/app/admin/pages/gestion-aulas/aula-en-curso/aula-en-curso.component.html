@@ -1,0 +1,36 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-text" data-background-color="red">
+                        <h4 class="card-title text-right">{{aulaEnCurso.aula}}</h4>
+                        <p class="category">Turno {{aulaEnCurso.turno}}</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs">
+                                    <li routerLinkActive="active">
+                                        <a [routerLink]="path">
+                                            <i class="material-icons">bookmarks</i> Áreas Curriculares
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li routerLinkActive="active" *ngIf="tipo===1 || tipo===2 || tipo===3">
+                                        <a [routerLink]="path2">
+                                            <i class="material-icons">school</i> Estudiantes
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <router-outlet></router-outlet>
+        </div>
+    </div>

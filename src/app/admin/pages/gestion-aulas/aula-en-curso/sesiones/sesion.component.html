@@ -1,0 +1,46 @@
+<div class="col-lg-12 col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="default">
+            <i class="material-icons">book</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title ">Matemáticas
+            </h4>
+            <div class="stats">
+                <ul class="nav nav-pills nav-pills-info">
+                    <li class="active">
+                        <a>
+                            Sesiones
+                        </a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-center espacio">
+                <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
+                    <!--
+            color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+        -->
+        <li *ngFor="let sesion of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+        [ngClass]="sesionHijo.numero === sesion.numero ? 'active':''" 
+        >
+        <a class="btn btn-simple" (click)="consultarSesion(sesion)" role="tab" data-toggle="tab">
+            <i class="material-icons">date_range</i>Sesión {{ sesion.numero }}
+        </a>
+    </li>
+                </ul>
+                <pagination-controls class="hide-page-numbers" (pageChange)="p = $event"></pagination-controls>
+            
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">Tema:
+                    <small>{{sesionHijo.tema}}</small>
+                </h5>
+            </div>
+            
+            <div class="col-md-4">
+                 <a [href]="sesionHijo.link" class="btn btn-info"><i class="material-icons">videocam</i> Clase en Google Meet</a>
+            </div>            
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

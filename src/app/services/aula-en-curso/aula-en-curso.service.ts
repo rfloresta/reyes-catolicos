@@ -12,15 +12,19 @@ export class AulaEnCursoService {
   constructor(private httpClient: HttpClient) { }
 
   listar(anioId: number): Observable<AulaEnCurso[]>{
-    return this.httpClient.get<AulaEnCurso[]>(`${environment.API_URL}/aulas_en_curso/${anioId}`);
+    return this.httpClient.get<AulaEnCurso[]>(`${environment.API_URL}/aulas_en_curso/anios/${anioId}`);
+  }
+
+  obtenerId(usuarioId: number): Observable<AulaEnCurso>{
+    return this.httpClient.get<AulaEnCurso>(`${environment.API_URL}/aulas_en_curso/id/${usuarioId}`);
   }
 
   registrar(aulaEnCurso: AulaEnCurso){
     return this.httpClient.post(`${environment.API_URL}/aulas_en_curso`, aulaEnCurso);
   }
 
-  buscar(id: number): Observable<AulaEnCurso>{
-    return this.httpClient.delete(`${environment.API_URL}/aulas_en_curso/${id}`);
+  buscar(id: string): Observable<AulaEnCurso>{
+    return this.httpClient.get(`${environment.API_URL}/aulas_en_curso/${id}`);
   }
 
   actualizar(aulaEnCurso: AulaEnCurso){

@@ -60,7 +60,7 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
     this.cargando = true;
     // (async () => {
     //   await this.delay(1000);
-    this.usuarioService.listar('todos').subscribe(
+    this.usuarioService.listar().subscribe(
       (res: Usuario[]) => {
         setTimeout(() => {
           this.usuariosHijo = res;

@@ -145,6 +145,20 @@
                             </a>
                         </li>
                     </ng-container>
+                    <ng-container *ngIf="tipo===3 || tipo===4">
+                        <li routerLinkActive="active">
+                            <a [routerLink]="[menuItems[11].path]">
+                                <i class="{{menuItems[11].icon}}">T</i>
+                                <p>{{menuItems[11].title}}</p>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="[menuItems[12].path]">
+                                <i class="{{menuItems[12].icon}}">U</i>
+                                <p>{{menuItems[12].title}}</p>
+                            </a>
+                        </li>
+                    </ng-container>
                 </ul>
             </div>
         

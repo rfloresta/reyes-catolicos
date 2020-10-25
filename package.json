@@ -23,6 +23,8 @@
     "angular-datatables": "^9.0.2",
     "bootstrap": "^3.3.5",
     "material-dashboard": "^2.1.0",
+    "moment": "^2.29.1",
+    "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.3.3",

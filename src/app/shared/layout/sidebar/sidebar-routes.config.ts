@@ -1,8 +1,8 @@
 import { MenuType, RouteInfo } from './sidebar.metadata';
-
+        
 export const ROUTES: RouteInfo[] = [
+//-------------ADMINISTRADOR/COORDINADOR-----------------------------------------
     { path: 'dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'material-icons' },
-
     //Administracion IE
     { path: 'dashboard/administracion/areas', title: 'Areas Curriculares', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
     { path: 'dashboard/administracion/turnos', title: 'Turnos', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
@@ -12,7 +12,6 @@ export const ROUTES: RouteInfo[] = [
     //Gestión de clases
     { path: 'dashboard/gestion-aulas/aulas', title: 'Aulas', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
     { path: 'dashboard/gestion-aulas/aulas-en-curso', title: 'Aulas en Curso', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
-    
     //Años escolares
     { path: 'dashboard/anios-escolares', title: 'Años Escolares', menuType: MenuType.LEFT, icon:'material-icons' },
     //
@@ -20,5 +19,13 @@ export const ROUTES: RouteInfo[] = [
     //
     { path: 'dashboard/profesores', title: 'Profesores', menuType: MenuType.LEFT, icon:'material-icons' },
     { path: 'dashboard/tipos-usuario', title: 'Tipos de Usuario', menuType: MenuType.LEFT, icon:'material-icons' },
-    { path: 'dashboard/usuarios', title: 'Usuarios', menuType: MenuType.LEFT, icon:'material-icons' }
+    { path: 'dashboard/usuarios', title: 'Usuarios', menuType: MenuType.LEFT, icon:'material-icons' },
+//------------------------------------------------------------------------------------
+
+//-------------PROFESOR/ESTUDIANTE----------------------------------------------------
+
+{ path: 'inicio', title: 'Inicio', menuType: MenuType.LEFT, icon: 'material-icons' },
+{ path: 'areas-curriculares', title: 'Areas Curriculares', menuType: MenuType.LEFT, icon:'material-icons' },
+
+//------------------------------------------------------------------------------------
 ];

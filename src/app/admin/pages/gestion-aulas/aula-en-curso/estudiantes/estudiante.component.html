@@ -1,0 +1,14 @@
+
+<div *ngIf="tipo===1 || tipo===2" class="col-md-12 col-md-offset-5">
+    <ul class="nav nav-pills nav-pills-danger">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a [routerLink]="path">Listar</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a [routerLink]="path2">Registrar</a>
+        </li>
+    </ul>
+</div>
+
+    <router-outlet></router-outlet>
+    

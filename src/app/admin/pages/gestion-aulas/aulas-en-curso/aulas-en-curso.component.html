@@ -1,11 +1,12 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row espacio">
+        <!-- <ng-container *ngIf="mostrar"> -->
+        <div class="row">
             <div class="col-md-12">
                 <div class="card card-stats"> 
                     <div class="card-content">
                         <div class="stats">
-                            <ul class="nav nav-pills nav-pills-simple">
+                            <ul class="nav nav-pills nav-pills-warning">
                                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                                     <a routerLink="/principal/dashboard/gestion-aulas/aulas-en-curso">Listar</a>
                                 </li>
@@ -18,7 +19,7 @@
                 </div>
             </div>
         </div>
-        
+    <!-- </ng-container> -->
         <router-outlet></router-outlet>
 
         </div>

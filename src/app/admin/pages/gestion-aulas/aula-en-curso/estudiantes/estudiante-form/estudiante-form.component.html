@@ -1,0 +1,33 @@
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-content">
+                <form [formGroup]="aulaEnCursoEstudianteForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                            <div class="col-md-12" *ngIf="estudiantes">
+                                <div class="form-group"
+                                    [ngClass]="campoValido('estudiante_id')?'has-error':''">
+
+                                    <label class="control-label">Estudiante*</label>
+
+                                    <select data-live-search="true"  data-style="select-with-transition" multiple class="selectpicker" data-size="5"
+                                        formControlName="estudiante_id" title="seleccione estudiante">
+                                        <option disabled>Seleccione</option>
+                                        <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id">
+                                            {{estudiante.primer_nombre}} {{estudiante.segundo_nombre}}
+                                            {{estudiante.apellido_paterno}} {{estudiante.apellido_materno}}
+                                        </option>
+                                    </select>
+                                    <ng-container *ngIf="campoValido('estudiante_id')" class="text-danger">
+                                        <span class="error-message">{{ mensajeError("estudiante_id") }}</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" [disabled]="aulaEnCursoEstudianteForm.invalid" class="btn btn-fill btn-primary pull-right"
+                       >
+                        Guardar</button>
+                        <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>

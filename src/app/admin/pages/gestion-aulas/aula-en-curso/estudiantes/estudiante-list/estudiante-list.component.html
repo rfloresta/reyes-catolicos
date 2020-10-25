@@ -1,0 +1,32 @@
+
+    <app-carga *ngIf="cargando"></app-carga>
+    <ng-container *ngIf="!cargando">
+
+        <div class="col-md-3 tarjeta-espacio" *ngFor="let estudiante of aulaEnCursoEstudiantesHijo">
+
+        <div class="card card-profile card-hidden">
+            <div class="card-avatar">
+                <a href="#pablo">
+                    <img class="avatar" src="../../../../../../assets/img/faces/avatar.jpg" alt="...">
+                </a>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">{{estudiante.estudiante}}</h4>
+                <p class="description">
+                    {{ estudiante.email }}
+                </p>
+                <p class="description">
+                    {{ estudiante.edad }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary btn-round" rel="tooltip" type="button" data-original-title="Editar" title="Editar">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="btn btn-rose btn-round" rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    </ng-container>

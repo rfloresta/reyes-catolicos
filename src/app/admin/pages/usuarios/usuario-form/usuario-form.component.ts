@@ -18,9 +18,9 @@ declare var $:any;
 export class UsuarioFormComponent implements OnInit {
 
   private validarEmail: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private validarSoloLetras = /^[a-zA-Z ]*$/;
+  private validarSoloLetras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
   private validarDni = /^([0-9]){8}$/;
-  private validarFecha = /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/;
+  // private validarFecha = /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/;
   
   accionHijo: string;
   usuarioHijo: Usuario;
@@ -78,7 +78,7 @@ export class UsuarioFormComponent implements OnInit {
       this.usuarioForm = this._builder.group({
       id: this.usuarioHijo.id,
       dni: [this.usuarioHijo.dni, [Validators.required,Validators.pattern(this.validarDni)]],
-      fecha_nacimiento: [this.usuarioHijo.fecha_nacimiento, [Validators.required, Validators.pattern(this.validarFecha)]],
+      fecha_nacimiento: [this.usuarioHijo.fecha_nacimiento, [Validators.required]],
       sexo: [this.usuarioHijo.sexo, Validators.required],
       primer_nombre: [this.usuarioHijo.primer_nombre, [Validators.required,Validators.minLength(2), Validators.pattern(this.validarSoloLetras)]],
       segundo_nombre: [this.usuarioHijo.segundo_nombre, [Validators.minLength(2), Validators.pattern(this.validarSoloLetras)]],

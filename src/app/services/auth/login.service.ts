@@ -16,12 +16,12 @@ const helper = new JwtHelperService();
 export class LoginService {
 
   user: Usuario;
-
+  tipo: number;
   constructor(private httpClient: HttpClient, 
     private router: Router, 
     private flujoService: FlujoService) {
     this.verificarToken();
-   }
+       }
    
   login(Usuario: Usuario): Observable<UsuarioResponse | void >{
     return this.httpClient
@@ -34,10 +34,13 @@ export class LoginService {
         return res;
       })
     );
+    
   }
+
 
   logout():void {
     localStorage.removeItem('usuario');
+    localStorage.removeItem('ai');
     this.flujoService.logeado(false);
     this.router.navigate([""]);
   }

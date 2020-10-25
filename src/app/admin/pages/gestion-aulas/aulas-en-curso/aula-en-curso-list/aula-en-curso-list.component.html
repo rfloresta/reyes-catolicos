@@ -2,7 +2,7 @@
     <app-carga *ngIf="cargando"></app-carga>
     <ng-container *ngIf="!cargando">
 
-    <div class="col-md-4" *ngFor="let aulaEnCurso of aulasEnCursoHijo">
+    <div class="col-md-4 espacio" *ngFor="let aulaEnCurso of aulasEnCursoHijo">
         <div class="card card-profile">
             <div class="card-avatar">
                 <a href="#pablo">
@@ -17,8 +17,8 @@
                 </p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-orange btn-round" rel="tooltip" type="button" data-original-title="Ver" title="Ver">
-                    <i class="material-icons">person</i>
+                <button (click)="irAula(aulaEnCurso)"  class="btn btn-orange btn-round" rel="tooltip" type="button" data-original-title="Ver" title="Ver">
+                    <i class="material-icons">remove_red_eye</i>
                 <div class="ripple-container"></div></button>
                 <button class="btn btn-primary btn-round" rel="tooltip" type="button" data-original-title="Editar" title="Editar">
                     <i class="material-icons">edit</i>

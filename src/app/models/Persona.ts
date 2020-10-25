@@ -13,4 +13,9 @@ export interface Persona {
     direccion?: string,
     foto?: string,
     estado?: number
+
+    //pintar
+    texto_sexo?: string,
+    texto_tipo?: string
+    edad?: string
 }

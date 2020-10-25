@@ -11,8 +11,20 @@ export class UsuarioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listar(tipoUsuarioId: string): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/${tipoUsuarioId}`);
+  listar(): Observable<Usuario[]>{
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios`);
+  }
+
+  listarEstudiantes(): Observable<Usuario[]>{
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/estudiantes`);
+  }
+
+  listarProfesores(): Observable<Usuario[]>{
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/profesores`);
+  }
+
+  listarEstudiantesSinAula(): Observable<Usuario[]>{
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/estudiantes-sin-aula`);
   }
 
   registrar(Usuario: Usuario){
@@ -20,7 +32,7 @@ export class UsuarioService {
   }
 
   buscar(id: number): Observable<Usuario>{
-    return this.httpClient.delete(`${environment.API_URL}/usuarios/${id}`);
+    return this.httpClient.get(`${environment.API_URL}/usuarios/${id}`);
   }
 
   actualizar(Usuario: Usuario){

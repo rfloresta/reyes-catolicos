@@ -1,0 +1,48 @@
+<div class="col-md-12 espacio">
+    <h4 class="card-title">Recursos
+
+        <button title="Agregar Nuevo Recurso" class="btn btn-round btn-success btn-sm"><i class="material-icons">queue</i></button>
+
+    </h4>
+
+    <div class="col-lg-3" *ngFor="let recurso of recursos">
+        <div class="card card-pricing card-raised">
+            <div class="content">
+                <h6 class="category">PDF</h6>
+                <div class="icon icon-danger">
+                    <a href="#"> <i class="material-icons">link</i></a>
+                </div>
+                <h4 class="card-title"><a href="#">{{recurso.titulo}}</a></h4>
+                <p class="card-description">
+                    {{ humanFormat(recurso.fecha)}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-md-12">
+    <h4 class="card-title">Actividades
+        <button title="Agregar Nueva Actividad" class="btn btn-round btn-success btn-sm"><i class="material-icons">queue</i></button>
+    </h4>
+    <div class="col-lg-4" *ngFor="let actividad of actividades" >
+        <div class="card card-pricing card-raised">
+            <div class="content">
+                <h6 class="category">Tarea</h6>
+                <div class="icon icon-info">
+                    <a href="#"><i class="material-icons">work_off</i></a>
+                </div>
+                <h5 class="card-title"><a href="#">{{actividad.titulo}}</a></h5>
+                <p class="card-description">
+                   
+                    {{ humanFormat(actividad.fecha_inicio)}}
+                </p>
+            </div>
+            <div class="card-footer">
+                <div class="stats pull-right">
+                    <p class="category"><i class="material-icons">hourglass_bottom</i> Cerrado en 0 min.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

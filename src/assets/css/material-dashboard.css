@@ -10998,7 +10998,7 @@ footer .btn {
 }
 
 .nav-tabs {
-  background: #9c27b0;
+  background: #b3b3b3;
   border: 0;
   border-radius: 3px;
   padding: 0 15px;
@@ -11842,4 +11842,14 @@ footer .btn {
 .espacio{
   position: relative; 
   margin-bottom: 2em
+}
+
+.espacio2{
+  position: relative; 
+  margin-bottom: 3.5em
+}
+
+.tarjeta-espacio{
+  position: relative; 
+  margin-top: 3.5em
 }

@@ -6,10 +6,6 @@ export interface Usuario extends Persona {
     estado?: number,
     tipo_usuario_id?: number,
     persona_id?: number,
-
-    //pintar
-    texto_sexo?: string,
-    texto_tipo?: string
 }
 
 export interface UsuarioResponse {

@@ -5,6 +5,9 @@ import { FlujoService } from '@services/flujo.service';
 import { AulaEnCursoService } from '@services/aula-en-curso/aula-en-curso.service';
 import Swal from 'sweetalert2'
 import { AulaEnCurso } from '@models/AulaEnCurso';
+import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
+import { AnioEscolar } from '@models/AnioEscolar';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-aula-en-curso-list',
@@ -22,29 +25,29 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
     aula_id: null,
     anio_id: null,
     estado: null,
-    capacidad_actual: null,
-    //pintar
-    aula: null,
-    profesor: null,
-    cantidad_estudiantes: null
+    capacidad_actual: null
   };
+
+  anioId: number= 0;
 
   accionEstado: string = "Activa";
 
   cargando: boolean;
+  mostrar: boolean;
 
   constructor(private aulaEnCursoService: AulaEnCursoService,
+    private anioEscolarService: AnioEscolarService,
     private flujoService: FlujoService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    // Configuración de datatable
 
-    // Listar aulaEnCursos
-    this.cargando = true;
-
-    this.aulaEnCursoService.listar(1).subscribe(
+    this.cargando=true;
+    this.anioEscolarService.obtenerAnioActivo()
+    .pipe(
+      switchMap((res: AnioEscolar) => this.aulaEnCursoService.listar(res.id))
+    ).subscribe(
       (res: AulaEnCurso[]) => {
         setTimeout(() => {
           this.aulasEnCursoHijo = res;
@@ -58,13 +61,10 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
     //Método para inicializar el registro
     this.flujoService.enviarObjeto(this.aulaEnCursoHijo);
     this.flujoService.enviarAccion("Registrar");
+    // this.flujoService.enviarBool(true);
     $.getScript('../../../../../../assets/js/init/initMenu.js');
 
   }
-
-  // delay(ms: number) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
 
 
   editar(aulaEnCurso: AulaEnCurso) {
@@ -139,6 +139,15 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  irAula(aulaEnCurso: AulaEnCurso){
+    localStorage.setItem('ai', aulaEnCurso.id.toString());
+    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas']);
+  }
+  
+  // mostrarBarra(){
+  //   this.flujoService.enviarBool(false);
+  // }
 
   ngOnDestroy(): void {
     // this.dtTrigger.unsubscribe();

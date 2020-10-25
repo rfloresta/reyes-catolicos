@@ -47,7 +47,7 @@ export class AulaEnCursoFormComponent implements OnInit {
         this.aulas=res;
     });
 
-    this.usuarioService.listar('3').subscribe((res) => {
+    this.usuarioService.listarProfesores().subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);

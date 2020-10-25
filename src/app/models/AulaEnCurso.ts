@@ -1,5 +1,3 @@
-import { Persona } from './Persona'
-
 export interface AulaEnCurso{
     id?: number,
     capacidad_actual?: number,
@@ -9,6 +7,7 @@ export interface AulaEnCurso{
     usuario_id?: number,
     //pintar
     aula?: string,
+    turno?: string,
     profesor?: string,
     cantidad_estudiantes?: number
 }
