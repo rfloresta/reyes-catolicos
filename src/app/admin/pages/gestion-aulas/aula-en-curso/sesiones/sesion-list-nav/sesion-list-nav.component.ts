@@ -6,6 +6,7 @@ import { FlujoService } from 'src/app/services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { Sesion } from '@models/sesion';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
+import Swal from 'sweetalert2';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
@@ -102,6 +103,47 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
     this.sesion = sesion;
     localStorage.setItem('sesion', JSON.stringify(sesion));
     this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones', sesion.numero]);
+  }
+
+  editar(obj: Sesion) {
+    console.log('SESION -',obj);
+
+    this.flujoService.enviarObjeto(obj);
+    this.flujoService.enviarAccion("Actualizar");
+    this.router.navigate(['principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/frm/guardar']);
+  }
+
+  eliminar(obj: Sesion) {
+
+    Swal.fire({
+      title: `¿Está seguro de eliminar la sesión número ${obj.numero}?`,
+      text: "Una vez eliminado no se podrá revertir",
+      width: 500,
+      buttonsStyling: false,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      // icon: 'warning',
+      imageUrl: "../../../../.././assets/img/warning-icon.png",
+      imageWidth: 80,
+      imageHeight: 80,
+      showCancelButton: true
+    }).then((result) => {
+      if (result.value) {
+        this.sesionService.eliminar(obj.id).subscribe(
+          res => {
+            if (res === "ok") Swal.fire('¡Eliminado!', 'La sesión fue eliminado.', 'success')
+          },
+          err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) },
+          () => {
+            this.sesionesHijo = this.sesionesHijo.filter(a => a.id !== obj.id);
+          }
+        );
+      }
+    })
   }
 
   //Para destruir la suscripcion anterior al registrar

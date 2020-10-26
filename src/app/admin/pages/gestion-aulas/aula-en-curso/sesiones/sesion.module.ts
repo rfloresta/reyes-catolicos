@@ -18,6 +18,9 @@ import { SesionFormComponent } from './sesion-form/sesion-form.component';
     SesionComponent,
     SesionFormComponent
     ],
+    exports:[
+      SesionFormComponent
+    ],
   imports: [
     CommonModule,
     SesionRoutingModule,
