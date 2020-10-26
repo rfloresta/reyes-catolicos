@@ -11,8 +11,13 @@ export class SesionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listar(area_aula_ani_id: string): Observable<Sesion[]>{
-    return this.httpClient.get<Sesion[]>(`${environment.API_URL}/sesiones/${area_aula_ani_id}`);
+  listar(area_aula_anio_id: number): Observable<Sesion[]>{
+    return this.httpClient.get<Sesion[]>(`${environment.API_URL}/sesiones/${area_aula_anio_id}`);
+  }
+
+  obtenerSesionActual(area_aula_anio_id: number): Observable<Sesion>{
+    return this.httpClient
+    .get<Sesion>(`${environment.API_URL}/sesiones/sesion_actual/${area_aula_anio_id}`);
   }
 
   registrar(obj: Sesion){

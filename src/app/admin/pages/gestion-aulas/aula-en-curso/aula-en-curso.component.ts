@@ -60,8 +60,8 @@ export class AulaEnCursoComponent implements OnInit {
       this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas";
       this.path2 = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/estudiantes";
     }else{
-      this.path = "/principal/inicio/areas-curriculares/areas";
-      this.path2 = "/principal/inicio/areas-curriculares/estudiantes";
+      this.path = "/principal/inicio/areas";
+      this.path2 = "/principal/inicio/areas/estudiantes";
     }
 
   }

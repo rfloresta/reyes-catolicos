@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
@@ -8,7 +8,7 @@ import { FlujoService } from 'src/app/services/flujo.service';
   templateUrl: './aula.component.html',
   styleUrls: ['./aula.component.css']
 })
-export class AulaComponent implements OnInit {
+export class AulaComponent implements OnInit, OnDestroy {
   accion: string;
   accionSuscription$: Subscription;
   

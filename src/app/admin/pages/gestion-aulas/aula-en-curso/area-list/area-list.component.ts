@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
 import { filter } from 'rxjs/operators';
 import { Sesion } from '@models/sesion';
+import { SesionService } from '@services/sesion/sesion.service';
 
 @Component({
   selector: 'app-area-list',
@@ -19,15 +20,15 @@ export class AreaListComponent implements OnInit, OnDestroy {
 
   sesion: Sesion = 
     {
-    id:1,
-    numero: 1,
-    fecha: "2020-10-25 13:32:46",
-    link: "https",
-    tema: "Los colores primarios",
-    area_aula_anio_id: 9
+    // id:2,
+    // numero: 2,
+    // fecha: "2020-10-26 13:32:46",
+    // link: "https",
+    // tema: "Los colores secundarios",
+    // area_aula_anio_id: 9
     }
   
-
+  area: AulaEnCursoArea;
   accionEstado: string = "Activa";
   aula_anio_id: string;
   cargando: boolean;
@@ -35,6 +36,7 @@ export class AreaListComponent implements OnInit, OnDestroy {
   imgRuta: string = "../../../../../../../assets/img/";
 
   constructor(private aulaEnCursoAreaService: AulaEnCursoAreaService,
+    private sesionService: SesionService,
     private flujoService: FlujoService,
     private activatedRouter: ActivatedRoute,
     private router: Router
@@ -61,18 +63,34 @@ export class AreaListComponent implements OnInit, OnDestroy {
 
   }
 
-  // delay(ms: number) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
+  consultarArea(area: AulaEnCursoArea) {
+
+    //almacenamos el area para listar sus sesiones mediante el id, 
+    //además de mostrar el nombre en la vista Sesiones
+    localStorage.setItem('area', JSON.stringify(area));
+
+  // hacer busqueda de la sesion activa segun la semana
+  // this.sesionService.obtenerSesionActual(area.id).subscribe(
+  //   (res: Sesion) => {
+      
+  //     this.sesion = res;
+  //     console.log('Sesion in suscribe',this.sesion);
+      
+  //     this.flujoService.theItem = JSON.stringify(res);
 
 
-  consultarArea(id: string) {
-    localStorage.setItem('aaai',id);
+  //   },
+  //   err => console.error(err)
+  // );
+// localStorage.setItem('sesion', JSON.stringify(this.sesion));
 
-  // hacer busqueda de la sesion activa segun la semana aquí
-  localStorage.setItem('sesion', JSON.stringify(this.sesion));
 
-    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones']);
+this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones']);
+
+
+
+
+
   }
 
 

@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.1.2",
+    "@angular/cdk": "^10.2.5",
     "@angular/common": "~10.1.2",
     "@angular/compiler": "~10.1.2",
     "@angular/core": "~10.1.2",
@@ -24,6 +25,7 @@
     "bootstrap": "^3.3.5",
     "material-dashboard": "^2.1.0",
     "moment": "^2.29.1",
+    "ng-pick-datetime": "^7.0.0",
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.6.0",

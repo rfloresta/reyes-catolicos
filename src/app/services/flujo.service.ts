@@ -55,5 +55,17 @@ export class FlujoService {
     this.enviarBoolSource.next(bool);
   }
 
+  $itemValue = new BehaviorSubject(this.theItem);
+
+ set theItem(value) {
+   this.$itemValue.next(value); // this will make sure to tell every subscriber about the change.
+   
+   localStorage.setItem('sesion', value);
+ }
+
+ get theItem() {
+   return localStorage.getItem('sesion');
+ }
+
   constructor() { }
 }

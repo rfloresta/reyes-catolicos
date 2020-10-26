@@ -14,6 +14,7 @@ import { UsuarioService } from '@services/usuario/usuario.service';
 import { AulaEnCursoService } from '@services/aula-en-curso/aula-en-curso.service';
 import { AreaListComponent } from './area-list/area-list.component';
 import { AulaEnCursoAreaService } from '@services/aula-en-curso-area/aula-en-curso-area.service';
+import { SesionService } from '@services/sesion/sesion.service';
 @NgModule({
   declarations: [
     AulaEnCursoComponent,
@@ -33,7 +34,7 @@ import { AulaEnCursoAreaService } from '@services/aula-en-curso-area/aula-en-cur
     FlujoService,
     AulaEnCursoService,
     AulaEnCursoAreaService,
-    UsuarioService
+    SesionService
   ]
 })
 export class AulaEnCursoModule { }

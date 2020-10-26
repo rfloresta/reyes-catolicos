@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { Aula } from '@models/aula';
@@ -20,7 +20,7 @@ declare var $:any;
   templateUrl: './aula-form.component.html',
   styleUrls: ['./aula-form.component.css']
 })
-export class AulaFormComponent implements OnInit {
+export class AulaFormComponent implements OnInit, OnDestroy {
   
   accionHijo: string;
   aulaHijo: Aula;

@@ -4,43 +4,24 @@
             <i class="material-icons">book</i>
         </div>
         <div class="card-content">
-            <h4 class="card-title ">Matemáticas
+            <h4 class="card-title">{{area.nombre_area}} -
+                <small>Sesiones</small>
             </h4>
-            <div class="stats">
-                <ul class="nav nav-pills nav-pills-info">
-                    <li class="active">
-                        <a>
-                            Sesiones
-                        </a> 
-                    </li>
-                </ul>
-            </div>
-            <div class="nav-center espacio">
-                <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
-                    <!--
-            color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
-        -->
-        <li *ngFor="let sesion of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
-        [ngClass]="sesionHijo.numero === sesion.numero ? 'active':''" 
-        >
-        <a class="btn btn-simple" (click)="consultarSesion(sesion)" role="tab" data-toggle="tab">
-            <i class="material-icons">date_range</i>Sesión {{ sesion.numero }}
-        </a>
-    </li>
-                </ul>
-                <pagination-controls class="hide-page-numbers" (pageChange)="p = $event"></pagination-controls>
-            
-            </div>
-            <div class="col-md-8">
-                <h5 class="card-title">Tema:
-                    <small>{{sesionHijo.tema}}</small>
-                </h5>
-            </div>
-            
-            <div class="col-md-4">
-                 <a [href]="sesionHijo.link" class="btn btn-info"><i class="material-icons">videocam</i> Clase en Google Meet</a>
-            </div>            
+            <ul class="nav nav-pills nav-pills-info">
+                <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a routerLink="/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones">
+                        Listar
+                    </a> 
+                </li> -->
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/frm/guardar']">
+                        {{accion}}
+                    </a> 
+                </li>
+            </ul>
+
             <router-outlet></router-outlet>
+        
         </div>
     </div>
 </div>

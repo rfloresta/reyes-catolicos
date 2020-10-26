@@ -1,96 +1,113 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UsuarioResponse } from '@models/Usuario';
-import { Observable, Subscription  } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { Sesion } from '@models/sesion';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
-import { map, take } from 'rxjs/operators';
-import { async } from '@angular/core/testing';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
-  selector: 'app-sesion',
-  templateUrl: './sesion.component.html',
-  styleUrls: ['./sesion.component.css']
+  selector: 'app-sesion-list-nav',
+  templateUrl: './sesion-list-nav.component.html',
+  styleUrls: ['./sesion-list-nav.component.css']
 })
-export class SesionComponent implements OnInit, OnDestroy {
-  
+export class SesionListNavComponent implements OnInit, OnDestroy {
+
   accion: string;
   accionSuscription$: Subscription;
   cargando: boolean;
-  area_aula_anio_id:string;
+  area_aula_anio_id: string;
   path: string;
   path2: string;
   urlAnterior: string;
   p: number = 1;
   sesionesHijo: Sesion[] = [];
-  sesionHijo: Sesion = {};
+  sesion: Sesion = {};
+  sesionFrm: Sesion = {
+    id: null,
+    numero: null,
+    fecha: null,
+    link: null,
+    tema: null,
+    area_aula_anio_id: null
+  };
+
   area: AulaEnCursoArea = {};
   usuario: UsuarioResponse;
   tipo: number;
   time: string;
   time_end: string;
-  constructor( private flujoService: FlujoService,
+  constructor(private flujoService: FlujoService,
     private sesionService: SesionService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-    ) { 
+  ) {}
 
-    }
-
-  ngOnInit(): void {
-
-
-
- 
-      this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion)
-
+  ngOnInit(): void { 
     let areaString = localStorage.getItem('area');
     this.area = JSON.parse(areaString);
-    // this.consultarSesion();
+
+    this.cargando = true;
+    this.sesionService.listar(this.area.id).subscribe(
+      (res: Sesion[]) => {
+        this.sesionesHijo = res;
+        let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
+        // this.sesionFrm.numero=numeroMayor+1;
+        localStorage.setItem('nuevoNumero', numeroMayor + 1); 
+      },
+      err => console.error(err)
+    );
+
+    this.sesionService.obtenerSesionActual(this.area.id)
+      .subscribe((res: Sesion) => {
+        this.consultarSesion(res);
+      });
+
+    this.flujoService.enviarObjeto(this.sesionFrm);
+    this.flujoService.enviarAccion("Registrar");
+    
 
 
     // this.flujoService.$itemValue.subscribe((val)=>{
     //   this.sesionHijo = JSON.parse(val);
     //   console.log('sesionHijo ->', this.sesionHijo);
     // });
-    
-   
-   
+
+
+
     // this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion);
 
-    
+
     // let usuarioString = localStorage.getItem('usuario');
     // this.usuario = JSON.parse(usuarioString);
     // this.tipo = this.usuario.tipo;
 
-    
+
 
     // if(this.tipo===1 || this.tipo===2 ){
-      // this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/";
+    // this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/";
     //   // this.path2 = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones";
     // }else{
     //   this.path = "/principal/inicio/areas-curriculares";
     //   this.path2 = "/principal/inicio/areas-curriculares/estudiantes";
     // }
-    
-    
+
+
   }
 
-  consultarSesion(){
+  consultarSesion(sesion: Sesion) {
     //Propiedad para comparar con la lista de sesiones y adignar la clase active
-    // this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/list";
-    // this.sesionHijo=sesion;
-    // localStorage.setItem('sesion', JSON.stringify(sesion));
-    // this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones']);
+    this.sesion = sesion;
+    localStorage.setItem('sesion', JSON.stringify(sesion));
+    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones', sesion.numero]);
   }
 
   //Para destruir la suscripcion anterior al registrar
   ngOnDestroy(): void {
-    if(this.accionSuscription$)
-    this.accionSuscription$.unsubscribe();
+    if (this.accionSuscription$)
+      this.accionSuscription$.unsubscribe();
   }
-  
+
 }

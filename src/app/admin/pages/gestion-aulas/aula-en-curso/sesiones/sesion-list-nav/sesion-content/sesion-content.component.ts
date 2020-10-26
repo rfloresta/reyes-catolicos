@@ -20,7 +20,7 @@ import { map } from 'rxjs/operators';
 export class SesionContentComponent implements OnInit {
   
   sesion_id:string;
-  sesion: Sesion;
+  sesionHijo: Sesion;
   usuario: UsuarioResponse;
   tipo: number;
   actividades: Actividad[] = [];
@@ -49,13 +49,17 @@ export class SesionContentComponent implements OnInit {
     //hasta minuto
     // this.time_end=moment('02:40:00', "hh:mm:ss", true).endOf('m').fromNow();
     //hasta seg
-    this.time_end=moment('02:38:00', "hh:mm:ss", true).endOf('s').fromNow();
+    // this.time_end=moment('02:38:00', "hh:mm:ss", true).endOf('s').fromNow();
     //
+
+
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       let sesionString = localStorage.getItem('sesion');
-      this.sesion = JSON.parse(sesionString);
+      this.sesionHijo = JSON.parse(sesionString);
       
-      this.actividadService.listar(this.sesion.id)
+   
+      //Listar Actividades
+      this.actividadService.listar(this.sesionHijo.id)
       .subscribe((res: Actividad[])=> 
       {
         this.actividades=res; 
@@ -63,7 +67,7 @@ export class SesionContentComponent implements OnInit {
       );
       
       //Listar Recursos
-      this.recursoService.listar(this.sesion.id).subscribe((res: Recurso[])=> 
+      this.recursoService.listar(this.sesionHijo.id).subscribe((res: Recurso[])=> 
       {
         this.recursos=res; 
       }
@@ -73,11 +77,6 @@ export class SesionContentComponent implements OnInit {
     // this.numero=this.activatedRoute.snapshot.paramMap.get('numero');
     
     
-   
-    //Listar Actividades
-   
-
-
     
     // this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion);
 

@@ -1,0 +1,55 @@
+<form [formGroup]="sesionForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+    
+    <div class="row espacio">
+        <div class="col-md-3">
+            <div class="form-group label-floating" [ngClass]="campoValido('numero')?'has-error':''">
+                <label class="control-label">Número*</label>
+                <input type="number" class="form-control" formControlName="numero" required />
+                <ng-container *ngIf="campoValido('numero')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("numero") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group label-floating" [ngClass]="campoValido('fecha')?'has-error':''">
+                <label class="control-label">Fecha*</label>
+                <input class="form-control" formControlName="fecha" required  [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+    <owl-date-time #dt></owl-date-time>
+                <ng-container *ngIf="campoValido('fecha')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("fecha") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group label-floating" [ngClass]="campoValido('link')?'has-error':''">
+                <label class="control-label">Link de clase*</label>
+                <input type="url" class="form-control" formControlName="link" />
+                <ng-container *ngIf="campoValido('link')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("link") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group label-floating" [ngClass]="campoValido('tema')?'has-error':''">
+                <label class="control-label">Tema*</label>
+                <textarea formControlName="tema" class="form-control"></textarea>
+                <ng-container *ngIf="campoValido('tema')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("tema") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" [disabled]="sesionForm.invalid"
+                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+                Guardar</button>
+                <button (click)="atras()"  class="btn btn-default">
+                <i class="material-icons">undo</i>
+                </button>
+        </div>
+    </div>
+
+
+</form>
