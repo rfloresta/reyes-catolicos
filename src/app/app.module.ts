@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 //components
 import { AppComponent } from './app.component';
 import { Location } from '@angular/common';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // service
 // import { FlujoService } from './services/flujo.service';
 

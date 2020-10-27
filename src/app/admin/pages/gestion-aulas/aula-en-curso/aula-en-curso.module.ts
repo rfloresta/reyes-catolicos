@@ -15,6 +15,7 @@ import { AulaEnCursoService } from '@services/aula-en-curso/aula-en-curso.servic
 import { AreaListComponent } from './area-list/area-list.component';
 import { AulaEnCursoAreaService } from '@services/aula-en-curso-area/aula-en-curso-area.service';
 import { SesionService } from '@services/sesion/sesion.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AulaEnCursoComponent,
@@ -28,7 +29,8 @@ import { SesionService } from '@services/sesion/sesion.service';
     AulaEnCursoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CargaModule
+    CargaModule,
+    ModalModule.forChild()
   ],
   providers:[
     FlujoService,

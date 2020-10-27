@@ -12,14 +12,20 @@ import { SesionComponent } from './sesion.component';
 import { FlujoService } from '@services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { SesionFormComponent } from './sesion-form/sesion-form.component';
+import { SesionListNavComponent } from './sesion-list-nav/sesion-list-nav.component';
+import { SesionContentComponent } from './sesion-list-nav/sesion-content/sesion-content.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { RecursoService } from '@services/recurso/recurso.service';
+import { ActividadService } from '@services/actividad/actividad.service';
+import { RecursoModalComponent } from './sesion-list-nav/recursos-modal/recurso-modal.component';
 
 @NgModule({
   declarations: [
     SesionComponent,
-    SesionFormComponent
-    ],
-    exports:[
-      SesionFormComponent
+    SesionFormComponent,
+    SesionListNavComponent,
+    SesionContentComponent,
+    RecursoModalComponent 
     ],
   imports: [
     CommonModule,
@@ -28,11 +34,14 @@ import { SesionFormComponent } from './sesion-form/sesion-form.component';
     ReactiveFormsModule,
     CargaModule,
     OwlDateTimeModule, 
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    NgxPaginationModule
   ],
   providers:[
     FlujoService,
-    SesionService
+    SesionService,
+    RecursoService,
+    ActividadService
   ]
 })
 export class SesionModule { }

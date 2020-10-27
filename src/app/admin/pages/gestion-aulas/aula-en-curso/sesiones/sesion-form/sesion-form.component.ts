@@ -21,7 +21,6 @@ export class SesionFormComponent implements OnInit, OnDestroy {
   private validarFecha = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
   private validarLink = /[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?/;
 
-  
 
   accionHijo: string;
   sesionHijo: Sesion;
@@ -79,7 +78,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
 
   validar(){
     
-    this.sesionHijo.numero=parseInt(localStorage.getItem('nuevoNumero'));
+    // this.sesionHijo.numero=parseInt(localStorage.getItem('nuevoNumero'));
       this.sesionForm = this._builder.group({
       id: this.sesionHijo.id,
       numero: [this.sesionHijo.numero, [Validators.required,Validators.pattern(this.numeroPositivo),Validators.pattern]],
@@ -121,6 +120,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
         console.log(err);
       }
     )
+    
   }
 
   atras(){

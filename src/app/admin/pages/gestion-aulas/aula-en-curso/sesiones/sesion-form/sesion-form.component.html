@@ -15,7 +15,7 @@
             <div class="form-group label-floating" [ngClass]="campoValido('fecha')?'has-error':''">
                 <label class="control-label">Fecha*</label>
                 <input class="form-control" formControlName="fecha" required  [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-    <owl-date-time #dt></owl-date-time>
+                <owl-date-time #dt></owl-date-time>
                 <ng-container *ngIf="campoValido('fecha')" class="text-danger">
                     <span class="error-message">{{ mensajeError("fecha") }}</span>
                 </ng-container>
@@ -42,7 +42,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" [disabled]="sesionForm.invalid"
+            <button class="btn-pull-right" type="submit" [disabled]="sesionForm.invalid"
                 [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
                 Guardar</button>
                 <button (click)="atras()"  class="btn btn-default">

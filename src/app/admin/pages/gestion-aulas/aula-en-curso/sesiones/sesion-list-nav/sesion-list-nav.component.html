@@ -21,6 +21,15 @@
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 </div>
-                    
-            <router-outlet></router-outlet>
-        
+<div class="col-md-8">
+    <div id="typography">
+        <div class="card-title">
+            <h4>{{sesion.tema}}</h4>
+        </div>
+        </div>
+</div>
+
+<div class="col-md-4">
+     <a [href]="sesion.link" class="btn btn-info"><i class="material-icons">videocam</i> Clase en Google Meet</a>
+</div>     
+    <app-sesion-content [sesionHijo]="sesion" [actividadesHijo]="actividades" [recursosHijo]="recursos" ></app-sesion-content>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UsuarioResponse } from '@models/Usuario';
 import { Observable, Subscription } from 'rxjs';
@@ -7,6 +7,12 @@ import { SesionService } from '@services/sesion/sesion.service';
 import { Sesion } from '@models/sesion';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
 import Swal from 'sweetalert2';
+import { SesionContentComponent } from './sesion-content/sesion-content.component';
+import { ActividadService } from '@services/actividad/actividad.service';
+import { RecursoService } from '@services/recurso/recurso.service';
+import { Actividad } from '@models/actividad';
+import { Recurso } from '@models/recurso';
+import { switchMap } from 'rxjs/operators';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
@@ -34,19 +40,26 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
     tema: null,
     area_aula_anio_id: null
   };
-
+  actividades: Actividad[] = [];
+  recursos: Recurso[] = [];
   area: AulaEnCursoArea = {};
   usuario: UsuarioResponse;
   tipo: number;
   time: string;
   time_end: string;
+
+  // @ViewChild('sesionContent', { static: false }) sesionContent: SesionContentComponent;
+
+
   constructor(private flujoService: FlujoService,
     private sesionService: SesionService,
+    private actividadService: ActividadService,
+    private recursoService: RecursoService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     let areaString = localStorage.getItem('area');
     this.area = JSON.parse(areaString);
 
@@ -55,20 +68,31 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
       (res: Sesion[]) => {
         this.sesionesHijo = res;
         let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
-        // this.sesionFrm.numero=numeroMayor+1;
-        localStorage.setItem('nuevoNumero', numeroMayor + 1); 
+        this.sesionFrm.numero=numeroMayor+1;
+        // localStorage.setItem('nuevoNumero', numeroMayor + 1);
       },
       err => console.error(err)
     );
 
     this.sesionService.obtenerSesionActual(this.area.id)
       .subscribe((res: Sesion) => {
-        this.consultarSesion(res);
-      });
+          this.consultarSesion(res);
+        },
+        err => console.error(err)
+      );
+
+    console.log('Recursos->', this.recursos, 'Acti->', this.actividades);
+
 
     this.flujoService.enviarObjeto(this.sesionFrm);
     this.flujoService.enviarAccion("Registrar");
-    
+    this.recursoService.enviarRecurso$.subscribe((res: Recurso[])=> 
+    {
+      this.recursos=res;
+      console.log('Res sesion-list->',res);
+      
+    }
+    );
 
 
     // this.flujoService.$itemValue.subscribe((val)=>{
@@ -95,22 +119,27 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
     //   this.path2 = "/principal/inicio/areas-curriculares/estudiantes";
     // }
 
-
   }
 
   consultarSesion(sesion: Sesion) {
     //Propiedad para comparar con la lista de sesiones y adignar la clase active
     this.sesion = sesion;
-    localStorage.setItem('sesion', JSON.stringify(sesion));
-    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones', sesion.numero]);
+    let id=this.sesion.id;
+    this.actividadService.listar(id)
+    .subscribe((res: Actividad[]) => this.actividades = res
+    );
+
+    this.recursoService.listar(id)
+    .subscribe((res: Recurso[]) => this.recursos = res
+    );
   }
 
   editar(obj: Sesion) {
-    console.log('SESION -',obj);
+    console.log('SESION -', obj);
 
     this.flujoService.enviarObjeto(obj);
     this.flujoService.enviarAccion("Actualizar");
-    this.router.navigate(['principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/frm/guardar']);
+    this.router.navigate(['principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/form']);
   }
 
   eliminar(obj: Sesion) {

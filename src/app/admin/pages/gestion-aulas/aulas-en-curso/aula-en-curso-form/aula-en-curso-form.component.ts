@@ -60,7 +60,6 @@ export class AulaEnCursoFormComponent implements OnInit {
       .subscribe((res: Aula) => {
         console.log(res);
         this.aulaEnCursoHijo = res;
-        
       });
 
       this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accionHijo=accion)

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recurso } from '@models/recurso';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,7 +9,18 @@ import { environment } from 'src/environments/environment';
 })
 export class RecursoService {
 
-  constructor(private httpClient: HttpClient) { }
+  readonly enviarRecursoSource: BehaviorSubject<Recurso[]> = new BehaviorSubject(null);
+  readonly enviarRecurso$ = this.enviarRecursoSource.asObservable();
+
+   enviarRecursos(recurso: Recurso[]): void{
+    this.enviarRecursoSource.next(recurso);
+  }
+
+
+  constructor(private httpClient: HttpClient) {
+
+    
+   }
 
   listar(sesion_id: number): Observable<Recurso[]>{
     return this.httpClient.get<Recurso[]>(`${environment.API_URL}/recursos/${sesion_id}`);

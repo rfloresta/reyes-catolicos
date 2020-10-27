@@ -1,0 +1,86 @@
+
+    <form [formGroup]="recursoForm" (ngSubmit)="onSubmit()">
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{accionHijo}} Recurso</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="ocultarModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+        <input type="hidden" formControlName="id">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group label-floating">
+                    <label class="control-label">Tipo de Recurso*</label>
+                    <select (change)="actualizarLista($event)" class="selectpicker" data-style="select-with-transition"
+                        data-size="7">
+                        <option disabled selected value="">Seleccione</option>
+                        <option value="archivo">Archivo</option>
+                        <option value="link">Link</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group label-floating" [ngClass]="campoValido('tipo_recurso_id')?'has-error':''">
+                    <label class="control-label">Tipo de Archivo*</label>
+                    <select formControlName="tipo_recurso_id" class="selectpicker" data-style="select-with-transition"
+                        data-size="7">
+                        <option disabled selected value="">Seleccione</option>
+                        <option [value]="tipoRecurso.id" *ngFor="let tipoRecurso of tipoRecursos">{{tipoRecurso.nombre}}
+                        </option>
+                    </select>
+                    <ng-container *ngIf="campoValido('tipo_recurso_id')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("tipo_recurso_id") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group label-floating" [ngClass]="campoValido('titulo')?'has-error':''">
+                    <label class="control-label">Titulo*</label>
+                    <input type="text" formControlName="titulo" class="form-control" />
+                    <ng-container *ngIf="campoValido('titulo')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("titulo") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div *ngIf="tipoRecurso==='archivo'" class="fileinput fileinput-new text-center" data-provides="fileinput">
+                    <div class="fileinput-preview fileinput-exists"></div>
+                    <div>
+                        <span class="btn btn-round btn-rose btn-file">
+                            <span class="fileinput-new">Archivo</span>
+                            <span class="fileinput-exists">Cambiar</span>
+                            <input type="file" formControlName="contenido" required />
+                        </span>
+                        <br />
+                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
+                                class="fa fa-times"></i> Quitar</a>
+                    </div>
+                </div>
+                <div *ngIf="tipoRecurso==='link'" class="form-group label-floating" [ngClass]="campoValido('contenido')?'has-error':''">
+                    <label class="control-label">Link*</label>
+                    <input type="text" formControlName="contenido" class="form-control" />
+                    <ng-container *ngIf="campoValido('contenido')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("contenido") }}</span>
+                    </ng-container>
+                </div>
+                <ng-container *ngIf="campoValido('contenido')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("contenido") }}</span>
+                </ng-container>
+            </div>
+        </div>
+</div>
+<div class="modal-footer">
+    <button [disabled]="recursoForm.invalid" class="pull-right" class="btn btn-fill btn-info">
+        {{accionHijo}}
+    </button>
+    <button class="btn btn-simple" (click)="ocultarModal()" type="button">Cancelar<div class="ripple-container">
+            <div class="ripple ripple-on ripple-out"></div>
+        </div></button>
+</div>
+
+</form>
+
