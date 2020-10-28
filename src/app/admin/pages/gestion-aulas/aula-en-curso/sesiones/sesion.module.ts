@@ -18,6 +18,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RecursoService } from '@services/recurso/recurso.service';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { RecursoModalComponent } from './sesion-list-nav/recursos-modal/recurso-modal.component';
+import { FormatoService } from '@services/formato/formato.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RecursoModalComponent } from './sesion-list-nav/recursos-modal/recurso-
     FlujoService,
     SesionService,
     RecursoService,
-    ActividadService
+    ActividadService,
+    FormatoService
   ]
 })
 export class SesionModule { }

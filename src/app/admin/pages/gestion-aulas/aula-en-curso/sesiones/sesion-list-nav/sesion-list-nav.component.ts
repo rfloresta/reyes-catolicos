@@ -81,7 +81,6 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
         err => console.error(err)
       );
 
-    console.log('Recursos->', this.recursos, 'Acti->', this.actividades);
 
 
     this.flujoService.enviarObjeto(this.sesionFrm);
@@ -132,6 +131,8 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
     this.recursoService.listar(id)
     .subscribe((res: Recurso[]) => this.recursos = res
     );
+    console.log('Recursos->', this.recursos, 'Acti->', this.actividades);
+
   }
 
   editar(obj: Sesion) {

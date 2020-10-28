@@ -32,6 +32,7 @@ export class SesionContentComponent implements OnInit {
     id: null,
         titulo: null,
         contenido: null,
+        formato_id: null,
         tipo_recurso_id: null
   };
   time: string;
@@ -60,26 +61,7 @@ export class SesionContentComponent implements OnInit {
     //hasta seg
     // this.time_end=moment('02:38:00', "hh:mm:ss", true).endOf('s').fromNow();
     //
-
-    //Listar Actividades
-    // this.actividadService.listar(this.sesionHijo.id)
-    // .subscribe((res: Actividad[])=> 
-    // {
-    //   this.actividades=res; 
-    // }
-    // );
-
-    // //Listar Recursos
-    // this.recursoService.listar(this.sesionHijo.id).subscribe((res: Recurso[])=> 
-    // {
-    //   this.recursos=res; 
-    // }
-    // );
-
-    // this.numero=this.activatedRoute.snapshot.paramMap.get('numero');
-
-
-
+ 
     // this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion);
 
 
@@ -105,8 +87,25 @@ export class SesionContentComponent implements OnInit {
 
   }
 
-  humanFormat(fecha: string) {
-    return moment(fecha, "YYYYMMDD hh:mm:ss").fromNow();
+  humanFormatStart(fecha: string) {
+    let fechaFormat = moment(fecha).format("YYYYMMDD HH:mm:ss");
+    return moment(fechaFormat, "YYYYMMDD HH:mm:ss").fromNow();
+  }
+
+  humanFormatEnd(fecha: string) {
+    let fechaFormat = moment(fecha).format("YYYYMMDD HH:mm:ss");
+    return moment(fechaFormat, "YYYYMMDD HH:mm:ss").endOf('seconds').fromNow();
+  }
+
+  comprobarVigencia(fechaFin: string){
+    let fechaFinFormat: string = moment(fechaFin).format("YYYYMMDD HH:mm:ss");
+    let fechaFinFormat2 =  moment(fechaFinFormat,"YYYYMMDD HH:mm:ss");
+    let fechaActualFormat2 = moment(moment().format("YYYYMMDD HH:mm:ss"),"YYYYMMDD HH:mm:ss");
+    let result=fechaActualFormat2.isBefore(fechaFinFormat2);
+    if(!result){
+        let iconState: string;
+        return iconState="_off";
+    }
   }
 
   refrescarLista(recursos: Recurso[]){
@@ -123,13 +122,11 @@ export class SesionContentComponent implements OnInit {
     // this.bsModalRef = this.modalService.show(template);
   }
 
-  abrirModalEditarRecurso(recurso: Recurso) {
-    const initialState = {
-      recurso,
-      title: 'Editar Recurso'
-    };
-    this.bsModalRef = this.modalService.show(RecursoModalComponent, { initialState });
-    this.bsModalRef.content.accion = 'Actualizar';
+  abrirModalEditarRecurso(template: TemplateRef<any>,recurso: Recurso) {
+    console.log('recurso->',recurso);
+    this.recurso=recurso;
+    this.accion="Actualizar";
+    this.bsModalRef = this.modalService.show(template);
   }
 
 }

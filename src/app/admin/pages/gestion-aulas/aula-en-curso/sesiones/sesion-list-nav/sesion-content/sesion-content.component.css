@@ -1,0 +1,31 @@
+ 
+/* .btn-contenido{
+    padding: -50px 0 0px;
+} */
+
+.btn-contenido .btn {
+    padding-left: 5px;
+    padding-right: 5px;
+} 
+
+.title-contenido{
+    position: relative;
+    padding-bottom: 5em;
+}
+
+/* .description{
+    position: relative;
+    top: -2em;
+    bottom: -7em;
+} */
+
+
+/* .titulo-contenido{
+    position: relative;
+    top: -3em;
+}
+
+.card-contenido{
+    position: relative;
+    bottom: -3em;
+}  */

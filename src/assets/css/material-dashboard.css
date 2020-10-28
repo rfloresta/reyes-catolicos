@@ -752,7 +752,7 @@ body.swal2-shown {
   content: '';
   position: absolute;
   width: 60px;
-  height: 120px;
+  height: 10px;
   background: #fff;
 }
 
@@ -10815,22 +10815,23 @@ footer .btn {
   text-align: center;
 }
 .card-pricing .card-title {
-  margin-top: 30px;
+  margin-top: 2px;
 }
 .card-pricing .content {
-  padding: 15px !important;
+  padding: 5px !important;
+  height: 300px;
 }
 .card-pricing .icon {
   padding: 10px 0 0px;
   color: #999999;
 }
 .card-pricing .icon i {
-  font-size: 55px;
+  font-size: 40px;
   border: 1px solid #E5E5E5;
   border-radius: 50%;
-  width: 130px;
-  line-height: 130px;
-  height: 130px;
+  width: 90px;
+  line-height: 90px;
+  height: 90px;
 }
 .card-pricing .icon.icon-primary {
   color: #9c27b0;

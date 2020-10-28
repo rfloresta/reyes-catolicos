@@ -10,5 +10,15 @@
 
 .ul-pagination{
     position: relative;
-    bottom: -3em;   
+    margin: 0 auto;
+    bottom: -2em;
 }
+
+.pagination{
+    width: 300px;       
+        position: relative;
+        top:160%;
+        margin-top: -100px;
+        margin-left: -100px;
+}
+

@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SesionListNavComponent } from '../sesion-list-nav.component';
 import { Sesion } from '@models/sesion';
+import { FormatoService } from '@services/formato/formato.service';
+import { Formato } from '@models/Formato';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 declare var $: any;
 
@@ -24,12 +26,12 @@ export class RecursoModalComponent implements OnInit {
   @Output() hide = new EventEmitter();
   @Output() recursos = new EventEmitter<Recurso[]>();
 
-  tipoRecursos: any[] = [];
-  tipoRecurso: string = '';
-
+  tipoRecursoId: string = '';
+  formatos: any[] = [];
   recursoForm: FormGroup;
   constructor(
-    private recursoService: RecursoService,
+    private recursoservice: RecursoService,
+    private formatoService:FormatoService,
     private _builder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
@@ -39,6 +41,12 @@ export class RecursoModalComponent implements OnInit {
 
   ngOnInit() {
     $('.selectpicker').selectpicker('refresh');
+    if(this.recursoHijo.tipo_recurso_id!==null){
+      let id = this.recursoHijo.tipo_recurso_id.toString();
+      this.listarFormatos(id);
+      this.tipoRecursoId = id;
+    }
+      
     this.validar();
   }
 
@@ -47,7 +55,8 @@ export class RecursoModalComponent implements OnInit {
       id: this.recursoHijo.id,
       titulo: [this.recursoHijo.titulo, Validators.required],
       contenido: [this.recursoHijo.contenido, Validators.required],
-      tipo_recurso_id: [this.recursoHijo.tipo_recurso_id, Validators.required]
+      formato_id: [this.recursoHijo.formato_id, Validators.required],
+      tipo_recurso_id: [this.recursoHijo.tipo_recurso_id, Validators.required],
     });
   }
 
@@ -59,23 +68,24 @@ export class RecursoModalComponent implements OnInit {
     let fecha = moment().format("YYYY-MM-DD HH:mm:ss");
     this.recursoHijo.fecha = fecha;
     this.recursoHijo.sesion_id = this.sesionNieto.id;
+    //Propiedad eliminada ya que solo se necesita para la vista no para el registro
+    delete this.recursoHijo['tipo_recurso_id'];
+    
     if (this.recursoHijo.id === null) {
       this.registrar(this.recursoHijo);
     } else this.actualizar(this.recursoHijo);
     
     setTimeout(() => {
-      this.recursoService.listar(this.sesionNieto.id).subscribe(res => {
+      this.recursoservice.listar(this.sesionNieto.id).subscribe(res => {
         this.recursos.emit(res);
         console.log('Res recurso-modal->', res);
       });
     }, 150);
 
-    
-
   }
 
   registrar(obj: Recurso) {
-    this.recursoService.registrar(obj).subscribe(
+    this.recursoservice.registrar(obj).subscribe(
       res => {
         console.log(res);
         if (res) {
@@ -93,8 +103,7 @@ export class RecursoModalComponent implements OnInit {
 
   actualizar(obj: Recurso) {
     console.log("actualizar", obj);
-
-    this.recursoService.actualizar(obj).subscribe(
+    this.recursoservice.actualizar(obj).subscribe(
       res => {
         if (res === "ok") this.toastr.success('El recurso se actualizó correctamente')
       },
@@ -109,35 +118,19 @@ export class RecursoModalComponent implements OnInit {
     this.hide.emit();
   }
 
-  actualizarLista(event: any) {
+
+  listarFormatos(tipoRecursoId: string){
     setTimeout(() => {
       $('.selectpicker').selectpicker('refresh');
-    }, 150);
-    this.tipoRecurso = event.target.value;
-    if (this.tipoRecurso === "archivo") {
-      this.tipoRecursos = [
-        {
-          id: 1,
-          nombre: 'PDF'
-        },
-        {
-          id: 4,
-          nombre: 'Otros'
-        }
-      ]
-    }
-    if (this.tipoRecurso === "link") {
-      this.tipoRecursos = [
-        {
-          id: 2,
-          nombre: 'Youtube'
-        },
-        {
-          id: 3,
-          nombre: 'Otros'
-        }
-      ]
-    }
+    }, 75);
+    this.formatoService.listar(tipoRecursoId).subscribe((formatos: Formato[])=> this.formatos = formatos);
+  }
+
+
+  actualizarLista(event: any) {
+    this.tipoRecursoId = event.target.value;
+    //para que se muestre el tipo de contenido a insertar
+    this.listarFormatos(this.tipoRecursoId);    
   }
 
   mensajeError(campo: string): string {
