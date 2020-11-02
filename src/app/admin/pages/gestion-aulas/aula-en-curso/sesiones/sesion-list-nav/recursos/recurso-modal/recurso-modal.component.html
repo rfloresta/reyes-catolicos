@@ -9,7 +9,8 @@
 <div class="modal-body">
 
         <input type="hidden" formControlName="id">
-        <div class="row">
+
+        <div class="row" *ngIf="tipoRecursoId!=='1' && recursoHijo.id!==null">
             <div class="col-md-12">
                 <div class="form-group label-floating" [ngClass]="campoValido('tipo_recurso_id')?'has-error':''">
                     <label class="control-label">Tipo de Recurso*</label>
@@ -50,13 +51,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div *ngIf="tipoRecursoId==='1'" class="fileinput fileinput-new text-center" data-provides="fileinput">
-                    <div class="fileinput-preview fileinput-exists"></div>
+                <div *ngIf="tipoRecursoId==='1' && recursoHijo.id===null " class="fileinput fileinput-new text-center" data-provides="fileinput">
+                    <div class="fileinput-preview fileinput-exists">{{recursoHijo.contenido}}</div>
                     <div>
                         <span class="btn btn-round btn-rose btn-file">
                             <span class="fileinput-new">Archivo</span>
                             <span class="fileinput-exists">Cambiar</span>
-                            <input type="file" formControlName="contenido" required />
+                            <input #file type="file" formControlName="contenido" required />
                         </span>
                         <br />
                         <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
@@ -77,7 +78,7 @@
         </div>
 </div>
 <div class="modal-footer">
-    <button [disabled]="recursoForm.invalid" class="pull-right" class="btn btn-fill btn-info">
+    <button [disabled]="recursoForm.invalid" class="btn btn-fill btn-info pull-right">
         {{accionHijo}}
     </button>
     <button class="btn btn-simple" (click)="ocultarModal()" type="button">Cancelar<div class="ripple-container">

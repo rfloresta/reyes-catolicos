@@ -13,20 +13,29 @@ import { FlujoService } from '@services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { SesionFormComponent } from './sesion-form/sesion-form.component';
 import { SesionListNavComponent } from './sesion-list-nav/sesion-list-nav.component';
-import { SesionContentComponent } from './sesion-list-nav/sesion-content/sesion-content.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RecursoService } from '@services/recurso/recurso.service';
 import { ActividadService } from '@services/actividad/actividad.service';
-import { RecursoModalComponent } from './sesion-list-nav/recursos-modal/recurso-modal.component';
 import { FormatoService } from '@services/formato/formato.service';
-
+import { RecursoModalComponent } from './sesion-list-nav/recursos/recurso-modal/recurso-modal.component';
+import { ActividadesComponent } from './sesion-list-nav/actividades/actividades.component';
+import { RecursosComponent } from './sesion-list-nav/recursos/recursos.component';
+import { ActividadModalComponent } from './sesion-list-nav/actividades/actividad-modal/actividad-modal.component';
+import { ArchivoModalComponent } from './sesion-list-nav/recursos/archivo-modal/archivo-modal.component';
+import { SafePipe } from '@shared/pipes/safe.pipe';
+import {FileInputAccessorModule} from "file-input-accessor";
+import { UploadService } from '@services/upload/upload.service';
 @NgModule({
   declarations: [
     SesionComponent,
     SesionFormComponent,
     SesionListNavComponent,
-    SesionContentComponent,
-    RecursoModalComponent 
+    ActividadesComponent,
+    RecursosComponent,
+    ActividadModalComponent,
+    RecursoModalComponent,
+    ArchivoModalComponent,
+    SafePipe
     ],
   imports: [
     CommonModule,
@@ -43,7 +52,8 @@ import { FormatoService } from '@services/formato/formato.service';
     SesionService,
     RecursoService,
     ActividadService,
-    FormatoService
+    FormatoService,
+    UploadService
   ]
 })
 export class SesionModule { }

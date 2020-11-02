@@ -26,15 +26,19 @@ export class RecursoService {
     return this.httpClient.get<Recurso[]>(`${environment.API_URL}/recursos/${sesion_id}`);
   }
 
-  registrar(obj: Recurso){
-    return this.httpClient.post(`${environment.API_URL}/recursos`, obj);
+  registrarArchivo(obj: FormData){
+    return this.httpClient.post(`${environment.API_URL}/recursos/archivo`, obj);
+  }
+
+  registrarLink(obj: Recurso){
+    return this.httpClient.post(`${environment.API_URL}/recursos/link`, obj);
   }
 
   buscar(id: number): Observable<Recurso>{
     return this.httpClient.delete(`${environment.API_URL}/recursos/${id}`);
   }
 
-  actualizar(obj: Recurso){
+  actualizar(obj: any){
     return this.httpClient.put(`${environment.API_URL}/recursos/${obj.id}`, obj);
   }
 

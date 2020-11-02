@@ -7,7 +7,6 @@ import { SesionService } from '@services/sesion/sesion.service';
 import { Sesion } from '@models/sesion';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
 import Swal from 'sweetalert2';
-import { SesionContentComponent } from './sesion-content/sesion-content.component';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { RecursoService } from '@services/recurso/recurso.service';
 import { Actividad } from '@models/actividad';

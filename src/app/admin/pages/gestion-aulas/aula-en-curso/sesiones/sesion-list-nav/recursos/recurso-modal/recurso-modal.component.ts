@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FlujoService } from 'src/app/services/flujo.service';
 import { RecursoService } from '@services/recurso/recurso.service';
 import { Recurso } from '@models/recurso';
@@ -6,10 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SesionListNavComponent } from '../sesion-list-nav.component';
 import { Sesion } from '@models/sesion';
 import { FormatoService } from '@services/formato/formato.service';
 import { Formato } from '@models/Formato';
+import { UploadService } from '@services/upload/upload.service';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 declare var $: any;
 
@@ -19,7 +19,7 @@ declare var $: any;
   styleUrls: ['./recurso-modal.component.css']
 })
 export class RecursoModalComponent implements OnInit {
-
+  @ViewChild("file") file;
   @Input() sesionNieto: Sesion;
   @Input() recursoHijo: Recurso;
   @Input() accionHijo: string;
@@ -29,24 +29,24 @@ export class RecursoModalComponent implements OnInit {
   tipoRecursoId: string = '';
   formatos: any[] = [];
   recursoForm: FormGroup;
+  archivo: any;
+  fileUpload: File;
+  form: FormData = new FormData();
   constructor(
     private recursoservice: RecursoService,
-    private formatoService:FormatoService,
+    private formatoService: FormatoService,
     private _builder: FormBuilder,
-    private toastr: ToastrService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    // private sesionListNavComponent: SesionListNavComponent
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
     $('.selectpicker').selectpicker('refresh');
-    if(this.recursoHijo.tipo_recurso_id!==null){
+    if (this.recursoHijo.tipo_recurso_id !== null) {
       let id = this.recursoHijo.tipo_recurso_id.toString();
       this.listarFormatos(id);
       this.tipoRecursoId = id;
     }
-      
+
     this.validar();
   }
 
@@ -64,33 +64,63 @@ export class RecursoModalComponent implements OnInit {
     if (this.recursoForm.invalid) {
       return;
     }
+
     this.recursoHijo = this.recursoForm.value;
-    let fecha = moment().format("YYYY-MM-DD HH:mm:ss");
-    this.recursoHijo.fecha = fecha;
+
     this.recursoHijo.sesion_id = this.sesionNieto.id;
-    //Propiedad eliminada ya que solo se necesita para la vista no para el registro
-    delete this.recursoHijo['tipo_recurso_id'];
-    
-    if (this.recursoHijo.id === null) {
-      this.registrar(this.recursoHijo);
-    } else this.actualizar(this.recursoHijo);
-    
+
+    if (this.recursoHijo.id === null) {//Registrar
+
+      //Obtener el id del video de youtube para cambiar el link a embebido
+      if (this.recursoHijo.formato_id == 2) {
+        let youtubeId = this.recursoHijo.contenido.split('v=')[1].split('&')[0];
+        this.recursoHijo.contenido = `https://www.youtube.com/embed/${youtubeId}`;
+      }
+
+      let fecha = moment().format("YYYY-MM-DD HH:mm:ss");
+      if (this.recursoHijo.tipo_recurso_id == 1) {//Solo para archivos
+        
+        //ve cambios del input contenido
+        let fi = this.file.nativeElement;
+        if (fi.files && fi.files[0]) {
+          this.fileUpload = fi.files[0];
+        }
+
+        this.form.append('titulo', this.recursoHijo.titulo);
+        this.form.append('contenido', this.fileUpload);
+        this.form.append('formato_id', this.recursoHijo.formato_id.toString());
+        this.form.append('sesion_id', this.recursoHijo.sesion_id.toString());
+        this.form.append('fecha', fecha);
+
+        this.registrarArchivo(this.form);
+
+      } else if (this.recursoHijo.tipo_recurso_id == 2) {//solo para links
+        
+        //campo solo para la vista es por eso que se elimina
+        delete this.recursoHijo['tipo_recurso_id'];
+        this.recursoHijo.fecha = fecha;
+        this.registrarLink(this.recursoHijo);
+      }
+    } else {//Actualizar
+      delete this.recursoHijo['tipo_recurso_id'];
+      this.actualizar(this.recursoHijo);
+    }
+
     setTimeout(() => {
       this.recursoservice.listar(this.sesionNieto.id).subscribe(res => {
         this.recursos.emit(res);
-        console.log('Res recurso-modal->', res);
+        // this.form = null;
       });
     }, 150);
 
   }
 
-  registrar(obj: Recurso) {
-    this.recursoservice.registrar(obj).subscribe(
+  registrarArchivo(obj: FormData) {
+    this.recursoservice.registrarArchivo(obj).subscribe(
       res => {
         console.log(res);
-        if (res) {
+        if (res === "ok") {
           this.toastr.success("Nuevo Recurso registrado");
-          
         }
       },
       err => {
@@ -98,9 +128,23 @@ export class RecursoModalComponent implements OnInit {
         console.log(err);
       }
     );
-    
-  }
 
+  }
+  registrarLink(obj: Recurso) {
+    this.recursoservice.registrarLink(obj).subscribe(
+      res => {
+        console.log(res);
+        if (res === "ok") {
+          this.toastr.success("Nuevo Recurso registrado");
+
+        }
+      },
+      err => {
+        this.toastr.error('Ha ocurrido un error inesperado');
+        console.log(err);
+      }
+    );
+  }
   actualizar(obj: Recurso) {
     console.log("actualizar", obj);
     this.recursoservice.actualizar(obj).subscribe(
@@ -119,18 +163,18 @@ export class RecursoModalComponent implements OnInit {
   }
 
 
-  listarFormatos(tipoRecursoId: string){
+  listarFormatos(tipoRecursoId: string) {
     setTimeout(() => {
       $('.selectpicker').selectpicker('refresh');
     }, 75);
-    this.formatoService.listar(tipoRecursoId).subscribe((formatos: Formato[])=> this.formatos = formatos);
+    this.formatoService.listar(tipoRecursoId).subscribe((formatos: Formato[]) => this.formatos = formatos);
   }
 
 
   actualizarLista(event: any) {
     this.tipoRecursoId = event.target.value;
     //para que se muestre el tipo de contenido a insertar
-    this.listarFormatos(this.tipoRecursoId);    
+    this.listarFormatos(this.tipoRecursoId);
   }
 
   mensajeError(campo: string): string {
@@ -147,6 +191,5 @@ export class RecursoModalComponent implements OnInit {
       !this.recursoForm.get(campo).valid
     )
   }
-
 
 }

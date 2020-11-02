@@ -68,9 +68,9 @@ export class SesionFormComponent implements OnInit, OnDestroy {
       return;
     }
     this.sesionHijo = this.sesionForm.value;
-    let fecha=moment(this.sesionHijo.fecha).format("YYYY-MM-DD HH:mm:ss");
-    if (this.sesionHijo.id===null) {
-      this.sesionHijo.fecha =fecha;
+    let fecha=moment(this.sesionHijo.fecha).format("YYYY-MM-DD hh:mm:ss");
+    this.sesionHijo.fecha =fecha;
+    if (this.sesionHijo.id===null) {  
       this.registrar(this.sesionHijo);
     } else this.actualizar(this.sesionHijo);
     this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones']);

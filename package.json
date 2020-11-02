@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.0.1",
     "angular-datatables": "^9.0.2",
     "bootstrap": "^3.3.5",
+    "file-input-accessor": "^10.0.0",
     "material-dashboard": "^2.1.0",
     "moment": "^2.29.1",
     "ng-pick-datetime": "^7.0.0",

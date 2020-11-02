@@ -1,0 +1,39 @@
+
+    <div class="modal-header">
+    <h4 class="modal-title pull-left">{{recursoHijo.titulo}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="ocultarModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+        <!-- <input type="hidden" formControlName="id"> -->
+        <div class="row">
+            <div class="col-md-12">
+                <a target="_blank" [href]="url"  title="Ver en página aparte" 
+                class="btn btn-success pull-right" 
+                ><i class="material-icons">north_east</i></a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-content">
+                        <div  class="iframe-container hidden-sm hidden-xs">
+                            <iframe [src]="url | safe">
+                                <p>Su navegador no soporta iframes.</p>
+                            </iframe>
+                        </div>
+                        <div class="col-md-6 hidden-lg hidden-md text-center">
+                            <h5>Visite el enlace en su página original 
+                                <a [href]="url" target="_blank">Ir a página</a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" (click)="ocultarModal()" type="button">Cerrar<div class="ripple-container">
+            <div class="ripple ripple-on ripple-out"></div>
+        </div></button>
+</div>
+
