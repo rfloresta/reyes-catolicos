@@ -14,10 +14,10 @@
                     <a *ngIf="recurso.formato_id===4" [href]="url+recurso.contenido"><i class="material-icons">{{recurso.nombre_icono}}</i></a>
                 </div>
                 <div class="btn-contenido">
-                    <button (click)="abrirModalEditar(template,recurso)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
+                    <button (click)="abrirModalEditar(template,recurso)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
                         <i class="material-icons">edit</i>
                     </button>
-                    <button (click)="eliminar(recurso)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">
+                    <button (click)="eliminar(recurso)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Eliminar">
                         <i class="material-icons">close</i>
                     </button>
                 </div>

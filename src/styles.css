@@ -1,3 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~ngx-toastr/toastr.css';
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~assets/css/material-dashboard.css";
+@import '~ngx-toastr/toastr.css';

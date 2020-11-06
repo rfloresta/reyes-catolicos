@@ -1,14 +1,11 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsuarioResponse } from '@models/Usuario';
-import { Subscription } from 'rxjs';
 import * as moment from 'moment';
-import { FlujoService } from 'src/app/services/flujo.service';
 import { RecursoService } from '@services/recurso/recurso.service';
 import { Sesion } from '@models/sesion';
 import { Recurso } from '@models/recurso';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { RecursoModalComponent } from '../recursos/recurso-modal/recurso-modal.component';
 import Swal from 'sweetalert2';
 
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
@@ -27,14 +24,10 @@ export class RecursosComponent implements OnInit {
   @Input() sesionHijo: Sesion;
 
   recurso: Recurso;
-  time: string;
-  time_end: string;
 
   accion: string;
   url: string = 'http://192.168.1.4:3000/';
-  constructor(private flujoService: FlujoService,
-    private recursoService: RecursoService,
-    private activatedRoute: ActivatedRoute,
+  constructor(private recursoService: RecursoService,
     private modalService: BsModalService,
     private router: Router
   ) {
@@ -74,7 +67,6 @@ export class RecursosComponent implements OnInit {
 
   abrirModalArchivo(template: TemplateRef<any>,recurso: Recurso) {
     this.recurso=recurso;
-    this.accion="Actualizar";
     this.bsModalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
 

@@ -31,7 +31,7 @@ export class RecursoModalComponent implements OnInit {
   recursoForm: FormGroup;
   archivo: any;
   fileUpload: File;
-  form: FormData = new FormData();
+  // form: FormData = new FormData();
   constructor(
     private recursoservice: RecursoService,
     private formatoService: FormatoService,
@@ -40,8 +40,12 @@ export class RecursoModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    $('.selectpicker').selectpicker('refresh');
-    if (this.recursoHijo.tipo_recurso_id !== null) {
+    
+    setTimeout(() => {
+      $('.selectpicker').selectpicker('refresh');
+    }, 75);
+
+      if (this.recursoHijo.tipo_recurso_id !== null) {
       let id = this.recursoHijo.tipo_recurso_id.toString();
       this.listarFormatos(id);
       this.tipoRecursoId = id;
@@ -70,7 +74,7 @@ export class RecursoModalComponent implements OnInit {
     this.recursoHijo.sesion_id = this.sesionNieto.id;
 
     if (this.recursoHijo.id === null) {//Registrar
-
+      let form =new FormData();
       //Obtener el id del video de youtube para cambiar el link a embebido
       if (this.recursoHijo.formato_id == 2) {
         let youtubeId = this.recursoHijo.contenido.split('v=')[1].split('&')[0];
@@ -86,13 +90,13 @@ export class RecursoModalComponent implements OnInit {
           this.fileUpload = fi.files[0];
         }
 
-        this.form.append('titulo', this.recursoHijo.titulo);
-        this.form.append('contenido', this.fileUpload);
-        this.form.append('formato_id', this.recursoHijo.formato_id.toString());
-        this.form.append('sesion_id', this.recursoHijo.sesion_id.toString());
-        this.form.append('fecha', fecha);
+        form.append('titulo', this.recursoHijo.titulo);
+        form.append('contenido', this.fileUpload);
+        form.append('formato_id', this.recursoHijo.formato_id.toString());
+        form.append('sesion_id', this.recursoHijo.sesion_id.toString());
+        form.append('fecha', fecha);
 
-        this.registrarArchivo(this.form);
+        this.registrarArchivo(form);
 
       } else if (this.recursoHijo.tipo_recurso_id == 2) {//solo para links
         
@@ -106,13 +110,6 @@ export class RecursoModalComponent implements OnInit {
       this.actualizar(this.recursoHijo);
     }
 
-    setTimeout(() => {
-      this.recursoservice.listar(this.sesionNieto.id).subscribe(res => {
-        this.recursos.emit(res);
-        // this.form = null;
-      });
-    }, 150);
-
   }
 
   registrarArchivo(obj: FormData) {
@@ -121,6 +118,7 @@ export class RecursoModalComponent implements OnInit {
         console.log(res);
         if (res === "ok") {
           this.toastr.success("Nuevo Recurso registrado");
+          this.listarRecursos();
         }
       },
       err => {
@@ -136,11 +134,11 @@ export class RecursoModalComponent implements OnInit {
         console.log(res);
         if (res === "ok") {
           this.toastr.success("Nuevo Recurso registrado");
-
+          this.listarRecursos();
         }
       },
       err => {
-        this.toastr.error('Ha ocurrido un error inesperado');
+        this.toastr.error('Ha ocurrido un error inesperado.');
         console.log(err);
       }
     );
@@ -149,13 +147,23 @@ export class RecursoModalComponent implements OnInit {
     console.log("actualizar", obj);
     this.recursoservice.actualizar(obj).subscribe(
       res => {
-        if (res === "ok") this.toastr.success('El recurso se actualizó correctamente')
+        if (res === "ok") {
+        this.toastr.success('El recurso se actualizó correctamente');
+        this.listarRecursos();
+      }
       },
       err => {
-        this.toastr.error('Ha ocurrido un error inesperado');
+        this.toastr.error('Ha ocurrido un error inesperado.');
         console.log(err);
       }
     )
+  }
+
+  listarRecursos(){
+    this.recursoservice.listar(this.sesionNieto.id).subscribe(res => {
+      this.recursos.emit(res);
+      // this.form = null;
+    });
   }
 
   ocultarModal() {

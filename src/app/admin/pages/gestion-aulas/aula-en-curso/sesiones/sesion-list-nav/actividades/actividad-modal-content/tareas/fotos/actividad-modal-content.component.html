@@ -1,0 +1,28 @@
+
+                        <!-- fotos -->
+                        <div class="tab-pane active" id="fotos">
+                            <app-carga *ngIf="cargando"></app-carga>
+                            <ng-container *ngIf="!cargando">
+                                <p class="card-description text-right">Cantidad: {{actividadesUsuariosImg.length}}</p>
+                                <carousel [showIndicators]="false" [noPause]="false">
+                                    <slide *ngFor="let actividadUsuario of actividadesUsuariosImg; let i=index">
+                                        <img [src]="'http://localhost:3000/'+actividadUsuario.archivo" alt="First slide"
+                                            style="display: block; width: 100%;">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h4>{{actividadUsuario.descripcion}}</h4>
+                                            <small>{{i+1}} - {{actividadUsuario.estudiante}}</small>
+                                            <!-- <small >{{actividadUsuario.fecha | date:'short'}}</small> -->
+                                            <div>
+                                                <rating [max]="5" (click)="actualizarValoracion(actividadUsuario)"
+                                                    [(ngModel)]="actividadUsuario.valoracion"></rating>
+                                            </div>
+                                            <a *ngIf="false" (click)="eliminarTarea(actividadUsuario)" title="Eliminar"
+                                                class="btn btn-simple btn-danger btn-icon remove"><i
+                                                    class="material-icons">close</i></a>
+                                        </div>
+                                    </slide>
+                                </carousel>
+                            </ng-container>
+                           
+                        </div>
+                       

@@ -1,6 +1,9 @@
 <div class="col-md-12">
     <h3 class="card-title">Actividades
-        <button title="Agregar Nueva Actividad" class="btn btn-primary btn-round btn-fab btn-fab-mini" ><i class="material-icons">add</i></button>
+        <button title="Agregar Nueva Actividad" 
+        class="btn btn-primary btn-round btn-fab btn-fab-mini" 
+        (click)="abrirModalRegistrar(modalForm)">
+        <i class="material-icons">add</i></button>
     </h3>
     <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let actividad of actividadesHijo" >
         <div class="card card-pricing card-raised card-contenido">
@@ -8,27 +11,34 @@
               
                 <h6 class="category">{{actividad.tipo_nombre}}</h6>
                 <div  class="icon icon-info">
-                    <a href="#"><i class="material-icons">{{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_fin)}}</i></a>
-                   
+                    <a href="javascript:void(0);" (click)="abrirModalContent(modalContent,actividad)"> <i class="material-icons">{{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_inicio,actividad.fecha_fin)}}</i></a>                   
                 </div>
                 <div class="btn-contenido">
-                    <button  type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
+                    <button  (click)="abrirModalEditar(modalForm,actividad)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
                         <i class="material-icons">edit</i>
                     </button>
-                    <button type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">
+                    <button (click)="eliminar(actividad)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Eliminar">
                         <i class="material-icons">close</i>
                     </button>
                 </div>
                 <h5 class="card-title">{{actividad.titulo}}</h5>
                 <p class="card-description">
-                    {{ humanFormatStart(actividad.fecha_inicio)}}
+                    {{ humanFormatStart(actividad.fecha_publicacion)}}
                 </p>
             </div>
             <div class="card-footer">
                 <div class="stats pull-right">
-                    <p class="category"><i class="material-icons">hourglass_bottom</i> Cerrado {{humanFormatEnd(actividad.fecha_fin)}}</p>
+                    <p class="category"><i class="material-icons">hourglass_bottom</i>{{humanFormatEnd(actividad.fecha_inicio,actividad.fecha_fin)}}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #modalForm>
+    <app-actividad-modal-form (hide)="bsModalRef.hide()" (actividades)="refrescarLista($event)" [accionHijo]="accion" [sesionNieto]="sesionHijo" [actividadHijo]="actividad"></app-actividad-modal-form>
+</ng-template>
+
+<ng-template #modalContent>
+    <app-actividad-modal-content (hide)="bsModalRef.hide()" [sesionNieto]="sesionHijo" [actividadHijo]="actividad"></app-actividad-modal-content>
+</ng-template>

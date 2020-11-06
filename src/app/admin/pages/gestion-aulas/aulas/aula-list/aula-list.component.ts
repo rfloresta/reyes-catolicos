@@ -77,12 +77,7 @@ export class AulaListComponent implements OnInit, OnDestroy {
     this.flujoService.enviarAccion("Registrar");
 
   }
-
-  // delay(ms: number) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
-
-
+  
   editar(aula: Aula) {
     console.log(aula);
 

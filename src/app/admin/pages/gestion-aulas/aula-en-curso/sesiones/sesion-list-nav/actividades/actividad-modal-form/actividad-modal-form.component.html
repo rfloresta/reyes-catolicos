@@ -1,0 +1,97 @@
+
+    <form [formGroup]="actividadForm" (ngSubmit)="onSubmit()">
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{accionHijo}} actividad</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="ocultarModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group label-floating" [ngClass]="campoValido('titulo')?'has-error':''">
+                    <label class="control-label">Titulo*</label>
+                    <input type="text" formControlName="titulo" class="form-control" required/>
+                    <ng-container *ngIf="campoValido('titulo')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("titulo") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group label-floating" [ngClass]="campoValido('descripcion')?'has-error':''">
+                    <label class="control-label">Descripción*</label>
+                    <textarea formControlName="descripcion" class="form-control" required>
+
+                    </textarea>
+                    <ng-container *ngIf="campoValido('descripcion')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("descripcion") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-md-2">
+                <div class="form-group label-floating is-focused togglebutton">
+                    <label class="control-label">Vigencia*</label>
+
+                    <label>
+                        <input (click)="showHide()" type="checkbox">
+                    </label>
+                </div>
+            </div> -->
+            <div class="col-md-6">
+                <div class="form-group label-floating">
+                    <label class="control-label">Fecha de inicio</label>
+
+                    <!-- <input [disabled]="!activo" formControlName="fecha_inicio" class="form-control" [owlDateTimeTrigger]="activo?dt:false" [owlDateTime]="activo?dt:false"/>
+                    <owl-date-time [disabled]="!activo"  #dt></owl-date-time> -->
+                    
+                    <input nbInput status="info" formControlName="fecha_inicio" class="form-control" [owlDateTimeTrigger]="dt" [owlDateTime]="dt"/>
+                    <owl-date-time #dt></owl-date-time>
+
+                    <ng-container *ngIf="campoValido('fecha_inicio')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("fecha_inicio") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group label-floating">
+                    <label class="control-label">Fecha de fin</label>
+                    <!-- <input class="form-control" formControlName="fecha_fin"   [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                <owl-date-time #dt2></owl-date-time> -->
+                <input  nbInput status="info" class="form-control" formControlName="fecha_fin"  [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                <owl-date-time  #dt2></owl-date-time>
+                    <ng-container *ngIf="campoValido('fecha_fin')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("fecha_fin") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group label-floating" [ngClass]="campoValido('tipo_actividad_id')?'has-error':''">
+                    <label class="control-label">Tipo de Actividad*</label>
+                    <select formControlName="tipo_actividad_id"  class="selectpicker" data-style="select-with-transition"
+                        data-size="7" required>
+                        <option disabled selected value="">Seleccione</option>
+                        <option *ngFor="let tipo of tipoActividades" [value]="tipo.id">{{tipo.nombre}}</option>
+                    </select>
+                    <ng-container *ngIf="campoValido('tipo_actividad_id')" class="text-danger">
+                        <span class="error-message">{{ mensajeError("tipo_actividad_id") }}</span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+ </div>
+<div class="modal-footer">
+    <button [disabled]="actividadForm.invalid" class="pull-right" class="btn btn-fill btn-info">
+        {{accionHijo}}
+    </button>
+    <button class="btn btn-simple" (click)="ocultarModal()" type="button">Cancelar<div class="ripple-container">
+            <div class="ripple ripple-on ripple-out"></div>
+        </div></button>
+</div>
+
+</form>
+

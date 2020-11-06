@@ -1,17 +1,11 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
 import { UsuarioResponse } from '@models/Usuario';
-import { Subscription } from 'rxjs';
 import * as moment from 'moment';
-import { FlujoService } from 'src/app/services/flujo.service';
 import { Sesion } from '@models/sesion';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { ActividadModalComponent } from '../actividades/actividad-modal/actividad-modal.component';
 import Swal from 'sweetalert2';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { Actividad } from '@models/actividad';
-
-// import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
   selector: 'app-actividades',
@@ -26,23 +20,12 @@ export class ActividadesComponent implements OnInit {
   @Input() actividadesHijo: Actividad[] = [];
   @Input() sesionHijo: Sesion;
 
-  actividad: Actividad={
-    id: null,
-        titulo: null,
-        archivo_adjunto: null,
-        descripción: null,
-        fecha_fin: null,
-        fecha_inicio: null,
-        sesion_id: null
-  };
+  actividad: Actividad = {};
 
   accion: string;
 
-  constructor(private flujoService: FlujoService,
-    private actividadService: ActividadService,
-    private activatedRoute: ActivatedRoute,
+  constructor(private actividadService: ActividadService,
     private modalService: BsModalService,
-    private router: Router
   ) {
 
   }
@@ -50,44 +33,87 @@ export class ActividadesComponent implements OnInit {
   ngOnInit(): void {
     moment.locale('es');
   }
-  humanFormatStart(fecha: string) {
+
+  humanFormatStart(fecha: string): string {
     let fechaFormat = moment(fecha).format("YYYYMMDD HH:mm:ss");
     return moment(fechaFormat, "YYYYMMDD HH:mm:ss").fromNow();
   }
 
-  humanFormatEnd(fecha: string) {
-    let fechaFormat = moment(fecha).format("YYYYMMDD HH:mm:ss");
-    return moment(fechaFormat, "YYYYMMDD HH:mm:ss").endOf('seconds').fromNow();
+  humanFormatEnd(fechaInicio: string, fechaFin: string): string {
+    let txtFecha = "...";
+    if (fechaInicio !== null && fechaFin !== null) {
+    let fechaInicioFormat = moment(fechaInicio).format("YYYYMMDD HH:mm:ss");
+    let fechaInicioFormat2 = moment(fechaInicioFormat, "YYYYMMDD HH:mm:ss");
+    let fechaFinFormat = moment(fechaFin).format("YYYYMMDD HH:mm:ss");
+    let fechaFinFormat2 = moment(fechaFinFormat, "YYYYMMDD HH:mm:ss");
+
+    let fechaActual = moment(moment().format("YYYYMMDD HH:mm:ss"), "YYYYMMDD HH:mm:ss");
+
+    if (moment(fechaInicioFormat2).isValid() && moment(fechaFinFormat2).isValid()) {
+      if (fechaActual.isBefore(fechaInicioFormat2)) {
+        txtFecha = 'Abrirá ' + moment(fechaInicioFormat, "YYYYMMDD HH:mm:ss").startOf('seconds').fromNow();
+      }else if (fechaActual.isBetween(fechaInicioFormat2, fechaFinFormat2) || fechaActual.isAfter(fechaFinFormat2)) {
+        txtFecha = 'Cerrado ' + moment(fechaFinFormat, "YYYYMMDD HH:mm:ss").endOf('seconds').fromNow();
+      } 
+    }
+  }else{
+    txtFecha = 'Abierto en todo momento';
+  }
+    return txtFecha;
   }
 
-  comprobarVigencia(fechaFin: string){
-    let fechaFinFormat: string = moment(fechaFin).format("YYYYMMDD HH:mm:ss");
-    let fechaFinFormat2 =  moment(fechaFinFormat,"YYYYMMDD HH:mm:ss");
-    let fechaActualFormat2 = moment(moment().format("YYYYMMDD HH:mm:ss"),"YYYYMMDD HH:mm:ss");
-    let result=fechaActualFormat2.isBefore(fechaFinFormat2);
-    if(!result){
+  comprobarVigencia(fechaInicio: string, fechaFin: string) {
+    // Hacer mejoras luego para estas instrucciones
+    if (fechaInicio !== null && fechaFin !== null) {
+      let fechaInicioFormat: string = moment(fechaInicio).format("YYYYMMDD HH:mm:ss");
+      let fechaInicioFormat2 = moment(fechaInicioFormat, "YYYYMMDD HH:mm:ss");
+
+      let fechaFinFormat: string = moment(fechaFin).format("YYYYMMDD HH:mm:ss");
+      let fechaFinFormat2 = moment(fechaFinFormat, "YYYYMMDD HH:mm:ss");
+      let fechaActual = moment(moment().format("YYYYMMDD HH:mm:ss"), "YYYYMMDD HH:mm:ss");
+
+      let result2 = fechaActual.isBetween(fechaInicioFormat2, fechaFinFormat2);
+
+      if (!result2) {
         let iconState: string;
-        return iconState="_off";
+        return iconState = "_off";
+      }
     }
+
   }
-  refrescarLista(actividades: Actividad[]){
-    this.actividadesHijo=actividades;
+  refrescarLista(actividades: Actividad[]) {
+    this.actividadesHijo = actividades;
   }
 
   abrirModalRegistrar(template: TemplateRef<any>) {
+    this.actividad = {
+      id: null,
+      titulo: null,
+      archivo_adjunto: null,
+      descripcion: null,
+      fecha_fin: null,
+      fecha_inicio: null,
+      sesion_id: null
+    };
+    this.accion = "Registrar";
     this.bsModalRef = this.modalService.show(template);
-    this.accion="Registrar";
   }
 
-  abrirModalEditar(template: TemplateRef<any>,actividad: Actividad) {
-    this.actividad=actividad;
-    this.accion="Actualizar";
+  abrirModalEditar(template: TemplateRef<any>, actividad: Actividad) {
+    this.actividad = actividad;
+    this.accion = "Actualizar";
     this.bsModalRef = this.modalService.show(template);
+  }
+
+  abrirModalContent(template: TemplateRef<any>, actividad: Actividad) {
+    this.actividad = actividad;
+    
+    this.bsModalRef = this.modalService.show(template,{class: 'modal-lg'});
   }
 
   eliminar(obj: Actividad) {
     Swal.fire({
-      title: `¿Está seguro de eliminar el actividad ${obj.titulo}?`,
+      title: `¿Está seguro de eliminar la actividad ${obj.titulo}?`,
       text: "Una vez eliminado no se podrá revertir",
       width: 500,
       buttonsStyling: false,
@@ -106,7 +132,7 @@ export class ActividadesComponent implements OnInit {
       if (result.value) {
         this.actividadService.eliminar(obj.id).subscribe(
           res => {
-            if (res === "ok") Swal.fire('¡Eliminado!', 'El actividad fue eliminada.', 'success')
+            if (res === "ok") Swal.fire('¡Eliminado!', 'La actividad fue eliminada.', 'success')
           },
           err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) },
           () => {

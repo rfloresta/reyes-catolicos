@@ -1,0 +1,126 @@
+     <!-- tarea -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Responder Tarea</h5>
+        </div>
+        <div class="card-content">
+            <form [formGroup]="ActividadTareaUsuarioForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="fileinput fileinput-new text-center col-md-6">
+                        <div>
+                            <span class="btn btn-round btn-simple btn-rose btn-file pull-left">
+                                <span class="fileinput-new">Buscar Archivos</span>
+                                <input id="file" type="file" multiple="" required (change)="onFileChange($event)"
+                                    accept=".pdf,.doc,.docx, .png,.jpg">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <button [disabled]="ActividadTareaUsuarioForm.invalid" class="btn btn-fill btn-info pull-right">
+                            Enviar </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pre-scrollable">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3"
+                            *ngFor='let url of files; let i=index'>
+                            <a class="btn btn-simple btn-danger pull-right" (click)="quitarTareas(i)"
+                                href="javascript:void(0);"><i class="material-icons">close</i></a>
+                            <img [src]="url" /> <br />
+                            <div formArrayName="tareas">
+                                <div [formGroupName]="i" class="form-group label-floating">
+                                    <label class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" formControlName="descripcion">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills nav-pills-warning">
+                        <li class="active">
+                            <a href="#fotos" data-toggle="tab">Fotos</a>
+                        </li>
+                        <li>
+                            <a href="#documentos" data-toggle="tab">Documentos</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- fotos -->
+                        <div class="tab-pane active" id="fotos">
+                            <app-carga *ngIf="cargando"></app-carga>
+                            <ng-container *ngIf="!cargando">
+                                <p class="card-description text-right">Cantidad: {{tareasUsuariosImg.length}}</p>
+                                <carousel [showIndicators]="false" [noPause]="false">
+                                    <slide *ngFor="let actividadUsuario of tareasUsuariosImg; let i=index">
+                                        <img [src]="'http://localhost:3000/'+actividadUsuario.archivo" alt="First slide"
+                                            style="display: block; width: 100%;">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h4 class="card-title">{{actividadUsuario.descripcion}}</h4>
+                                            <small class="card-description">{{i+1}} - {{actividadUsuario.estudiante}}</small>
+                                            <!-- <small >{{actividadUsuario.fecha | date:'short'}}</small> -->
+                                            <div>
+                                                <rating class="card-description" [max]="5" (click)="actualizarValoracion(actividadUsuario)"
+                                                    [(ngModel)]="actividadUsuario.valoracion"></rating>
+                                            </div>
+                                            <a *ngIf="false" (click)="eliminarTarea(actividadUsuario)" title="Eliminar"
+                                                class="btn btn-simple btn-danger btn-icon remove"><i
+                                                    class="material-icons">close</i></a>
+                                        </div>
+                                    </slide>
+                                </carousel>
+                            </ng-container>
+                           
+                        </div>
+                        <!-- documentos -->
+                        <div class="tab-pane" id="documentos">
+                            <div class="material-datatables table-responsive">
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                    class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                                    width="100%" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <!-- profe -->
+                                            <th>Estudiante</th>
+                                            <th>Fecha</th>
+                                            <th>Archivo</th>
+                                            <!-- profe -->
+                                            <th>Valoración</th>
+                                            <!-- estu -->
+                                            <th class="disabled-sorting text-right">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Usar optimizador de For -->
+                                        <tr *ngFor="let actividadUsuario of tareasUsuariosDocs">
+                                            <td>{{actividadUsuario.estudiante}}</td>
+                                            <td>{{actividadUsuario.fecha | date:'short'}}</td>
+                                            <td>
+                                                <span>{{actividadUsuario.descripcion}}</span>
+                                                <div class="icon icon-info">
+                                                    <a [href]="'http://localhost:3000/'+actividadUsuario.archivo"
+                                                        target="_blank">
+                                                        <i class="material-icons">attach_file</i></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <rating [max]="5" (click)="actualizarValoracion(actividadUsuario)"
+                                                    [(ngModel)]="actividadUsuario.valoracion"></rating>
+                                            </td>
+                                            <td class="text-right">
+                                                <a (click)="eliminarTarea(actividadUsuario)" title="Eliminar"
+                                                    class="btn btn-simple btn-danger btn-icon remove">
+                                                    <i class="material-icons">delete</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

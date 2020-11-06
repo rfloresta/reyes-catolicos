@@ -1,0 +1,53 @@
+    <!-- foro -->
+    <div  class="row">
+        <form [formGroup]="actividadForoUsuarioForm" (ngSubmit)="onSubmit()">
+           
+        <div class="col-md-12">
+            <div class="form-group label-floating" [ngClass]="campoValido('respuesta')?'has-error':''">
+                <label class="control-label">Respuesta*</label>
+                <textarea formControlName="respuesta" class="form-control" required>
+                </textarea>
+                <ng-container *ngIf="campoValido('respuesta')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("respuesta") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button [disabled]="actividadForoUsuarioForm.invalid" class="btn btn-info pull-right" type="submit">Responder<div class="ripple-container">
+                </div>
+            </button>
+        </div>
+        </form>
+        <!-- foro -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Pedro Elote</span><br>
+                            <small class="card-description">
+                                12:00 pm - 12/12/2020
+                            </small>
+                        </div>
+                        <div class="card-content">
+                            Esta es la respuesta
+                            Y dice así como esto
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">María Rivas</span><br>
+                            <small class="card-description">
+                                12:00 pm - 12/12/2020
+                            </small>
+                        </div>
+                        <div class="card-content">
+                            Esta es la respuesta
+                            Y dice así como esto
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 

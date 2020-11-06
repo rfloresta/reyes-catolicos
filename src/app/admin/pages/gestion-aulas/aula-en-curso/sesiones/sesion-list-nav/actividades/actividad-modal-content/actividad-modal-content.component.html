@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{actividadHijo.tipo_actividad_id===1?'Tarea':'Foro'}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="ocultarModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title font-weight-bold">{{actividadHijo.titulo}}</h5>
+                    <small class="card-description">{{actividadHijo.fecha_publicacion | date: 'h:mm a - MMM d, y'}}
+                    </small>
+                </div>
+                <div class="card-content">
+                    <span>{{actividadHijo.descripcion}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <app-foros [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
+        *ngIf="actividadHijo.tipo_actividad_id===2">
+    </app-foros>
+
+    <app-tareas [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
+        *ngIf="actividadHijo.tipo_actividad_id===1">
+    </app-tareas>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="card-description pull-right">
+                {{actividadHijo.fecha_inicio === null ? 'Abierto en todo momento.': 'Del'}}
+                {{actividadHijo.fecha_inicio || 'Abierto en todo momento' | date: 'EEEE, MMMM d, h:mm a'}}
+                {{actividadHijo.fecha_fin === null ? '': 'al.'}}
+                {{actividadHijo.fecha_fin  | date: 'EEEE, MMMM d, h:mm a'}}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger btn-simple" (click)="ocultarModal()" type="button">Cerrar<div
+            class="ripple-container">
+            <div class="ripple ripple-on ripple-out"></div>
+        </div></button>
+</div>

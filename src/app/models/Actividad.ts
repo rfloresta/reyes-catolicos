@@ -1,7 +1,8 @@
 export interface Actividad{
     id?: number,
     titulo?: string,
-    descripción?: string,
+    descripcion?: string,
+    fecha_publicacion?: string,
     fecha_inicio?: string,
     fecha_fin?: string,
     archivo_adjunto?: string,
