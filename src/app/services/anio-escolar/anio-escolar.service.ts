@@ -12,30 +12,30 @@ export class AnioEscolarService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<AnioEscolar[]>{
-    return this.httpClient.get<AnioEscolar[]>(`${environment.API_URL}/anios`);
+    return this.httpClient.get<AnioEscolar[]>(`${environment.API_URL}/api/anios`);
   }
 
   obtenerAnioActivo(): Observable<AnioEscolar>{
-    return this.httpClient.get<AnioEscolar>(`${environment.API_URL}/anios/activo`);
+    return this.httpClient.get<AnioEscolar>(`${environment.API_URL}/api/anios/activo`);
   }
 
   registrar(anioEscolar: AnioEscolar){
-    return this.httpClient.post(`${environment.API_URL}/anios`, anioEscolar);
+    return this.httpClient.post(`${environment.API_URL}/api/anios`, anioEscolar);
   }
 
   buscar(id: number): Observable<AnioEscolar>{
-    return this.httpClient.delete(`${environment.API_URL}/anios/${id}`);
+    return this.httpClient.delete(`${environment.API_URL}/api/anios/${id}`);
   }
 
   actualizar(anioEscolar: AnioEscolar){
-    return this.httpClient.put(`${environment.API_URL}/anios/${anioEscolar.id}`, anioEscolar);
+    return this.httpClient.put(`${environment.API_URL}/api/anios/${anioEscolar.id}`, anioEscolar);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/anios/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/anios/${id}`)
   }
 
   actualizarEstado(id: number, anioEscolar: AnioEscolar): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/anios/${id}`, anioEscolar)
+    return this.httpClient.patch(`${environment.API_URL}/api/anios/${id}`, anioEscolar)
   }
 }

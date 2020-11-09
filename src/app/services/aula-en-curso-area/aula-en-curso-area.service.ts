@@ -12,26 +12,26 @@ export class AulaEnCursoAreaService {
   constructor(private httpClient: HttpClient) { }
 
   listar(anioAulaId: string): Observable<AulaEnCursoArea[]>{
-    return this.httpClient.get<AulaEnCursoArea[]>(`${environment.API_URL}/aula_en_curso_areas/${anioAulaId}`);
+    return this.httpClient.get<AulaEnCursoArea[]>(`${environment.API_URL}/api/aula_en_curso_areas/${anioAulaId}`);
   }
 
   registrar(aulaEnCursoArea: AulaEnCursoArea){
-    return this.httpClient.post(`${environment.API_URL}/aulas_en_curso`, aulaEnCursoArea);
+    return this.httpClient.post(`${environment.API_URL}/api/aulas_en_curso`, aulaEnCursoArea);
   }
 
   buscar(id: string): Observable<AulaEnCursoArea>{
-    return this.httpClient.get(`${environment.API_URL}/aulas_en_curso/${id}`);
+    return this.httpClient.get(`${environment.API_URL}/api/aulas_en_curso/${id}`);
   }
 
   actualizar(aulaEnCursoArea: AulaEnCursoArea){
-    return this.httpClient.put(`${environment.API_URL}/aulas_en_curso/${aulaEnCursoArea.id}`, aulaEnCursoArea);
+    return this.httpClient.put(`${environment.API_URL}/api/aulas_en_curso/${aulaEnCursoArea.id}`, aulaEnCursoArea);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/aulas_en_curso/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/aulas_en_curso/${id}`)
   }
 
   actualizarEstado(id: number, aulaEnCursoArea: AulaEnCursoArea): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/aulas_en_curso/${id}`, aulaEnCursoArea)
+    return this.httpClient.patch(`${environment.API_URL}/api/aulas_en_curso/${id}`, aulaEnCursoArea)
   }
 }

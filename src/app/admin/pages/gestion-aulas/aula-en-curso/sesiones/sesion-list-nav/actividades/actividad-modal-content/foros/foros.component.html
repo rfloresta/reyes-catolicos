@@ -1,7 +1,6 @@
     <!-- foro -->
     <div  class="row">
-        <form [formGroup]="actividadForoUsuarioForm" (ngSubmit)="onSubmit()">
-           
+        <form *ngIf="tipoVisnieto===4" [formGroup]="actividadForoUsuarioForm" (ngSubmit)="onSubmit()">
         <div class="col-md-12">
             <div class="form-group label-floating" [ngClass]="campoValido('respuesta')?'has-error':''">
                 <label class="control-label">Respuesta*</label>
@@ -21,31 +20,26 @@
         <!-- foro -->
         <div class="col-md-12">
             <div class="card">
-                <div class="card-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">Pedro Elote</span><br>
-                            <small class="card-description">
-                                12:00 pm - 12/12/2020
-                            </small>
-                        </div>
-                        <div class="card-content">
-                            Esta es la respuesta
-                            Y dice así como esto
-                        </div>
+                <div class="card-header">
+                    <div class="card-title">
+                        Respuestas
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">María Rivas</span><br>
-                            <small class="card-description">
-                                12:00 pm - 12/12/2020
-                            </small>
-                        </div>
-                        <div class="card-content">
-                            Esta es la respuesta
-                            Y dice así como esto
-                        </div>
-                    </div>
+                </div>
+                <div class="card-content pre-scrollable">
+                    <app-carga *ngIf="cargando"></app-carga>
+                    <ng-container *ngIf="!cargando">
+                        <div  class="card" *ngFor="let foroUsuario of foroUsuarios">
+                            <div class="card-header">
+                                <span class="card-title">{{foroUsuario.estudiante}}</span><br>
+                                <small class="card-description">
+                                    {{foroUsuario.fecha | date: 'short'}}
+                                </small>
+                            </div>
+                            <div class="card-content">
+                                {{foroUsuario.respuesta}}
+                            </div>
+                        </div>  
+                    </ng-container>   
                 </div>
             </div>
         </div>

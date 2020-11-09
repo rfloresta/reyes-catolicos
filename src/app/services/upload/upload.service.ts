@@ -14,7 +14,7 @@ export class UploadService {
   subir(file: any): Observable<any>{
     const input = new FormData();
     input.append('file', file);
-    return this.httpClient.post<any>(`${environment.API_URL}/uploads`, input);
+    return this.httpClient.post<any>(`${environment.API_URL}/api/uploads`, input);
   }
 
 }

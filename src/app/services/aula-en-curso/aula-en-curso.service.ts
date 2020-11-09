@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Sesion } from '@models/sesion';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AulaEnCurso } from '../../models/AulaEnCurso';
@@ -12,30 +13,30 @@ export class AulaEnCursoService {
   constructor(private httpClient: HttpClient) { }
 
   listar(anioId: number): Observable<AulaEnCurso[]>{
-    return this.httpClient.get<AulaEnCurso[]>(`${environment.API_URL}/aulas_en_curso/anios/${anioId}`);
+    return this.httpClient.get<AulaEnCurso[]>(`${environment.API_URL}/api/aulas_en_curso/anios/${anioId}`);
   }
 
   obtenerId(usuarioId: number): Observable<AulaEnCurso>{
-    return this.httpClient.get<AulaEnCurso>(`${environment.API_URL}/aulas_en_curso/id/${usuarioId}`);
+    return this.httpClient.get<AulaEnCurso>(`${environment.API_URL}/api/aulas_en_curso/id/${usuarioId}`);
   }
 
   registrar(aulaEnCurso: AulaEnCurso){
-    return this.httpClient.post(`${environment.API_URL}/aulas_en_curso`, aulaEnCurso);
+    return this.httpClient.post(`${environment.API_URL}/api/aulas_en_curso`, aulaEnCurso);
   }
 
   buscar(id: string): Observable<AulaEnCurso>{
-    return this.httpClient.get(`${environment.API_URL}/aulas_en_curso/${id}`);
+    return this.httpClient.get(`${environment.API_URL}/api/aulas_en_curso/${id}`);
   }
 
   actualizar(aulaEnCurso: AulaEnCurso){
-    return this.httpClient.put(`${environment.API_URL}/aulas_en_curso/${aulaEnCurso.id}`, aulaEnCurso);
+    return this.httpClient.put(`${environment.API_URL}/api/aulas_en_curso/${aulaEnCurso.id}`, aulaEnCurso);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/aulas_en_curso/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/aulas_en_curso/${id}`)
   }
 
   actualizarEstado(id: number, aulaEnCurso: AulaEnCurso): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/aulas_en_curso/${id}`, aulaEnCurso)
+    return this.httpClient.patch(`${environment.API_URL}/api/aulas_en_curso/${id}`, aulaEnCurso)
   }
 }

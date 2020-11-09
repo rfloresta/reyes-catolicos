@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AreaListComponent } from './area-list/area-list.component';
 import { AulaEnCursoComponent } from './aula-en-curso.component';
 
+//routing
+
 const routes: Routes = [
   {
     path: '', component: AulaEnCursoComponent,

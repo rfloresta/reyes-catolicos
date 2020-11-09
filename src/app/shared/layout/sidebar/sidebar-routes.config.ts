@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
 //-------------PROFESOR/ESTUDIANTE----------------------------------------------------
 
 { path: 'inicio', title: 'Inicio', menuType: MenuType.LEFT, icon: 'material-icons' },
-{ path: 'areas-curriculares', title: 'Areas Curriculares', menuType: MenuType.LEFT, icon:'material-icons' },
+{ path: 'aula-en-curso/areas', title: 'Areas Curriculares', menuType: MenuType.LEFT, icon:'material-icons' },
 
 //------------------------------------------------------------------------------------
 ];

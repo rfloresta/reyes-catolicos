@@ -12,38 +12,38 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios`);
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/api/usuarios`);
   }
 
   listarEstudiantes(): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/estudiantes`);
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/api/usuarios/estudiantes`);
   }
 
   listarProfesores(): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/profesores`);
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/api/usuarios/profesores`);
   }
 
   listarEstudiantesSinAula(): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/usuarios/estudiantes-sin-aula`);
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/api/usuarios/estudiantes-sin-aula`);
   }
 
   registrar(Usuario: Usuario){
-    return this.httpClient.post(`${environment.API_URL}/usuarios`, Usuario);
+    return this.httpClient.post(`${environment.API_URL}/api/usuarios`, Usuario);
   }
 
   buscar(id: number): Observable<Usuario>{
-    return this.httpClient.get(`${environment.API_URL}/usuarios/${id}`);
+    return this.httpClient.get(`${environment.API_URL}/api/usuarios/${id}`);
   }
 
   actualizar(Usuario: Usuario){
-    return this.httpClient.put(`${environment.API_URL}/usuarios/${Usuario.id}`, Usuario);
+    return this.httpClient.put(`${environment.API_URL}/api/usuarios/${Usuario.id}`, Usuario);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/usuarios/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/usuarios/${id}`)
   }
 
   actualizarEstado(id: number, Usuario: Usuario): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/usuarios/${id}`, Usuario)
+    return this.httpClient.patch(`${environment.API_URL}/api/usuarios/${id}`, Usuario)
   }
 }

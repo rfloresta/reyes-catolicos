@@ -41,7 +41,7 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   };
   actividades: Actividad[] = [];
   recursos: Recurso[] = [];
-  area: AulaEnCursoArea = {};
+  areaEnCurso: AulaEnCursoArea = {};
   usuario: UsuarioResponse;
   tipo: number;
   time: string;
@@ -59,11 +59,11 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    let areaString = localStorage.getItem('area');
-    this.area = JSON.parse(areaString);
+    let areaEnCursoString = localStorage.getItem('area');
+    this.areaEnCurso = JSON.parse(areaEnCursoString);
 
     this.cargando = true;
-    this.sesionService.listar(this.area.id).subscribe(
+    this.sesionService.listar(this.areaEnCurso.id).subscribe(
       (res: Sesion[]) => {
         this.sesionesHijo = res;
         let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
@@ -73,7 +73,7 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
       err => console.error(err)
     );
 
-    this.sesionService.obtenerSesionActual(this.area.id)
+    this.sesionService.obtenerSesionActual(this.areaEnCurso.id)
       .subscribe((res: Sesion) => {
           this.consultarSesion(res);
         },
@@ -103,18 +103,18 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
     // this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion);
 
 
-    // let usuarioString = localStorage.getItem('usuario');
-    // this.usuario = JSON.parse(usuarioString);
-    // this.tipo = this.usuario.tipo;
+    let usuarioString = localStorage.getItem('usuario');
+    this.usuario = JSON.parse(usuarioString);
+    this.tipo = this.usuario.tipo;
 
 
 
     // if(this.tipo===1 || this.tipo===2 ){
-    // this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/";
-    //   // this.path2 = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones";
+    // this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areaEnCursos/sesiones/";
+    //   // this.path2 = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areaEnCursos/sesiones";
     // }else{
-    //   this.path = "/principal/inicio/areas-curriculares";
-    //   this.path2 = "/principal/inicio/areas-curriculares/estudiantes";
+    //   this.path = "/principal/inicio/areaEnCursos-curriculares";
+    //   this.path2 = "/principal/inicio/areaEnCursos-curriculares/estudiantes";
     // }
 
   }
@@ -135,11 +135,11 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   }
 
   editar(obj: Sesion) {
-    console.log('SESION -', obj);
-
     this.flujoService.enviarObjeto(obj);
     this.flujoService.enviarAccion("Actualizar");
-    this.router.navigate(['principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones/form']);
+  
+      this.router.navigate(['principal/inicio/aula-en-curso/areas/sesiones/form']);
+
   }
 
   eliminar(obj: Sesion) {

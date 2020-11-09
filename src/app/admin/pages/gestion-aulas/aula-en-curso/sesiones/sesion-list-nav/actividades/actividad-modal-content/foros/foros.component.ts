@@ -16,10 +16,10 @@ export class ForosComponent implements OnInit, OnDestroy {
 
   @Input() actividadNieto: Actividad;
   @Input() usuarioResponseHijo: UsuarioResponse;
-
+  @Input() tipoVisnieto: number;
   @Output() hide = new EventEmitter();
   actividadForoUsuario: ActividadForoUsuario = {};
-  actividadesUsuarios: ActividadForoUsuario[] = [];
+  foroUsuarios: ActividadForoUsuario[] = [];
   actividadForoUsuarioForm: FormGroup;
   cargando: boolean;
   constructor(private actividadService: ActividadService,
@@ -33,7 +33,7 @@ export class ForosComponent implements OnInit, OnDestroy {
     this.actividadForoUsuario.actividad_id = this.actividadNieto.id;
 
     this.validar();
-      // this.listarTareasEstudiante(this.ActividadForoUsuario);
+      this.listarForosEstudiante(this.actividadForoUsuario.actividad_id);
   }
 
   onSubmit() {
@@ -64,7 +64,7 @@ export class ForosComponent implements OnInit, OnDestroy {
           this.toastr.success("El foro ha sido registrado");
           this.actividadForoUsuarioForm.reset();
           this.validar();
-          // this.listarTareasEstudiante(this.ActividadForoUsuario);
+          this.listarForosEstudiante(this.actividadForoUsuario.actividad_id);
         }else{
           this.toastr.error('Ha ocurrido un problema al registrar');
         }
@@ -74,6 +74,17 @@ export class ForosComponent implements OnInit, OnDestroy {
         console.log(err);
       }
     );
+  }
+
+  listarForosEstudiante(id: number) {
+    this.cargando = true;
+    setTimeout(() => {
+      this.actividadService.listarForosEstudiante(id)
+    .subscribe(res => {
+      this.foroUsuarios = res;
+    });
+      this.cargando = false;
+    }, 1000); 
   }
 
   mensajeError(campo: string): string {
@@ -94,7 +105,5 @@ export class ForosComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // this.dtTrigger.unsubscribe();
   }
-
-
 
 }

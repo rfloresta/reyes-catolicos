@@ -9,5 +9,6 @@ export interface AulaEnCurso{
     aula?: string,
     turno?: string,
     profesor?: string,
-    cantidad_estudiantes?: number
+    cantidad_estudiantes?: number,
+    nombre_anio?: string
 }

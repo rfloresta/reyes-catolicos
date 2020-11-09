@@ -75,12 +75,6 @@ export class ActividadModalFormComponent implements OnInit {
       this.registrar(this.actividadHijo);
     } else this.actualizar(this.actividadHijo);
     
-    setTimeout(() => {
-      this.actividadService.listar(this.sesionNieto.id).subscribe(res => {
-        this.actividades.emit(res);
-      });
-    }, 150);
-
   }
 
   registrar(obj: Actividad) {
@@ -88,8 +82,8 @@ export class ActividadModalFormComponent implements OnInit {
       res => {
         console.log(res);
         if (res) {
-          this.toastr.success("Nueva actividad registrado");
-          
+          this.toastr.success("Nueva actividad registrada");
+          this.listarActividades();
         }
       },
       err => {
@@ -100,11 +94,20 @@ export class ActividadModalFormComponent implements OnInit {
     
   }
 
+  listarActividades(){
+    this.actividadService.listar(this.sesionNieto.id).subscribe(res => {
+      this.actividades.emit(res);
+    });
+  }
+
   actualizar(obj: Actividad) {
     console.log("actualizar", obj);
     this.actividadService.actualizar(obj).subscribe(
       res => {
-        if (res === "ok") this.toastr.success('La actividad se actualizó correctamente')
+        if (res === "ok") {
+          this.toastr.success('La actividad se actualizó correctamente')
+          this.listarActividades();
+        }
       },
       err => {
         this.toastr.error('Ha ocurrido un error inesperado');

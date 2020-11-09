@@ -12,7 +12,7 @@ export class TipoUsuarioService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<TipoUsuario[]>{
-    return this.httpClient.get<TipoUsuario[]>(`${environment.API_URL}/tipo_usuarios`);
+    return this.httpClient.get<TipoUsuario[]>(`${environment.API_URL}/api/tipo_usuarios`);
   }
   
 }

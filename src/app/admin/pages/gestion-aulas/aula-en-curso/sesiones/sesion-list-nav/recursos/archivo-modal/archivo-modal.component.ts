@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Recurso } from '@models/recurso';
+import { environment } from 'src/environments/environment';
+
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
@@ -18,11 +20,10 @@ export class ArchivoModalComponent implements OnInit {
 
   ngOnInit() {
     if(this.recursoHijo.tipo_recurso_id===1){
-      this.url='http://192.168.1.4:3000/'+this.recursoHijo.contenido;
+      this.url=`${environment.API_URL}/${this.recursoHijo.contenido}`;
     }else if (this.recursoHijo.tipo_recurso_id===2){
       this.url=this.recursoHijo.contenido;
     }
-
   }
 
   onSubmit() {

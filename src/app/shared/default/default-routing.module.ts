@@ -29,7 +29,7 @@ export const routes: Routes = [
     path: 'inicio', component: DefaultComponent,
     children: [
       { path: '', loadChildren: () => import('../../pages/inicio/inicio.module').then(m => m.InicioModule)},   
-      { path: 'areas-curriculares', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) }, 
+      { path: 'aula-en-curso', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) }, 
       { path: '**', component: InicioComponent},   
     ]
   }

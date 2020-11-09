@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "starts": "ng serve --host=192.168.1.4  --disable-host-check",
+    "start-ip": "ng serve --o",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -30,6 +32,8 @@
     "ngx-bootstrap": "^6.1.0",
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^13.0.0",
+    "pdfmake": "^0.1.68",
+    "pdfmake-wrapper": "^2.0.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.3.3",
     "tslib": "^2.0.0",

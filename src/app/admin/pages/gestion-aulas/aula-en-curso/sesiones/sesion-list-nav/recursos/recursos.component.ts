@@ -22,6 +22,7 @@ export class RecursosComponent implements OnInit {
   tipo: number;
   @Input() recursosHijo: Recurso[] = [];
   @Input() sesionHijo: Sesion;
+  @Input() tipoHijo: number;
 
   recurso: Recurso;
 

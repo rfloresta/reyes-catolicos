@@ -18,6 +18,7 @@ export class ActividadModalContentComponent implements OnInit, OnDestroy {
 
   @Input() accionHijo: string;
   @Input() actividadHijo: Actividad;
+  @Input() tipoNieto: number;
   @Output() hide = new EventEmitter();
   usuarioResponse: UsuarioResponse;
   

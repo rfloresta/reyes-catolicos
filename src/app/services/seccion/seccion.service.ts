@@ -12,26 +12,26 @@ export class SeccionService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<Seccion[]>{
-    return this.httpClient.get<Seccion[]>(`${environment.API_URL}/secciones`);
+    return this.httpClient.get<Seccion[]>(`${environment.API_URL}/api/secciones`);
   }
 
   registrar(Seccion: Seccion){
-    return this.httpClient.post(`${environment.API_URL}/secciones`, Seccion);
+    return this.httpClient.post(`${environment.API_URL}/api/secciones`, Seccion);
   }
 
   buscar(id: number): Observable<Seccion>{
-    return this.httpClient.delete(`${environment.API_URL}/secciones/${id}`);
+    return this.httpClient.delete(`${environment.API_URL}/api/secciones/${id}`);
   }
 
   actualizar(Seccion: Seccion){
-    return this.httpClient.put(`${environment.API_URL}/secciones/${Seccion.id}`, Seccion);
+    return this.httpClient.put(`${environment.API_URL}/api/secciones/${Seccion.id}`, Seccion);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/secciones/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/secciones/${id}`)
   }
 
   actualizarEstado(id: number, Seccion: Seccion): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/secciones/${id}`, Seccion)
+    return this.httpClient.patch(`${environment.API_URL}/api/secciones/${id}`, Seccion)
   }
 }

@@ -14,50 +14,54 @@ export class ActividadService {
   constructor(private httpClient: HttpClient) { }
 
   listar(sesion_id: number): Observable<Actividad[]>{
-    return this.httpClient.get<Actividad[]>(`${environment.API_URL}/actividades/${sesion_id}`);
+    return this.httpClient.get<Actividad[]>(`${environment.API_URL}/api/actividades/${sesion_id}`);
   }
 
-  listarTareasEstudiante(obj: ActividadTareaUsuario): Observable<Actividad[]>{
-    // Initialize Params Object
-    let Params = new HttpParams();
+  listarTareasEstudiante(obj: ActividadTareaUsuario): Observable<ActividadTareaUsuario[]>{
+    return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/tarea/`+JSON.stringify(obj));
+  }
 
-    // Begin assigning parameters
-    Params = Params.append('actividad_id', obj.actividad_id.toString());
-    Params = Params.append('usuario_id', obj.usuario_id.toString());
-    const headers = new HttpHeaders({'h1':'v1','h2':'v2'});
+  listarTareasEstudiantes(actividad_id: number): Observable<ActividadTareaUsuario[]>{
+    return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/tareas/${actividad_id}`);
+  }
 
-    return this.httpClient.get<Actividad[]>(`${environment.API_URL}/actividades/tarea/`+JSON.stringify(obj));
+  listarForosEstudiante(id: number): Observable<ActividadForoUsuario[]>{
+    return this.httpClient.get<ActividadForoUsuario[]>(`${environment.API_URL}/api/actividades/foro/${id}`);
+  }
+
+  listarFotosInforme(sesionId: number): Observable<ActividadForoUsuario[]>{
+    return this.httpClient.get<ActividadForoUsuario[]>(`${environment.API_URL}/api/actividades/informe_fotos/${sesionId}`);
   }
 
   registrar(obj: Actividad){
-    return this.httpClient.post(`${environment.API_URL}/actividades`, obj);
+    return this.httpClient.post(`${environment.API_URL}/api/actividades`, obj);
   }
 
   registrarTarea(obj: FormData){
-        return this.httpClient.post(`${environment.API_URL}/actividades/tarea`, obj);
+        return this.httpClient.post(`${environment.API_URL}/api/actividades/tarea`, obj);
   }
 
   registrarForo(obj: ActividadForoUsuario){
-    return this.httpClient.post(`${environment.API_URL}/actividades/foro`, obj);
+    return this.httpClient.post(`${environment.API_URL}/api/actividades/foro`, obj);
 }
 
   buscar(id: number): Observable<Actividad>{
-    return this.httpClient.delete(`${environment.API_URL}/actividades/${id}`);
+    return this.httpClient.delete(`${environment.API_URL}/api/actividades/${id}`);
   }
 
   actualizar(obj: Actividad){
-    return this.httpClient.put(`${environment.API_URL}/actividades/${obj.id}`, obj);
+    return this.httpClient.put(`${environment.API_URL}/api/actividades/${obj.id}`, obj);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/actividades/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/actividades/${id}`)
   }
 
   eliminarTarea(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/actividades/tarea/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/actividades/tarea/${id}`)
   }
 
   actualizarValoracion(id: number, obj: ActividadTareaUsuario): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/actividades/actividad/${id}`, obj)
+    return this.httpClient.patch(`${environment.API_URL}/api/actividades/actividad/${id}`, obj)
   }
 }

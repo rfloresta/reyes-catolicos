@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <h3 class="card-title">Actividades
-        <button title="Agregar Nueva Actividad" 
+        <button *ngIf="tipoHijo===3" title="Agregar Nueva Actividad" 
         class="btn btn-primary btn-round btn-fab btn-fab-mini" 
         (click)="abrirModalRegistrar(modalForm)">
         <i class="material-icons">add</i></button>
@@ -13,7 +13,7 @@
                 <div  class="icon icon-info">
                     <a href="javascript:void(0);" (click)="abrirModalContent(modalContent,actividad)"> <i class="material-icons">{{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_inicio,actividad.fecha_fin)}}</i></a>                   
                 </div>
-                <div class="btn-contenido">
+                <div *ngIf="tipoHijo===3" class="btn-contenido">
                     <button  (click)="abrirModalEditar(modalForm,actividad)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
                         <i class="material-icons">edit</i>
                     </button>
@@ -40,5 +40,5 @@
 </ng-template>
 
 <ng-template #modalContent>
-    <app-actividad-modal-content (hide)="bsModalRef.hide()" [sesionNieto]="sesionHijo" [actividadHijo]="actividad"></app-actividad-modal-content>
+    <app-actividad-modal-content (hide)="bsModalRef.hide()" [sesionNieto]="sesionHijo" [tipoNieto]="tipoHijo" [actividadHijo]="actividad"></app-actividad-modal-content>
 </ng-template>

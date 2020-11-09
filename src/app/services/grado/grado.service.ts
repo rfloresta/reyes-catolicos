@@ -12,26 +12,26 @@ export class GradoService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<Grado[]>{
-    return this.httpClient.get<Grado[]>(`${environment.API_URL}/grados`);
+    return this.httpClient.get<Grado[]>(`${environment.API_URL}/api/grados`);
   }
 
   registrar(Grado: Grado){
-    return this.httpClient.post(`${environment.API_URL}/grados`, Grado);
+    return this.httpClient.post(`${environment.API_URL}/api/grados`, Grado);
   }
 
   buscar(id: number): Observable<Grado>{
-    return this.httpClient.delete(`${environment.API_URL}/grados/${id}`);
+    return this.httpClient.delete(`${environment.API_URL}/api/grados/${id}`);
   }
 
   actualizar(Grado: Grado){
-    return this.httpClient.put(`${environment.API_URL}/grados/${Grado.id}`, Grado);
+    return this.httpClient.put(`${environment.API_URL}/api/grados/${Grado.id}`, Grado);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/grados/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/grados/${id}`)
   }
 
   actualizarEstado(id: number, Grado: Grado): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/grados/${id}`, Grado)
+    return this.httpClient.patch(`${environment.API_URL}/api/grados/${id}`, Grado)
   }
 }

@@ -7,7 +7,7 @@ import { SidebarComponent } from '../layout/sidebar/sidebar.component';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { ContentHeaderComponent } from '../layout/content-header/content-header.component';
 import { FooterComponent } from '../layout/footer/footer.component';
-//routing
+// Import pdfmake-wrapper and the fonts to use
 
 @NgModule({
   declarations: [

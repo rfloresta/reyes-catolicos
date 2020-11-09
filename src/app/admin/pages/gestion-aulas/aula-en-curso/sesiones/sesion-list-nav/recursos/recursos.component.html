@@ -1,6 +1,6 @@
 <div class="col-md-12 espacio">
     <h3 class="card-title">Recursos
-        <button type="button" title="Agregar Nuevo Recurso" 
+        <button *ngIf="tipoHijo===3" type="button" title="Agregar Nuevo Recurso" 
         class="btn btn-primary btn-round btn-fab btn-fab-mini" 
         (click)="abrirModalRegistrar(template)"><i class="material-icons">add</i></button>
     </h3>
@@ -13,7 +13,7 @@
                     <a *ngIf="recurso.formato_id!==4" href="javascript:void(0);" (click)="abrirModalArchivo(templateArchivo,recurso)"> <i class="material-icons">{{recurso.nombre_icono}}</i></a>
                     <a *ngIf="recurso.formato_id===4" [href]="url+recurso.contenido"><i class="material-icons">{{recurso.nombre_icono}}</i></a>
                 </div>
-                <div class="btn-contenido">
+                <div *ngIf="tipoHijo===3" class="btn-contenido">
                     <button (click)="abrirModalEditar(template,recurso)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
                         <i class="material-icons">edit</i>
                     </button>

@@ -30,8 +30,6 @@ export class SesionComponent implements OnInit, OnDestroy {
   area: AulaEnCursoArea = {};
   usuario: UsuarioResponse;
   tipo: number;
-  time: string;
-  time_end: string;
   constructor( private flujoService: FlujoService,
     private sesionService: SesionService,
     private activatedRoute: ActivatedRoute,
@@ -62,9 +60,9 @@ export class SesionComponent implements OnInit, OnDestroy {
     // this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion);
 
     
-    // let usuarioString = localStorage.getItem('usuario');
-    // this.usuario = JSON.parse(usuarioString);
-    // this.tipo = this.usuario.tipo;
+    let usuarioString = localStorage.getItem('usuario');
+    this.usuario = JSON.parse(usuarioString);
+    this.tipo = this.usuario.tipo;
 
     
 

@@ -20,11 +20,11 @@
 
         </div>
     </div>
-    <app-foros [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
+    <app-foros [tipoVisnieto]="tipoNieto" [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
         *ngIf="actividadHijo.tipo_actividad_id===2">
     </app-foros>
 
-    <app-tareas [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
+    <app-tareas [tipoVisnieto]="tipoNieto" [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
         *ngIf="actividadHijo.tipo_actividad_id===1">
     </app-tareas>
 

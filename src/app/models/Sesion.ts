@@ -4,5 +4,8 @@ export interface Sesion{
     fecha?: string,
     link?: string,
     tema?: string,
-    area_aula_anio_id?: number
+    area_aula_anio_id?: number,
+
+    //pintar
+    area_nombre?: string
 }

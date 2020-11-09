@@ -8,7 +8,7 @@
 <i class="material-icons">date_range</i>Sesión {{ s.numero }}
 </a>
 
-<div class="btn-sesion">
+<div *ngIf="tipo===3" class="btn-sesion">
 <button (click)="editar(s)" type="button" class="btn btn-sm btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
     <i class="material-icons">edit</i>
 </button>
@@ -16,8 +16,10 @@
     <i class="material-icons">close</i>
 </button>
 </div>
+
 </li>
     </ul>
+    
 <div class="center-block">
     <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
 </div>
@@ -37,8 +39,6 @@
 </div>    
 </div>
 <div class="row">
-    <app-recursos [sesionHijo]="sesion" [recursosHijo]="recursos" ></app-recursos>
-
-    <app-actividades [sesionHijo]="sesion" [actividadesHijo]="actividades"></app-actividades>
-
+    <app-recursos [tipoHijo]="tipo" [sesionHijo]="sesion" [recursosHijo]="recursos" ></app-recursos>
+    <app-actividades [tipoHijo]="tipo" [sesionHijo]="sesion" [actividadesHijo]="actividades"></app-actividades>
 </div>

@@ -19,6 +19,7 @@ export class ActividadesComponent implements OnInit {
   tipo: number;
   @Input() actividadesHijo: Actividad[] = [];
   @Input() sesionHijo: Sesion;
+  @Input() tipoHijo: number;
 
   actividad: Actividad = {};
 

@@ -25,7 +25,7 @@ export class LoginService {
    
   login(Usuario: Usuario): Observable<UsuarioResponse | void >{
     return this.httpClient
-    .post<UsuarioResponse>(`${environment.API_URL}/login`, Usuario)
+    .post<UsuarioResponse>(`${environment.API_URL}/api/login`, Usuario)
     .pipe( 
       map((res: UsuarioResponse) => {
         console.log(res);

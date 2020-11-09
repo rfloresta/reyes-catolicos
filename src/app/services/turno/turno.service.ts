@@ -12,26 +12,26 @@ export class TurnoService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<Turno[]>{
-    return this.httpClient.get<Turno[]>(`${environment.API_URL}/turnos`);
+    return this.httpClient.get<Turno[]>(`${environment.API_URL}/api/turnos`);
   }
 
   registrar(turno: Turno){
-    return this.httpClient.post(`${environment.API_URL}/turnos`, turno);
+    return this.httpClient.post(`${environment.API_URL}/api/turnos`, turno);
   }
 
   buscar(id: number): Observable<Turno>{
-    return this.httpClient.delete(`${environment.API_URL}/turnos/${id}`);
+    return this.httpClient.delete(`${environment.API_URL}/api/turnos/${id}`);
   }
 
   actualizar(turno: Turno){
-    return this.httpClient.put(`${environment.API_URL}/turnos/${turno.id}`, turno);
+    return this.httpClient.put(`${environment.API_URL}/api/turnos/${turno.id}`, turno);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/turnos/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/turnos/${id}`)
   }
 
   actualizarEstado(id: number, Turno: Turno): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/turnos/${id}`, Turno)
+    return this.httpClient.patch(`${environment.API_URL}/api/turnos/${id}`, Turno)
   }
 }

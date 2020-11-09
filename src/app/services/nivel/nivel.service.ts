@@ -12,26 +12,26 @@ export class NivelService {
   constructor(private httpClient: HttpClient) { }
 
   listar(): Observable<Nivel[]>{
-    return this.httpClient.get<Nivel[]>(`${environment.API_URL}/niveles`);
+    return this.httpClient.get<Nivel[]>(`${environment.API_URL}/api/niveles`);
   }
 
   registrar(Nivel: Nivel){
-    return this.httpClient.post(`${environment.API_URL}/niveles`, Nivel);
+    return this.httpClient.post(`${environment.API_URL}/api/niveles`, Nivel);
   }
 
   buscar(id: number): Observable<Nivel>{
-    return this.httpClient.delete(`${environment.API_URL}/niveles/${id}`);
+    return this.httpClient.delete(`${environment.API_URL}/api/niveles/${id}`);
   }
 
   actualizar(Nivel: Nivel){
-    return this.httpClient.put(`${environment.API_URL}/niveles/${Nivel.id}`, Nivel);
+    return this.httpClient.put(`${environment.API_URL}/api/niveles/${Nivel.id}`, Nivel);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/niveles/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/niveles/${id}`)
   }
 
   actualizarEstado(id: number, Nivel: Nivel): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/niveles/${id}`, Nivel)
+    return this.httpClient.patch(`${environment.API_URL}/api/niveles/${id}`, Nivel)
   }
 }

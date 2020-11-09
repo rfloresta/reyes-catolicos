@@ -16,6 +16,7 @@ import { AreaListComponent } from './area-list/area-list.component';
 import { AulaEnCursoAreaService } from '@services/aula-en-curso-area/aula-en-curso-area.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ActividadService } from '@services/actividad/actividad.service';
 @NgModule({
   declarations: [
     AulaEnCursoComponent,
@@ -36,7 +37,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FlujoService,
     AulaEnCursoService,
     AulaEnCursoAreaService,
-    SesionService
+    SesionService,
+    ActividadService
   ]
 })
 export class AulaEnCursoModule { }

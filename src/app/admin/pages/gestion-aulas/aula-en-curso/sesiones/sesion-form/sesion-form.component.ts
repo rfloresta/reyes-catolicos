@@ -73,7 +73,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
     if (this.sesionHijo.id===null) {  
       this.registrar(this.sesionHijo);
     } else this.actualizar(this.sesionHijo);
-    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones']);
+    this.router.navigate(['/principal/inicio/aula-en-curso/areas/sesiones']);
   }
 
   validar(){
@@ -124,7 +124,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
   }
 
   atras(){
-    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas/sesiones']);
+    this.router.navigate(['/principal/inicio/aula-en-curso/areas/sesiones']);
   }
 
   mensajeError(campo: string): string{
