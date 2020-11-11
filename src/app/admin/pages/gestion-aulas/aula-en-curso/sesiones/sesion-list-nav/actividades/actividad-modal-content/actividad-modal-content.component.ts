@@ -19,7 +19,9 @@ export class ActividadModalContentComponent implements OnInit, OnDestroy {
   @Input() accionHijo: string;
   @Input() actividadHijo: Actividad;
   @Input() tipoNieto: number;
-  @Output() hide = new EventEmitter();
+  @Input() estadoHijo: string;
+  @Output() hide = new EventEmitter<number>();
+
   usuarioResponse: UsuarioResponse;
   
   constructor(private actividadService: ActividadService,
@@ -37,6 +39,7 @@ export class ActividadModalContentComponent implements OnInit, OnDestroy {
   ocultarModal() {
     this.hide.emit();
   }
+
 
   ngOnDestroy(): void {
     // this.dtTrigger.unsubscribe();

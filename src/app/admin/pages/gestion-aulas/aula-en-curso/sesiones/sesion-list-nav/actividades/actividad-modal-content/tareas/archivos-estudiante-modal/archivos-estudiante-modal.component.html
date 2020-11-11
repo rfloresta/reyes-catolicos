@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{actividad.titulo}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef2.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title font-weight-bold">{{tarea.estudiante}}</h5>
+                    <small class="card-description">{{tarea.fecha | date: 'h:mm a - MMM d, y'}}
+                    </small>
+                </div>
+                <div class="card-content">
+                    <span>{{tarea.descripcion}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Estudiantes -->
+    <app-archivos-estudiante [tipoTataranieto]="tipo" [tareaHermano]="tarea"
+         >
+    </app-archivos-estudiante>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger btn-simple" (click)="bsModalRef2.hide()" type="button">Cerrar<div
+            class="ripple-container">
+            <div class="ripple ripple-on ripple-out"></div>
+        </div></button>
+</div>

@@ -11,7 +11,10 @@
               
                 <h6 class="category">{{actividad.tipo_nombre}}</h6>
                 <div  class="icon icon-info">
-                    <a href="javascript:void(0);" (click)="abrirModalContent(modalContent,actividad)"> <i class="material-icons">{{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_inicio,actividad.fecha_fin)}}</i></a>                   
+                    <a href="javascript:void(0);" 
+                    (click)="abrirModalContent(modalContent,actividad)"> 
+                    <i class="material-icons">
+                        {{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_inicio,actividad.fecha_fin)}}</i></a>                   
                 </div>
                 <div *ngIf="tipoHijo===3" class="btn-contenido">
                     <button  (click)="abrirModalEditar(modalForm,actividad)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
@@ -31,7 +34,8 @@
                     <p class="category"><i class="material-icons">hourglass_bottom</i>{{humanFormatEnd(actividad.fecha_inicio,actividad.fecha_fin)}}</p>
                 </div>
             </div>
-        </div>
+        </div> 
+
     </div>
 </div>
 
@@ -40,5 +44,5 @@
 </ng-template>
 
 <ng-template #modalContent>
-    <app-actividad-modal-content (hide)="bsModalRef.hide()" [sesionNieto]="sesionHijo" [tipoNieto]="tipoHijo" [actividadHijo]="actividad"></app-actividad-modal-content>
+    <app-actividad-modal-content [estadoHijo]="estado" (hide)="bsModalRef.hide()" [sesionNieto]="sesionHijo" [tipoNieto]="tipoHijo" [actividadHijo]="actividad"></app-actividad-modal-content>
 </ng-template>

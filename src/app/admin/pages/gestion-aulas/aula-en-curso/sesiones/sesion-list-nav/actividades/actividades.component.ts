@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { Actividad } from '@models/actividad';
+import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
 
 @Component({
   selector: 'app-actividades',
@@ -22,9 +23,17 @@ export class ActividadesComponent implements OnInit {
   @Input() tipoHijo: number;
 
   actividad: Actividad = {};
-
+  tarea: ActividadTareaUsuario;
   accion: string;
-
+  estado: string;
+  config = {
+    ignoreBackdropClick: true,
+    class: 'modal-lg'
+  };
+  config2 = {
+    ignoreBackdropClick: true
+  };
+  iconState: string;
   constructor(private actividadService: ActividadService,
     private modalService: BsModalService,
   ) {
@@ -97,20 +106,21 @@ export class ActividadesComponent implements OnInit {
       sesion_id: null
     };
     this.accion = "Registrar";
-    this.bsModalRef = this.modalService.show(template);
+    this.bsModalRef = this.modalService.show(template,this.config2);
   }
 
   abrirModalEditar(template: TemplateRef<any>, actividad: Actividad) {
     this.actividad = actividad;
     this.accion = "Actualizar";
-    this.bsModalRef = this.modalService.show(template);
+    this.bsModalRef = this.modalService.show(template, this.config2);
   }
 
   abrirModalContent(template: TemplateRef<any>, actividad: Actividad) {
     this.actividad = actividad;
-    
-    this.bsModalRef = this.modalService.show(template,{class: 'modal-lg'});
+    this.estado = this.comprobarVigencia(actividad.fecha_inicio, actividad.fecha_fin);
+    this.bsModalRef = this.modalService.show(template, this.config);
   }
+
 
   eliminar(obj: Actividad) {
     Swal.fire({

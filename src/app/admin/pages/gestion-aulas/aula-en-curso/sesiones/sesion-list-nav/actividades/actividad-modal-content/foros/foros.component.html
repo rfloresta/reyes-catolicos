@@ -1,6 +1,6 @@
     <!-- foro -->
     <div  class="row">
-        <form *ngIf="tipoVisnieto===4" [formGroup]="actividadForoUsuarioForm" (ngSubmit)="onSubmit()">
+        <form *ngIf="tipoVisnieto===4 && estadoNieto!=='_off'" [formGroup]="actividadForoUsuarioForm" (ngSubmit)="onSubmit()">
         <div class="col-md-12">
             <div class="form-group label-floating" [ngClass]="campoValido('respuesta')?'has-error':''">
                 <label class="control-label">Respuesta*</label>
@@ -11,7 +11,7 @@
                 </ng-container>
             </div>
         </div>
-        <div class="col-md-12">
+        <div  class="col-md-12">
             <button [disabled]="actividadForoUsuarioForm.invalid" class="btn btn-info pull-right" type="submit">Responder<div class="ripple-container">
                 </div>
             </button>

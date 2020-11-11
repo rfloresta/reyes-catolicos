@@ -7,6 +7,7 @@ import { OwlDateTimeIntl, OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_T
 import { CargaModule } from "@shared/carga/carga.module";
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { QuillEditorModule } from 'ngx-quill-editor';
 // componentes
 // import { AulaFormComponent } from './aula-en-curso-form/aula-en-curso-form.component';
 import { SesionComponent } from './sesion.component';
@@ -30,6 +31,8 @@ import { ActividadModalContentComponent } from './sesion-list-nav/actividades/ac
 import { DataTablesModule } from 'angular-datatables';
 import { ForosComponent } from './sesion-list-nav/actividades/actividad-modal-content/foros/foros.component';
 import { TareasComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/tareas.component';
+import { ArchivosEstudianteModalComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/archivos-estudiante-modal/archivos-estudiante-modal.component';
+import { ArchivosEstudianteComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/archivos-estudiante/archivos-estudiante.component';
 @NgModule({
   declarations: [
     SesionComponent,
@@ -43,7 +46,9 @@ import { TareasComponent } from './sesion-list-nav/actividades/actividad-modal-c
     ArchivoModalComponent,
     SafePipe,
     ForosComponent,
-    TareasComponent
+    TareasComponent,
+    ArchivosEstudianteModalComponent,
+    ArchivosEstudianteComponent
     ],
   imports: [
     CommonModule,
@@ -56,7 +61,8 @@ import { TareasComponent } from './sesion-list-nav/actividades/actividad-modal-c
     NgxPaginationModule,
     DataTablesModule,
     CarouselModule.forRoot(),
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    QuillEditorModule
   ],
   providers:[
     FlujoService,

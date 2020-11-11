@@ -20,13 +20,21 @@
 
         </div>
     </div>
-    <app-foros [tipoVisnieto]="tipoNieto" [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
+    <app-foros [estadoNieto]="estadoHijo" [tipoVisnieto]="tipoNieto" [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
         *ngIf="actividadHijo.tipo_actividad_id===2">
     </app-foros>
 
-    <app-tareas [tipoVisnieto]="tipoNieto" [actividadNieto]="actividadHijo" [usuarioResponseHijo]="usuarioResponse"
-        *ngIf="actividadHijo.tipo_actividad_id===1">
+    <!-- Para Otros ususarios al consultar tarea -->
+    <app-tareas  [tipoVisnieto]="tipoNieto" [actividadNieto]="actividadHijo"         
+    *ngIf="actividadHijo.tipo_actividad_id===1 && tipoNieto!==4"
+>
     </app-tareas>
+   
+
+    <!-- Para estudiantes al consultar tarea -->
+    <app-archivos-estudiante [estadoNieto]="estadoHijo" [tipoTataranieto]="tipoNieto" [actividadVisnieto]="actividadHijo" [usuarioResponseNieto]="usuarioResponse"
+        *ngIf="actividadHijo.tipo_actividad_id===1 && tipoNieto===4">
+    </app-archivos-estudiante>
 
     <div class="row">
         <div class="col-md-12">

@@ -87,6 +87,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
       
       link: [this.sesionHijo.link, [Validators.required,Validators.pattern(this.validarLink)]],
       tema: [this.sesionHijo.tema, [Validators.required]],
+      competencia: [this.sesionHijo.competencia, [Validators.required]],
       area_aula_anio_id: this.area.id
     });
     

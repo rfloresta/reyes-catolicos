@@ -4,6 +4,7 @@ export interface Sesion{
     fecha?: string,
     link?: string,
     tema?: string,
+    competencia?: string,
     area_aula_anio_id?: number,
 
     //pintar

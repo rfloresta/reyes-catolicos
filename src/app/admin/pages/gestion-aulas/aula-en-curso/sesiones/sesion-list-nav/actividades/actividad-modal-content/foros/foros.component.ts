@@ -17,6 +17,8 @@ export class ForosComponent implements OnInit, OnDestroy {
   @Input() actividadNieto: Actividad;
   @Input() usuarioResponseHijo: UsuarioResponse;
   @Input() tipoVisnieto: number;
+  @Input() estadoNieto: string;
+
   @Output() hide = new EventEmitter();
   actividadForoUsuario: ActividadForoUsuario = {};
   foroUsuarios: ActividadForoUsuario[] = [];

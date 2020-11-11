@@ -7,6 +7,7 @@ import { Sesion } from '@models/sesion';
 import { Recurso } from '@models/recurso';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
@@ -27,7 +28,14 @@ export class RecursosComponent implements OnInit {
   recurso: Recurso;
 
   accion: string;
-  url: string = 'http://192.168.1.4:3000/';
+  config = {
+    ignoreBackdropClick: true,
+    class: 'modal-lg'
+  };
+  config2 = {
+    ignoreBackdropClick: true
+  };
+  url: string=`${environment.API_URL}/`;
   constructor(private recursoService: RecursoService,
     private modalService: BsModalService,
     private router: Router
@@ -56,19 +64,19 @@ export class RecursosComponent implements OnInit {
       formato_id: null,
       tipo_recurso_id: null
     }
-    this.bsModalRef = this.modalService.show(template);
+    this.bsModalRef = this.modalService.show(template,this.config2);
     this.accion="Registrar";
   }
 
   abrirModalEditar(template: TemplateRef<any>,recurso: Recurso) {
     this.recurso=recurso;
     this.accion="Actualizar";
-    this.bsModalRef = this.modalService.show(template);
+    this.bsModalRef = this.modalService.show(template, this.config2);
   }
 
   abrirModalArchivo(template: TemplateRef<any>,recurso: Recurso) {
     this.recurso=recurso;
-    this.bsModalRef = this.modalService.show(template, {class: 'modal-lg'});
+    this.bsModalRef = this.modalService.show(template, this.config);
   }
 
   eliminar(obj: Recurso) {

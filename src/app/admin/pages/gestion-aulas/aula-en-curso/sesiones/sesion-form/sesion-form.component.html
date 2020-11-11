@@ -32,10 +32,19 @@
         </div>
         <div class="col-md-12">
             <div class="form-group label-floating" [ngClass]="campoValido('tema')?'has-error':''">
-                <label class="control-label">Tema*</label>
+                <label class="control-label">Actividad*</label>
                 <textarea formControlName="tema" class="form-control"></textarea>
                 <ng-container *ngIf="campoValido('tema')" class="text-danger">
                     <span class="error-message">{{ mensajeError("tema") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group label-floating" [ngClass]="campoValido('competencia')?'has-error':''">
+                <label class="control-label">Competencia*</label>
+                <textarea formControlName="competencia" class="form-control"></textarea>
+                <ng-container *ngIf="campoValido('competencia')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("competencia") }}</span>
                 </ng-container>
             </div>
         </div>

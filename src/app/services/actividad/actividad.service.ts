@@ -1,8 +1,10 @@
 import { HttpClient, HttpParams, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Form } from '@angular/forms';
 import { Actividad } from '@models/actividad';
 import { ActividadForoUsuario } from '@models/ActividadForoUsuario';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
+import { Retroalimentacion } from '@models/Retroalimentacion';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -17,8 +19,8 @@ export class ActividadService {
     return this.httpClient.get<Actividad[]>(`${environment.API_URL}/api/actividades/${sesion_id}`);
   }
 
-  listarTareasEstudiante(obj: ActividadTareaUsuario): Observable<ActividadTareaUsuario[]>{
-    return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/tarea/`+JSON.stringify(obj));
+  listarTareaEstudiante(obj: ActividadTareaUsuario): Observable<ActividadTareaUsuario>{
+    return this.httpClient.get<ActividadTareaUsuario>(`${environment.API_URL}/api/actividades/tarea/`+JSON.stringify(obj));
   }
 
   listarTareasEstudiantes(actividad_id: number): Observable<ActividadTareaUsuario[]>{
@@ -33,6 +35,10 @@ export class ActividadService {
     return this.httpClient.get<ActividadForoUsuario[]>(`${environment.API_URL}/api/actividades/informe_fotos/${sesionId}`);
   }
 
+  listarRetro(actividadTareaUsuarioid: number): Observable<Retroalimentacion>{
+    return this.httpClient.get<Retroalimentacion>(`${environment.API_URL}/api/actividades/tarea/retro/${actividadTareaUsuarioid}`);
+  }
+
   registrar(obj: Actividad){
     return this.httpClient.post(`${environment.API_URL}/api/actividades`, obj);
   }
@@ -40,10 +46,16 @@ export class ActividadService {
   registrarTarea(obj: FormData){
         return this.httpClient.post(`${environment.API_URL}/api/actividades/tarea`, obj);
   }
-
+  registrarArchivosEnTarea(archivos: FormData){    
+    return this.httpClient.post(`${environment.API_URL}/api/actividades/tarea/archivos`, archivos);
+  }
   registrarForo(obj: ActividadForoUsuario){
     return this.httpClient.post(`${environment.API_URL}/api/actividades/foro`, obj);
 }
+
+  registrarRetro(retro: Retroalimentacion){    
+  return this.httpClient.post(`${environment.API_URL}/api/actividades/tarea/retro`, retro);
+  }
 
   buscar(id: number): Observable<Actividad>{
     return this.httpClient.delete(`${environment.API_URL}/api/actividades/${id}`);
@@ -52,7 +64,12 @@ export class ActividadService {
   actualizar(obj: Actividad){
     return this.httpClient.put(`${environment.API_URL}/api/actividades/${obj.id}`, obj);
   }
-
+  actualizarValoracion(id: number, obj: ActividadTareaUsuario): Observable<any>{
+    return this.httpClient.patch(`${environment.API_URL}/api/actividades/actividad/${id}`, obj)
+  }
+  actualizarRetro(obj: Retroalimentacion): Observable<any>{
+    return this.httpClient.put(`${environment.API_URL}/api/actividades/tarea/retro/${obj.id}`, obj)
+  }
   eliminar(id: number){
     return this.httpClient.delete(`${environment.API_URL}/api/actividades/${id}`)
   }
@@ -61,7 +78,5 @@ export class ActividadService {
     return this.httpClient.delete(`${environment.API_URL}/api/actividades/tarea/${id}`)
   }
 
-  actualizarValoracion(id: number, obj: ActividadTareaUsuario): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/api/actividades/actividad/${id}`, obj)
-  }
+ 
 }
