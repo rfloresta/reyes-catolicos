@@ -19,6 +19,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "pdfmake"
+           ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -27,22 +30,18 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/core/shim.min.js",
-              "node_modules/zone.js/dist/zone.js",
-              "src/assets/js/reflect-metadata/Reflect.js",
-              "src/assets/js/system/dist/system.src.js",
+              "node_modules/quill/dist/quill.js",
               "src/assets/js/core/jquery.js",
               "src/assets/js/core/jquery-3.1.1.min.js",
               "src/assets/js/core/jquery-ui.min.js",
               "src/assets/js/core/bootstrap.min.js",
-              "src/assets/js/core/arrive.js",
               "src/assets/js/core/material.min.js",
               "src/assets/js/core/perfect-scrollbar.jquery.min.js",
               "src/assets/js/plugins/jquery.select-bootstrap.js",
               "src/assets/js/plugins/jquery.datatables.js",
-              "src/assets/js/plugins/jasny-bootstrap.min.js",
-              "src/assets/js/plugins/jquery.tagsinput.js",
+              "src/assets/js/plugins/jasny-bootstrap.min.js", 
               "src/assets/js/material-dashboard-angular.js"
+       
             ]
           },
           "configurations": {

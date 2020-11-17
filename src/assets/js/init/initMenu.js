@@ -117,7 +117,7 @@ mdp = {
             $toggle = $('.navbar-toggle');
 
             $toggle.click(function (){
-
+                console.log('Click');
                 if(mobile_menu_visible == 1) {
                     $('body').removeClass('nav-open');
 
@@ -127,7 +127,10 @@ mdp = {
                     }, 400);
 
                     mobile_menu_visible = 0;
+                    console.log('Si es menu_mobile de 1 -> 0');
+
                 } else {
+
                     setTimeout(function(){
                         $toggle.addClass('toggled');
                     }, 430);
@@ -157,6 +160,7 @@ mdp = {
 
                     $('body').addClass('nav-open');
                     mobile_menu_visible = 1;
+                    console.log('sino menu_mobile = 1');
 
                 }
             });

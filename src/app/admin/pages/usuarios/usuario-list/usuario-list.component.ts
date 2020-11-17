@@ -23,6 +23,7 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
 
   //Para el formulario
   usuarioHijo: Usuario = {
+    id: null,
     dni: null,
     persona_id: null,
     tipo_usuario_id: null,
@@ -36,7 +37,6 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
   accionEstado: string = "Activa";
 
   cargando: boolean;
-
   constructor(private usuarioService: UsuarioService,
     private flujoService: FlujoService,
     private router: Router
@@ -66,7 +66,7 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
           this.usuariosHijo = res;
           this.dtTrigger.next();
           this.cargando = false;
-        }, 2000);
+        }, 1000);
       },
       err => console.error(err)
     );
@@ -86,7 +86,6 @@ export class UsuarioListComponent implements OnInit, OnDestroy {
 
   editar(usuario: Usuario) {
     console.log(usuario);
-
     this.flujoService.enviarObjeto(usuario);
     this.flujoService.enviarAccion("Actualizar");
     this.router.navigate(['principal/dashboard/usuarios/form']);

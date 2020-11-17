@@ -19,8 +19,8 @@ export class AulaEnCursoEstudianteService {
     return this.httpClient.post(`${environment.API_URL}/api/aula_en_curso_estudiantes`, aulaEnCursoEstudiante);
   }
 
-  eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/api/aulas_en_curso/${id}`)
+  eliminar(id: number, aulaAnioId: number){
+    return this.httpClient.delete(`${environment.API_URL}/api/aula_en_curso_estudiantes/${id}/${aulaAnioId}`)
   }
 
   actualizarEstado(id: number, aulaEnCursoEstudiante: AulaEnCursoEstudiante): Observable<any>{

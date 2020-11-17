@@ -9,6 +9,7 @@ import { LoginComponent } from "./login.component";
 
 // Services
 import { LoginService } from "../../services/auth/login.service";
+import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { LoginService } from "../../services/auth/login.service";
         ReactiveFormsModule
       ],
       providers: [
-        LoginService
+        LoginService,
+        AnioEscolarService
       ]
 })
 

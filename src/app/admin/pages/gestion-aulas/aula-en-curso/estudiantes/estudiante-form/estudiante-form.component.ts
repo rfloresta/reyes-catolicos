@@ -6,7 +6,7 @@ import { UsuarioService } from '@services/usuario/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { AulaEnCursoEstudianteService } from '@services/aula-en-curso-estudiante/aula-en-curso-estudiante.service';
 import { FlujoService } from '@services/flujo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 declare var $:any;
 @Component({
@@ -33,7 +33,7 @@ export class EstudianteFormComponent implements OnInit {
     private usuarioService: UsuarioService,
     private _builder: FormBuilder,
     private toastr: ToastrService,
-    private activatedRoute: ActivatedRoute) {  }
+    private router: Router) {  }
 
   ngOnInit(): void {
     this.usuarioService.listarEstudiantesSinAula().subscribe((res) => {
@@ -72,10 +72,15 @@ export class EstudianteFormComponent implements OnInit {
         console.log(res);
         if(res){
           this.toastr.success("Estudiante(s) registrado(s) en el aula");
+          this.router.navigate(['principal/dashboard/aulas-en-curso/aula-en-curso/estudiantes']);
         }
       },
       err => {
-        this.toastr.error('Ha ocurrido un error inesperado');
+        if(err.status===400){
+          this.toastr.warning(err.error.mensaje);
+        }else{
+          this.toastr.error('Ha ocurrido un error inesperado');
+        }
         console.log(err);
       }
     )

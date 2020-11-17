@@ -12,6 +12,7 @@ import { RecursoService } from '@services/recurso/recurso.service';
 import { Actividad } from '@models/actividad';
 import { Recurso } from '@models/recurso';
 import { switchMap } from 'rxjs/operators';
+import { isNumber } from 'util';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
@@ -24,6 +25,8 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   accion: string;
   accionSuscription$: Subscription;
   cargando: boolean;
+  cargando2: boolean;
+  objetoValido: boolean;
   area_aula_anio_id: string;
   path: string;
   path2: string;
@@ -59,15 +62,23 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    
     let areaEnCursoString = localStorage.getItem('area');
     this.areaEnCurso = JSON.parse(areaEnCursoString);
 
     this.cargando = true;
     this.sesionService.listar(this.areaEnCurso.id).subscribe(
       (res: Sesion[]) => {
-        this.sesionesHijo = res;
-        let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
-        this.sesionFrm.numero=numeroMayor+1;
+        setTimeout(() => {
+          this.sesionesHijo = res;
+          console.log(this.sesionesHijo);
+          
+          let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
+            this.sesionFrm.numero=numeroMayor+1;  
+          this.cargando = false;
+        }, 1000);
+
+
         // localStorage.setItem('nuevoNumero', numeroMayor + 1);
       },
       err => console.error(err)
@@ -81,6 +92,7 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
       );
 
 
+      console.log('sesion',this.sesion);
 
     this.flujoService.enviarObjeto(this.sesionFrm);
     this.flujoService.enviarAccion("Registrar");
@@ -121,16 +133,35 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
 
   consultarSesion(sesion: Sesion) {
     //Propiedad para comparar con la lista de sesiones y adignar la clase active
+    console.log('sesion',sesion);
     this.sesion = sesion;
-    let id=this.sesion.id;
-    this.actividadService.listar(id)
-    .subscribe((res: Actividad[]) => this.actividades = res
-    );
 
-    this.recursoService.listar(id)
-    .subscribe((res: Recurso[]) => this.recursos = res
-    );
-    console.log('Recursos->', this.recursos, 'Acti->', this.actividades);
+    if(Object.keys(this.sesion).length === 0){
+      this.objetoValido = false;
+    }else{
+      this.objetoValido = true;
+    }
+
+    let id=this.sesion.id;
+
+    this.cargando2=true;
+    setTimeout(() => {
+      this.actividadService.listar(id)
+      .subscribe((res: Actividad[]) => {
+        this.actividades = res
+      }
+      );
+  
+      this.recursoService.listar(id)
+      .subscribe((res: Recurso[]) => {
+        
+          this.recursos = res
+        }
+      );
+      this.cargando2=false;
+
+    }, 1000);
+    
 
   }
 

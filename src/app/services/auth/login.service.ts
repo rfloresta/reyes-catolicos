@@ -7,6 +7,8 @@ import { catchError, map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { FlujoService } from '../flujo.service';
+import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
+import { AnioEscolar } from '@models/AnioEscolar';
 
 const helper = new JwtHelperService();
 
@@ -19,7 +21,8 @@ export class LoginService {
   tipo: number;
   constructor(private httpClient: HttpClient, 
     private router: Router, 
-    private flujoService: FlujoService) {
+    private flujoService: FlujoService,
+    private anioEscolarService: AnioEscolarService) {
     this.verificarToken();
        }
    
@@ -40,9 +43,15 @@ export class LoginService {
 
   logout():void {
     localStorage.removeItem('usuario');
+    localStorage.removeItem('anio_activo');
+
     localStorage.removeItem('ai');
     this.flujoService.logeado(false);
-    this.router.navigate([""]);
+    this.router.navigate(["/login"]);
+    setTimeout(() => {
+      window.location.reload();
+    }, 2);
+
   }
 
    verificarToken(): void{

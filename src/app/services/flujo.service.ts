@@ -37,6 +37,13 @@ export class FlujoService {
     this.tipoSource.next(tipo);
   }
 
+  readonly idSource: BehaviorSubject<number> = new BehaviorSubject(0);
+  readonly id$ = this.idSource.asObservable();
+
+   enviarId(id: number): void{
+    this.idSource.next(id);
+  }
+
    // private tipo$ = new Subject<number>();
 
   //  enviarTipo(tipo: number): void{

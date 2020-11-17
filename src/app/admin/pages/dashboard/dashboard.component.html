@@ -4,16 +4,19 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="orange">
-                        <i class="material-icons">weekend</i>
+                        <i class="material-icons">school</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">Bookings</p>
-                        <h3 class="card-title">184</h3>
+                        <p class="category">Estudiantes</p>
+                        <app-carga *ngIf="cargaEstudiantes">
+
+                        </app-carga>
+                        <h3 *ngIf="!cargaEstudiantes" class="card-title">{{cantidadEstudiantes}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a href="#pablo">Get More Space...</a>
+                            <i class="material-icons">accessibility_new</i>
+                          Aprendiendo
                         </div>
                     </div>
                 </div>
@@ -21,15 +24,18 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="red">
-                        <i class="material-icons">equalizer</i>
+                        <i class="material-icons">people_alt</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">Views</p>
-                        <h3 class="card-title">75.521</h3>
+                        <p class="category">Profesores</p>
+                        <app-carga *ngIf="cargaProfesores">
+
+                        </app-carga>
+                        <h3 *ngIf="!cargaProfesores" class="card-title">{{cantidadProfesores}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">local_offer</i> Google Analytics
+                            <i class="material-icons">how_to_reg</i> Enseñando
                         </div>
                     </div>
                 </div>
@@ -37,15 +43,19 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="green">
-                        <i class="material-icons">store</i>
+                        <i class="material-icons">file_copy</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">Revenue</p>
-                        <h3 class="card-title">$3,245</h3>
+                        
+                        <p class="category">Archivos</p>
+                        <app-carga *ngIf="cargaArchivos">
+
+                        </app-carga>
+                        <h3 *ngIf="!cargaArchivos" class="card-title">{{cantidadArchivos}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">date_range</i> Last 24 Hours
+                            <i class="material-icons">calendar_today</i> Tareas de estudiantes
                         </div>
                     </div>
                 </div>
@@ -53,22 +63,26 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="blue">
-                        <i class="fa fa-twitter"></i>
+                        <i class="material-icons">meeting_room</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">Followers</p>
-                        <h3 class="card-title">+245</h3>
+                        
+                        <p class="category">Aulas</p>
+                        <app-carga *ngIf="cargando">
+
+                        </app-carga>
+                        <h3 class="card-title" *ngIf="!cargando">{{cantidadAulas}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">update</i> Just Updated
+                            <i class="material-icons">calendar_today</i> Este año
                         </div>
                     </div>
                 </div>
             </div>
         </div>
   
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-4 col-md-6">
                 <div class="card card-product">
                     <div class="card-image" data-header-animation="true">
@@ -186,112 +200,83 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
   
   
-        <div class="row">
+        <div class="row" >
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-icon" data-background-color="red">
                         <i class="material-icons">language</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Global Sales by Top Locations</h4>
-                        <div class="row">
+                        <h4 class="card-title">{{anioEscolar.nombre}}</h4>
+                       
+                        <div class="row" style="height: 30em;">
                             <div class="col-md-5">
-                                <div class="table-responsive table-sales">
+                                <app-carga *ngIf="cargando">
+
+                                </app-carga>
+                                <div  *ngIf="!cargando" class="table-responsive table-sales pre-scrollable">
                                     <table class="table">
                                         <tbody>
-                                            <tr>
+                                            <tr *ngFor="let aula of aulasEnCursoHijo; let i = index">
+                                                <td>
+                                                    <p>{{i+1}}</p>
+                                                </td>
                                                 <td>
                                                     <div class="flag">
-                                                        <img src="../assets/img/flags/US.png">
+                                                        <img [src]="url+aula.foto">
                                                     </div>
                                                 </td>
-                                                <td>USA</td>
+                                                <td>{{aula.aula}}</td>
+                                                <td>{{aula.profesor}}</td>
                                                 <td class="text-right">
-                                                    2.920
-                                                </td>
-                                                <td class="text-right">
-                                                    53.23%
+                                                    <button (click)="irAula(aula)" class="btn btn-round btn-info btn-mini">
+                                                        <i class="material-icons">visibility</i>
+                                                    </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/DE.png">
-                                                    </div>
-                                                </td>
-                                                <td>Germany</td>
-                                                <td class="text-right">
-                                                    1.300
-                                                </td>
-                                                <td class="text-right">
-                                                    20.43%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/AU.png">
-                                                    </div>
-                                                </td>
-                                                <td>Australia</td>
-                                                <td class="text-right">
-                                                    760
-                                                </td>
-                                                <td class="text-right">
-                                                    10.35%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/GB.png">
-                                                    </div>
-                                                </td>
-                                                <td>United Kingdom</td>
-                                                <td class="text-right">
-                                                    690
-                                                </td>
-                                                <td class="text-right">
-                                                    7.87%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/RO.png">
-                                                    </div>
-                                                </td>
-                                                <td>Romania</td>
-                                                <td class="text-right">
-                                                    600
-                                                </td>
-                                                <td class="text-right">
-                                                    5.94%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/BR.png">
-                                                    </div>
-                                                </td>
-                                                <td>Brasil</td>
-                                                <td class="text-right">
-                                                    550
-                                                </td>
-                                                <td class="text-right">
-                                                    4.34%
-                                                </td>
-                                            </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
+                                
                             </div>
-                            <div class="col-md-6 col-md-offset-1">
-                                <div id="worldMap" class="map"></div>
+
+                            
+                            <div  class="col-md-7">
+                                <app-carga *ngIf="cargando2">
+
+                                </app-carga>
+                                <div *ngIf="!cargando2" id="worldMap" class="map">
+                                    <carousel >
+                                        <slide>
+                                            <img src="../../../assets/img/reyes-patio.jpg" alt="Primera Imagen"
+                                                style="display: block; width: 100%;">
+                                            <div class="carousel-caption d-none d-md-block">
+                                               
+                                               
+                                            </div>
+                                        </slide>
+                                        <slide>
+                                            <img src="../../../assets/img/reyes-patio2.png" alt="Segunda Imgagen"
+                                                style="display: block; width: 100%;">
+                                            <div class="carousel-caption d-none d-md-block">
+                                               
+                                               
+                                            </div>
+                                        </slide>
+                                        <slide>
+                                            <img src="../../../assets/img/reyes-patio3.png" alt="Tercera imagen"
+                                                style="display: block; width: 100%;">
+                                            <div class="carousel-caption d-none d-md-block">
+                                               
+                                               
+                                            </div>
+                                        </slide>
+                                    </carousel>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -299,7 +284,7 @@
             </div>
         </div>
   
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-header" data-background-color="green" data-header-animation="true">
@@ -382,7 +367,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
   </div>
   

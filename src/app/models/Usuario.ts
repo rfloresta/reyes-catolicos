@@ -13,5 +13,6 @@ export interface UsuarioResponse {
     token: string,
     id: number,
     tipo: number,
-    nombres: string
+    nombre: string,
+    foto: string
 }

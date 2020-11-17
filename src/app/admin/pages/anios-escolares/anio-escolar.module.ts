@@ -1,14 +1,8 @@
-import { LOCALE_ID,NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-//Configuración de idioma
-import { registerLocaleData } from '@angular/common';
-import localeEsPE from '@angular/common/locales/es-PE';
-registerLocaleData(localeEsPE, 'es-PE');
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AnioEscolarRoutingModule } from '@pages/anios-escolares/anio-routing.module';
+import { AnioEscolarRoutingModule } from '@pages/anios-escolares/anio-escolar-routing.module';
 
 import { DataTablesModule  } from "angular-datatables";
 import { CargaModule } from "@shared/carga/carga.module";
@@ -37,7 +31,6 @@ import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service'
   providers:[
     FlujoService,
     AnioEscolarService,
-    { provide: LOCALE_ID, useValue: 'es-PE' }
   ]
 })
 export class AnioEscolarModule { }

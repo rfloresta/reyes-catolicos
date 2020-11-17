@@ -1,0 +1,14 @@
+.nav.nav-mobile-menu
+{
+    display: none !important;
+}
+
+.nav .nav-mobile-menu
+{
+    display: none !important;
+}
+
+.nav-mobile-menu
+{
+    display: none !important;
+}

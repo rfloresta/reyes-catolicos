@@ -1,0 +1,40 @@
+<form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group label-floating" [ngClass]="campoValido('nombre')?'has-error':''">
+                <label class="control-label">Nombre*</label>
+                <input type="text" class="form-control" formControlName="nombre" required />
+                <ng-container *ngIf="campoValido('nombre')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("nombre") }}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                <div class="fileinput-new thumbnail img-circle">
+                    <img [src]="img" alt="imagen por defecto">
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+                <div>
+                    <span class="btn btn-round btn-simple btn-file">
+                        <span class="fileinput-new">Imagen</span>
+                        <span class="fileinput-exists">Cambiar</span>
+                        <input type="file" #file accept=".png,.jpg,jpeg"/>
+                    </span>
+                    <a href="#pablo" class="btn btn-simple btn-round fileinput-exists" data-dismiss="fileinput"><i
+                            class="fa fa-times"></i>Quitar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" [disabled]="areaForm.invalid"
+                class="btn btn-fill btn-info pull-right">
+                {{accionHijo}}</button>
+        </div>
+    </div>
+
+
+</form>

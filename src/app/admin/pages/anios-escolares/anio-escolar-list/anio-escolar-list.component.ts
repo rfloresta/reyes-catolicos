@@ -6,6 +6,9 @@ import { AnioEscolar } from '@models/AnioEscolar';
 import { FlujoService } from '@services/flujo.service';
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 import Swal from 'sweetalert2'
+import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
+
 declare var $:any;
 
 @Component({
@@ -34,6 +37,7 @@ export class AnioEscolarListComponent implements OnInit, OnDestroy {
   cargando: boolean;
 
   constructor(private anioEscolarService: AnioEscolarService,
+    private toastr: ToastrService,
     private flujoService: FlujoService,
     private router: Router
   ) { }
@@ -82,6 +86,8 @@ export class AnioEscolarListComponent implements OnInit, OnDestroy {
 
 
   editar(anioEscolar: AnioEscolar) {
+    anioEscolar.fecha_inicio=moment(anioEscolar.fecha_inicio).format('YYYY-MM-DD');
+    anioEscolar.fecha_fin=moment(anioEscolar.fecha_fin).format('YYYY-MM-DD');
     console.log(anioEscolar);
 
     this.flujoService.enviarObjeto(anioEscolar);
@@ -91,8 +97,9 @@ export class AnioEscolarListComponent implements OnInit, OnDestroy {
 
   eliminar(anioEscolar: AnioEscolar) {
 
+    let anio=moment(anioEscolar.fecha_inicio).format('YYYY');
     Swal.fire({
-      title: `¿Está seguro de eliminar el año escolar ${anioEscolar.anio}?`,
+      title: `¿Está seguro de eliminar el año escolar ${anio}?`,
       text: "Una vez eliminado no se podrá revertir",
       width: 500,
       buttonsStyling: false,
@@ -123,7 +130,8 @@ export class AnioEscolarListComponent implements OnInit, OnDestroy {
     })
   }
 
-  actualizarEstado(estado: string, anioEscolar) {
+  actualizarEstado(estado: string, anioEscolar: AnioEscolar) {
+    let anio=moment(anioEscolar.fecha_inicio).format('YYYY');
     Swal.fire({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -133,7 +141,7 @@ export class AnioEscolarListComponent implements OnInit, OnDestroy {
       imageUrl: "../../../../.././assets/img/warning-icon.png",
       imageWidth: 80,
       imageHeight: 80,
-      title: `¿Está seguro de cambiar el estado del Año Escolar ${anioEscolar.anio}?`,
+      title: `¿Está seguro de cambiar el estado del Año Escolar ${anio}?`,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -144,8 +152,20 @@ export class AnioEscolarListComponent implements OnInit, OnDestroy {
       if (result.value) {
         this.anioEscolarHijo = { estado }
         this.anioEscolarService.actualizarEstado(anioEscolar.id, this.anioEscolarHijo).subscribe(res => {
-          if (res === "ok") Swal.fire(`¡Actualizado!`, `El Año Escolar fue actualizado`, 'success');
-        }, err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) }
+          console.log(res);
+          if (res === "ok") {
+            Swal.fire(`¡Actualizado!`, `El Año Escolar fue actualizado`, 'success');
+          }else{
+            this.toastr.error('Ha ocurrido un error al actualizar el estado');
+          }
+        }, err => { 
+          if(err.status===400){
+            this.toastr.warning(err.error.mensaje);
+          }else{
+            this.toastr.error('Ha ocurrido un error inesperado');
+          }
+          console.log(err) 
+        }
         );
       }
     })

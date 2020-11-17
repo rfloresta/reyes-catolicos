@@ -57,28 +57,29 @@
             </div>
             <div class="col-md-12">
                 <div *ngIf="tipoRecursoId==='1' && recursoHijo.id===null " class="fileinput fileinput-new text-center" data-provides="fileinput">
-                    <div class="fileinput-preview fileinput-exists">{{recursoHijo.contenido}}</div>
+                    <div class="fileinput-preview fileinput-exists"></div>
                     <div>
                         <span class="btn btn-round btn-rose btn-file">
                             <span class="fileinput-new">Archivo</span>
                             <span class="fileinput-exists">Cambiar</span>
-                            <input #file type="file" formControlName="contenido" required />
+                            <input #file type="file" formControlName="contenido" required accept=".pdf,.doc,.docx,.rar,.zip"/>
                         </span>
                         <br />
                         <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
                                 class="fa fa-times"></i> Quitar</a>
                     </div>
+                    
+                <ng-container *ngIf="campoValido('contenido')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("contenido") }}</span>
+                </ng-container>
                 </div>
                 <div *ngIf="tipoRecursoId==='2'" class="form-group label-floating" [ngClass]="campoValido('contenido')?'has-error':''">
                     <label class="control-label">Link*</label>
-                    <input type="text" formControlName="contenido" class="form-control" />
+                    <input type="url" formControlName="contenido" class="form-control" required/>
                     <ng-container *ngIf="campoValido('contenido')" class="text-danger">
                         <span class="error-message">{{ mensajeError("contenido") }}</span>
                     </ng-container>
                 </div>
-                <ng-container *ngIf="campoValido('contenido')" class="text-danger">
-                    <span class="error-message">{{ mensajeError("contenido") }}</span>
-                </ng-container>
             </div>
         </div>
 </div>

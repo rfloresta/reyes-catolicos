@@ -7,8 +7,7 @@ import { OwlDateTimeIntl, OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_T
 import { CargaModule } from "@shared/carga/carga.module";
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { RatingModule } from 'ngx-bootstrap/rating';
-import { QuillEditorModule } from 'ngx-quill-editor';
-// componentes
+import { QuillModule,QUILL_CONFIG_TOKEN } from 'ngx-quill'// componentes
 // import { AulaFormComponent } from './aula-en-curso-form/aula-en-curso-form.component';
 import { SesionComponent } from './sesion.component';
 // import { AreaListComponent } from './area-list/area-list.component';
@@ -62,7 +61,7 @@ import { ArchivosEstudianteComponent } from './sesion-list-nav/actividades/activ
     DataTablesModule,
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
-    QuillEditorModule
+    QuillModule.forRoot()
   ],
   providers:[
     FlujoService,

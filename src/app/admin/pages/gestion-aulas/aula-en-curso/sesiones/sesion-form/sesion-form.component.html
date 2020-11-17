@@ -12,9 +12,9 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="form-group label-floating" [ngClass]="campoValido('fecha')?'has-error':''">
+            <div  [ngClass]="campoValido('fecha')?'form-group label-floating is-empty has-error':'form-group label-floating'">
                 <label class="control-label">Fecha*</label>
-                <input class="form-control" formControlName="fecha" required  [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                <input class="form-control" [owlDateTimeTrigger]="dt" formControlName="fecha" required  [owlDateTime]="dt">
                 <owl-date-time #dt></owl-date-time>
                 <ng-container *ngIf="campoValido('fecha')" class="text-danger">
                     <span class="error-message">{{ mensajeError("fecha") }}</span>

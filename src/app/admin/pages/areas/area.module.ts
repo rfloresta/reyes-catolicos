@@ -4,35 +4,30 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AreaRoutingModule } from './area-routing.module';
 
-// import { DataTablesModule  } from "angular-datatables";
-
 // Components
 import { AreaComponent } from "./area.component";
-// import { ArticuloFormComponent } from "./articulo-form/articulo-form.component";
-// import { ArticuloListComponent } from "./articulo-list/articulo-list.component";
-
-// Services
-// import { ArticuloService } from "../../../services/articulo/articulo.service";
-// import { SubcategoriaService } from "../../../services/subcategoria/subcategoria.service";
-
-// Shared
-// import { CargaModule } from "../layout/content/carga/carga.module";
+import { DataTablesModule } from 'angular-datatables';
+import { AreaService } from '@services/area/area.service';
+import { CargaModule } from '@shared/carga/carga.module';
+import { AreaListComponent } from './area-list/area-list.component';
+import { AreaFormComponent } from './area-form/area-form.component';
 
 @NgModule({
   declarations: [
-    AreaComponent
+    AreaComponent,
+    AreaListComponent,
+    AreaFormComponent
   ],
   imports: [
     CommonModule,
     AreaRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-    // DataTablesModule,
-    // CargaModule
+    ReactiveFormsModule,
+    DataTablesModule,
+    CargaModule
   ],
   providers: [
-    // ArticuloService,
-    // SubcategoriaService
+    AreaService
   ]
 })
 export class AreaModule { }

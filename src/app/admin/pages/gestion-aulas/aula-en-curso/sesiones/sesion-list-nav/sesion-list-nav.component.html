@@ -1,44 +1,74 @@
-<div class="nav-center espacio">
-    <ul class="nav nav-pills nav-pills-info nav-pills-icons ul-pagination" role="tablist">
+<app-carga *ngIf="cargando">
 
-<li class="" *ngFor="let s of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
-[ngClass]="sesion.numero === s.numero ? 'active':''" 
->
-<a class="btn btn-simple" (click)="consultarSesion(s)" role="tab" data-toggle="tab">
-<i class="material-icons">date_range</i>Sesión {{ s.numero }}
-</a>
+</app-carga>
 
-<div *ngIf="tipo===3" class="btn-sesion">
-<button (click)="editar(s)" type="button" class="btn btn-sm btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
-    <i class="material-icons">edit</i>
-</button>
-<button (click)="eliminar(s)" type="button" class="btn btn-sm btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Eliminar">
-    <i class="material-icons">close</i>
-</button>
-</div>
+<ng-container *ngIf="!cargando">
 
-</li>
-    </ul>
-    
-<div class="center-block">
-    <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
-</div>
+    <ng-container *ngIf="sesionesHijo.length >0; else vacio">
+        <div class="nav-center">
+            <ul class="nav nav-pills nav-pills-info nav-pills-icons ul-pagination" role="tablist">
 
-</div>
+                <li 
+                    *ngFor="let s of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                    [ngClass]="sesion.numero === s.numero ? 'active':''">
+                    <a class="btn btn-simple" (click)="consultarSesion(s)" role="tab" data-toggle="tab">
+                        <i class="material-icons">date_range</i>Sesión {{ s.numero }}
+                    </a>
 
-<div class="row">
-<div class="col-md-8">
-    <div id="typography">
-        <div class="card-title">
-            <h4>{{sesion.tema}}</h4>
+                    <div *ngIf="tipo===3" class="btn-sesion">
+                        <button (click)="editar(s)" type="button" class="btn btn-sm btn-success btn-simple"
+                            rel="tooltip" data-placement="bottom" title="Editar">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button (click)="eliminar(s)" type="button" class="btn btn-sm btn-danger btn-simple"
+                            rel="tooltip" data-placement="bottom" title="Eliminar">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+
+                </li>
+            </ul>
+            <div class="center-block">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
         </div>
+        <ng-container *ngIf="!cargando2">
+            <ng-container *ngIf="objetoValido; else objetoInvalido">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-header">
+                            <div class="col-md-8">
+                                <h4 class="card-title">{{sesion.tema}}</h4>
+                                <p class="card-description">{{sesion.fecha | date: 'EEEE, MMMM d, y'}}</p>
+                            </div>
+                            <div class="col-md-4" *ngIf="sesion.link !== null">
+                                <a target="_blank" [href]="sesion.link" class="btn btn-info pull-right"><i class="material-icons">videocam</i> Clase en
+                                    Google Meet</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <app-recursos [tipoHijo]="tipo" [sesionHijo]="sesion" [recursosHijo]="recursos"></app-recursos>
+
+                    <app-actividades [tipoHijo]="tipo" [sesionHijo]="sesion" [actividadesHijo]="actividades">
+                    </app-actividades>
+                </div>
+            </ng-container>
+            <ng-template #objetoInvalido>
+            </ng-template>
+        </ng-container>
+
+        <app-carga *ngIf="cargando2">
+
+        </app-carga>
+
+    </ng-container>
+    <ng-template #vacio>
+        <div class="col-md-12">
+            <p class="text-center">No hay sesiones registradas</p>
         </div>
-</div>
-<div class="col-md-4">
-     <a [href]="sesion.link" class="btn btn-info"><i class="material-icons">videocam</i> Clase en Google Meet</a>
-</div>    
-</div>
-<div class="row">
-    <app-recursos [tipoHijo]="tipo" [sesionHijo]="sesion" [recursosHijo]="recursos" ></app-recursos>
-    <app-actividades [tipoHijo]="tipo" [sesionHijo]="sesion" [actividadesHijo]="actividades"></app-actividades>
-</div>
+    </ng-template>
+
+</ng-container>

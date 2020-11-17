@@ -26,6 +26,7 @@ export class ActividadesComponent implements OnInit {
   tarea: ActividadTareaUsuario;
   accion: string;
   estado: string;
+  cargando: boolean;
   config = {
     ignoreBackdropClick: true,
     class: 'modal-lg'
@@ -92,7 +93,11 @@ export class ActividadesComponent implements OnInit {
 
   }
   refrescarLista(actividades: Actividad[]) {
-    this.actividadesHijo = actividades;
+    this.cargando = true;
+    setTimeout(() => {
+      this.actividadesHijo = actividades;
+      this.cargando = false;
+    }, 1000);
   }
 
   abrirModalRegistrar(template: TemplateRef<any>) {

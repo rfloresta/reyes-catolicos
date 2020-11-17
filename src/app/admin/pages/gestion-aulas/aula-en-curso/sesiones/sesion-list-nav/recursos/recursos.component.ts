@@ -36,6 +36,7 @@ export class RecursosComponent implements OnInit {
     ignoreBackdropClick: true
   };
   url: string=`${environment.API_URL}/`;
+  cargando: boolean;
   constructor(private recursoService: RecursoService,
     private modalService: BsModalService,
     private router: Router
@@ -53,7 +54,12 @@ export class RecursosComponent implements OnInit {
   }
 
   refrescarLista(recursos: Recurso[]){
-    this.recursosHijo=recursos;
+    this.cargando=true;
+    setTimeout(() => {
+      this.recursosHijo=recursos;
+      this.cargando=false;
+
+    }, 1000);
   }
 
   abrirModalRegistrar(template: TemplateRef<any>) {

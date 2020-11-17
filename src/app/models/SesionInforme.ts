@@ -5,5 +5,7 @@ export interface SesionInforme{
     tema?: string,
     actividad: string,
     retro: any,
-    pasos?: any,    
+    pasos?: any,   
+    fecha_inicio?: string,
+    fecha_fin?: string 
 }

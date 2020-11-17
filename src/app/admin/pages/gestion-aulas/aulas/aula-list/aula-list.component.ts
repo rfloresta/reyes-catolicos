@@ -83,13 +83,13 @@ export class AulaListComponent implements OnInit, OnDestroy {
 
     this.flujoService.enviarObjeto(aula);
     this.flujoService.enviarAccion("Actualizar");
-    this.router.navigate(['principal/dashboard/gestion-aulas/aulas/form']);
+    this.router.navigate(['principal/dashboard/administracion/aulas/form']);
   }
 
   eliminar(aula: Aula) {
 
     Swal.fire({
-      title: `¿Está seguro de eliminar al aula ${aula.aula_join}?`,
+      title: `¿Está seguro de eliminar el aula ${aula.aula_join}?`,
       text: "Una vez eliminado no se podrá revertir",
       width: 500,
       buttonsStyling: false,

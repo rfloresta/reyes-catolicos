@@ -13,24 +13,28 @@ export const routes: Routes = [
   {//RUTAS SOLO PARA EL ADMIN
     path: '', component: DefaultComponent, canActivate:[IsAdminGuard],
     children: [
-      { path: '', loadChildren: () => import('@pages/dashboard/dashboard.module').then(m => m.DashboardModule)},
+      { path: '', redirectTo: 'dashboard', pathMatch:'full'},
       { path: 'dashboard', loadChildren: () => import('@pages/dashboard/dashboard.module').then(m => m.DashboardModule)},
-      { path: 'dashboard/administracion/areas', loadChildren: () => import('@pages/areas/area.module').then(m => m.AreaModule) },
-      { path: 'dashboard/administracion/turnos', loadChildren: () => import('@pages/turnos/turno.module').then(m => m.TurnoModule) },
+      { path: 'dashboard/administracion/areas-curriculares', loadChildren: () => import('@pages/areas/area.module').then(m => m.AreaModule) },
+      { path: 'dashboard/administracion/aulas', loadChildren: () => import('@pages/gestion-aulas/aulas/aula.module').then(m => m.AulaModule) },
+      { path: 'dashboard/administracion/secciones', loadChildren: () => import('@pages/secciones/secciones.module').then(m => m.SeccionesModule) },
       { path: 'dashboard/usuarios', loadChildren: () => import('@pages/usuarios/usuario.module').then(m => m.UsuarioModule) },
-      { path: 'dashboard/gestion-aulas/aulas', loadChildren: () => import('@pages/gestion-aulas/aulas/aula.module').then(m => m.AulaModule) },
-      { path: 'dashboard/gestion-aulas/aulas-en-curso', loadChildren: () => import('@pages/gestion-aulas/aulas-en-curso/aulas-en-curso.module').then(m => m.AulasEnCursoModule) },
-      { path: 'dashboard/gestion-aulas/aulas-en-curso/aula-en-curso', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) },
-      { path: 'dashboard/anios-escolares', loadChildren: () => import('@pages/anios-escolares/anio-escolar.module').then(m => m.AnioEscolarModule) }
+      { path: 'dashboard/aulas', loadChildren: () => import('@pages/gestion-aulas/aulas/aula.module').then(m => m.AulaModule) },
+      { path: 'dashboard/aulas-en-curso', loadChildren: () => import('@pages/gestion-aulas/aulas-en-curso/aulas-en-curso.module').then(m => m.AulasEnCursoModule) },
+      { path: 'dashboard/aulas-en-curso/aula-en-curso', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) },
+      { path: 'dashboard/anios-escolares', loadChildren: () => import('@pages/anios-escolares/anio-escolar.module').then(m => m.AnioEscolarModule) },
+      { path: 'dashboard/cambiar-password', loadChildren: () => import('../../pages/cambiar-password/cambiar-password.module').then(m => m.CambiarPasswordModule)    }
     ]
   },
 
   {//RUTA PARA OTROS USUARIOS
-    path: 'inicio', component: DefaultComponent,
+    path: '', component: DefaultComponent,
     children: [
-      { path: '', loadChildren: () => import('../../pages/inicio/inicio.module').then(m => m.InicioModule)},   
-      { path: 'aula-en-curso', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) }, 
-      { path: '**', component: InicioComponent},   
+      { path: '', redirectTo: 'inicio', pathMatch:'full'},
+      { path: 'inicio', loadChildren: () => import('../../pages/inicio/inicio.module').then(m => m.InicioModule)},   
+      { path: 'inicio/aula-en-curso', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) }, 
+     { path: 'inicio/cambiar-password', loadChildren: () => import('../../pages/cambiar-password/cambiar-password.module').then(m => m.CambiarPasswordModule)    },
+      { path: '**', component: InicioComponent}
     ]
   }
 ];

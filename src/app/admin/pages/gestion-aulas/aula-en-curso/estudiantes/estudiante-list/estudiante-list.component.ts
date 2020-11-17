@@ -5,6 +5,7 @@ import { AulaEnCursoEstudianteService } from '@services/aula-en-curso-estudiante
 import Swal from 'sweetalert2'
 import { AulaEnCursoEstudiante } from '@models/AulaEnCursoEstudiante';
 import { FlujoService } from '@services/flujo.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-estudiante-list',
@@ -26,6 +27,7 @@ export class EstudianteListComponent implements OnInit, OnDestroy {
   accionEstado: string = "Activa";
 
   aula_anio_id: string;
+  url: string = `${environment.API_URL}/`;
 
   cargando: boolean;
 snap: RouterStateSnapshot;
@@ -59,7 +61,8 @@ snap: RouterStateSnapshot;
   }
 
   eliminar(aulaEnCursoEstudiante: AulaEnCursoEstudiante) {
-
+    console.log(aulaEnCursoEstudiante);
+    
     Swal.fire({
       title: `¿Está seguro de eliminar al estudiante ${aulaEnCursoEstudiante.estudiante} del aula?`,
       text: "Una vez eliminado no se podrá revertir",
@@ -78,9 +81,9 @@ snap: RouterStateSnapshot;
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        this.aulaEnCursoEstudianteService.eliminar(aulaEnCursoEstudiante.id).subscribe(
+        this.aulaEnCursoEstudianteService.eliminar(aulaEnCursoEstudiante.id, aulaEnCursoEstudiante.aula_anio_id).subscribe(
           res => {
-            if (res === "ok") Swal.fire('¡Eliminado!', 'El aula estudiante fue eliminado del aula.', 'success')
+            if (res === "ok") Swal.fire('¡Eliminado!', 'El estudiante fue eliminado del aula.', 'success')
           },
           err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) },
           () => {
@@ -92,7 +95,6 @@ snap: RouterStateSnapshot;
   }
 
   actualizarEstado(aulaEnCursoEstudiante: AulaEnCursoEstudiante) {
-
     if (aulaEnCursoEstudiante.estado === 1) this.accionEstado = "Inactiva";
     Swal.fire({
       customClass: {

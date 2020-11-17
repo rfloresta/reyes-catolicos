@@ -2,12 +2,20 @@
     <app-carga *ngIf="cargando"></app-carga>
     <ng-container *ngIf="!cargando">
 
+            <div class="col-md-12">
+                <h5 class="car-tittle">{{aulaEnCursoEstudiantesHijo[0].cantidad_estudiantes}} de {{aulaEnCursoEstudiantesHijo[0].capacidad}}</h5>
+            </div>
+        
+
         <div class="col-md-3 tarjeta-espacio" *ngFor="let estudiante of aulaEnCursoEstudiantesHijo">
 
         <div class="card card-profile card-hidden">
             <div class="card-avatar">
-                <a href="#pablo">
-                    <img class="avatar" src="../../../../../../assets/img/faces/avatar.jpg" alt="...">
+                <a href="javascript:void(0);">
+                    <img *ngIf="estudiante.foto==='' || estudiante.foto ===null || estudiante.foto ==null" class="avatar" src="../../../../../../assets/img/faces/default-user.png" alt="foto local">
+
+                    <img *ngIf="estudiante.foto!=='' && estudiante.foto !==null && estudiante.foto !=null" class="avatar" [src]="url+estudiante.foto" alt="Foto del estudiante url">
+
                 </a>
             </div>
             <div class="card-content">
@@ -20,10 +28,7 @@
                 </p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary btn-round" rel="tooltip" type="button" data-original-title="Editar" title="Editar">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button class="btn btn-rose btn-round" rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
+                <button (click)="eliminar(estudiante)" class="btn btn-danger btn-simple btn-mini btn-sm" rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
                     <i class="material-icons">close</i>
                 </button>
             </div>

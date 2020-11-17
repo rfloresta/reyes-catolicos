@@ -1,5 +1,7 @@
 <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
     <input type="hidden" formControlName="id">
+    <input type="hidden" formControlName="persona_id">
+
     <div class="row">
         <div class="col-md-3">
             <div class="form-group label-floating" [ngClass]="campoValido('dni')?'has-error':''">
@@ -76,7 +78,6 @@
             <div class="form-group label-floating" [ngClass]="campoValido('email')?'has-error':''">
                 <label class="control-label">Email*</label>
                 <input type="text" class="form-control" formControlName="email" required />
-
                 <ng-container *ngIf="campoValido('email')" class="text-danger">
                     <span class="error-message">{{ mensajeError("email") }}</span>
                 </ng-container>
@@ -84,7 +85,7 @@
         </div>
     </div>
     <div class="row espacio">
-        <div class="col-md-4" *ngIf="tipoUsuarios">
+        <div class="col-md-3" *ngIf="tipoUsuarios">
             <div class="form-group label-floating" [ngClass]="campoValido('tipo_usuario_id')?'has-error':''">
                
                 <label class="control-label">Tipo de Usuario*</label>
@@ -101,17 +102,26 @@
                 </ng-container>
             </div>
         </div>
+        <div class="col-md-3" *ngIf="accionHijo==='Actualizar'">
+            <div class="form-group label-floating" [ngClass]="campoValido('password')?'has-error':''">
+                <label class="control-label">Restablecer Contraseña*</label>
+                <input type="text" class="form-control" formControlName="password" />
+                <ng-container *ngIf="campoValido('password')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("password") }}</span>
+                </ng-container>
+            </div>
+        </div>
         <div class="col-md-5 ">
             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                 <div class="fileinput-new thumbnail img-circle">
-                    <img src="../../../../../assets/img/placeholder.jpg" alt="...">
+                    <img [src]="img" alt="foto del usuario">
                 </div>
                 <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
                 <div>
                     <span class="btn btn-round btn-simple btn-file">
                         <span class="fileinput-new">Foto</span>
                         <span class="fileinput-exists">Cambiar</span>
-                        <input type="file" name="..." />
+                        <input type="file" #file accept=".png,.jpg,jpeg" />
                     </span>
                     <a href="#pablo" class="btn btn-simple btn-round fileinput-exists" data-dismiss="fileinput"><i
                             class="fa fa-times"></i>Quitar</a>
@@ -123,7 +133,7 @@
         <div>
         <div class="col-md-12">
             <button type="submit" [disabled]="usuarioForm.invalid"
-                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+                class="btn btn-fill btn-info">
                 Guardar</button>
         </div>
     </div>

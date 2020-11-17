@@ -16,7 +16,7 @@
                                             <i class="material-icons">bookmarks</i> Áreas Curriculares
                                             <div class="ripple-container"></div>
                                         </a>
-                                    </li>
+                                     </li>
                                     <li routerLinkActive="active" *ngIf="tipo===1 || tipo===2 || tipo===3">
                                         <a [routerLink]="path2">
                                             <i class="material-icons">school</i> Estudiantes
@@ -24,8 +24,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a (click)="generarPdf()">
-                                            Click
+                                        <a href="javascript:void(0);"  (click)="abrirInformeModal()">
+                                            <i class="material-icons">picture_as_pdf</i> Informe de evidencias
                                         </a>
                                     </li>
                                 </ul>

@@ -31,28 +31,25 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   @Input() estadoNieto: string;
   @Output() hide = new EventEmitter();
   ActividadTareaUsuario: ActividadTareaUsuario = {};
-  archivosEstudiante: ActividadTareaUsuarioArchivo[]=[];
+  archivosEstudiante: ActividadTareaUsuarioArchivo[] = [];
   tareasUsuariosImg: ActividadTareaUsuario[] = [];
   tareasUsuariosDocs: ActividadTareaUsuario[] = [];
   retroalimentacion: Retroalimentacion = {
     id: null,
     pasos: {
-      aclarar:  {
+      aclarar: {
         enunciado: null,
         respuesta: null
       },
-      sugerir:  {
+      sugerir: {
         enunciado: null,
         respuesta: null
       },
-      valorar:  {
+      valorar: {
         enunciado: null,
         respuesta: null
       },
-      expresar:  {
-        enunciado: null,
-        respuesta: null
-      },
+      expresar: []
     }
   };
   files: File[] = [];
@@ -62,7 +59,9 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   pasosForm: FormGroup;
   url: string = `${environment.API_URL}/`;
   archivos: FormArray;
+  expresar: FormArray;
   cargando: boolean;
+  modules;
   constructor(private actividadService: ActividadService,
     private _builder: FormBuilder,
     private toastr: ToastrService
@@ -79,21 +78,45 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log('tipo hijo->', this.tipoTataranieto);
-    console.log('hermano->', this.tareaHermano);
+    this.modules = {
+      toolbar: [
+        // ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        // ['blockquote', 'code-block'],
+
+        // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+        // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+        // [{ 'direction': 'rtl' }],                         // text direction
+
+        // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        // [{ 'font': [] }],
+        // [{ 'align': [] }],
+
+        // ['clean'],                                         // remove formatting button
+
+        // ['link', 'image', 'video']                         // link and image, video
+      ]
+    };
 
 
     let actividadId: number;
     let usuarioId: number;
 
-    if(this.tipoTataranieto===3 || this.tipoTataranieto===2 || this.tipoTataranieto===1){
+    //profesor / coordinador / administrador
+    if (this.tipoTataranieto === 3 || this.tipoTataranieto === 2 || this.tipoTataranieto === 1) {
       actividadId = this.tareaHermano.actividad_id;
       usuarioId = this.tareaHermano.usuario_id;
-      if(this.tipoTataranieto===3){
+      //Solo para el profesor
+      if (this.tipoTataranieto === 3) {
         this.validarRetro();
+        this.listarRetro();
         this.retroalimentacion.actividad_tarea_usuario_id = this.tareaHermano.id;
       }
-    }else if (this.tipoTataranieto === 4) {//estudiante
+    } else if (this.tipoTataranieto === 4) {//estudiante
       actividadId = this.actividadVisnieto.id;
       usuarioId = this.usuarioResponseNieto.id;
     }
@@ -103,10 +126,11 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
 
     this.validar();
 
-      this.listarTareaEstudiante(this.ActividadTareaUsuario);
-    
+    this.listarTareaEstudiante(this.ActividadTareaUsuario);
+
 
   }
+
 
   onSubmit() {
 
@@ -124,32 +148,29 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       form.append('ruta_archivo', this.fileUpload[i]);
     }
     form.append('fecha', this.ActividadTareaUsuario.fecha);
-    console.log('id tarea->',this.ActividadTareaUsuario.id);
-    if(typeof this.ActividadTareaUsuario.id=== 'undefined'){
+    console.log('id tarea->', this.ActividadTareaUsuario.id);
+    if (typeof this.ActividadTareaUsuario.id === 'undefined') {
       // form.append('descripcion', this.ActividadTareaUsuarioForm.get('descripcion').value);
       form.append('actividad_id', this.ActividadTareaUsuario.actividad_id.toString());
       form.append('usuario_id', this.ActividadTareaUsuario.usuario_id.toString());
       this.registrarTarea(form);
-    }else{
+    } else {
       form.append('actividad_tarea_usuario_id', this.ActividadTareaUsuario.id.toString());
       this.registrarArchivosEnTarea(form);
     }
-    
-    console.log('files->',this.fileUpload);
-    
+
+    console.log('files->', this.fileUpload);
+
   }
 
   onSubmitRetro() {
-    
+
     this.retroalimentacion.pasos = this.retroForm.value;
-    if(this.retroalimentacion.id===null){
+    if (this.retroalimentacion.id === null) {
       this.registrarRetro(this.retroalimentacion)
-    }else{
+    } else {
       this.actualizarRetro(this.retroalimentacion)
     }
-
-    console.log('pasos->',this.retroForm.value);
-    
   }
 
   validateSize(arr: FormArray) {
@@ -166,25 +187,24 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   validarRetro() {
+    console.log('valid retro->', this.retroalimentacion);
+
     this.retroForm = this._builder.group({
-        aclarar:  this._builder.group({
-          enunciado: this.retroalimentacion.pasos.aclarar.enunciado,
-          respuesta: this.retroalimentacion.pasos.aclarar.respuesta
-        }),
-        sugerir:  this._builder.group({
-          enunciado: this.retroalimentacion.pasos.sugerir.enunciado,
-          respuesta: this.retroalimentacion.pasos.sugerir.respuesta
-        }),
-        valorar:  this._builder.group({
-          enunciado: this.retroalimentacion.pasos.valorar.enunciado,
-          respuesta: this.retroalimentacion.pasos.valorar.respuesta
-        }),
-        expresar:  this._builder.group({
-          enunciado: this.retroalimentacion.pasos.expresar.enunciado,
-          respuesta: this.retroalimentacion.pasos.expresar.respuesta
-        }),
-  });
-}
+      aclarar: this._builder.group({
+        enunciado: this.retroalimentacion.pasos.aclarar.enunciado,
+        respuesta: this.retroalimentacion.pasos.aclarar.respuesta
+      }),
+      sugerir: this._builder.group({
+        enunciado: this.retroalimentacion.pasos.sugerir.enunciado,
+        respuesta: this.retroalimentacion.pasos.sugerir.respuesta
+      }),
+      valorar: this._builder.group({
+        enunciado: this.retroalimentacion.pasos.valorar.enunciado,
+        respuesta: this.retroalimentacion.pasos.valorar.respuesta
+      }),
+      expresar: this._builder.array([])
+    });
+  }
 
   registrarTarea(obj: FormData) {
     this.actividadService.registrarTarea(obj).subscribe(
@@ -192,7 +212,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
         console.log(res);
         if (res === "ok") {
           this.refrescar('La tarea ha sido registrada');
-        }else{
+        } else {
           this.toastr.error('Ha ocurrido un problema al registrar');
         }
       },
@@ -208,7 +228,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       res => {
         if (res === "ok") {
           this.refrescar('El archivo ha sido registrado');
-        }else{
+        } else {
           this.toastr.error('Ha ocurrido un problema al registrar');
         }
       },
@@ -218,13 +238,13 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
+
   registrarRetro(obj: Retroalimentacion) {
     this.actividadService.registrarRetro(obj).subscribe(
       res => {
         if (res === "ok") {
           this.toastr.success('La retroalimentación ha sido guardada.');
-        }else{
+        } else {
           this.toastr.error('Ha ocurrido un problema al guardar.');
         }
       },
@@ -240,7 +260,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       res => {
         if (res === "ok") {
           this.toastr.success('La retroalimentación ha sido guardada.');
-        }else{
+        } else {
           this.toastr.error('Ha ocurrido un problema al guardar');
         }
       },
@@ -251,13 +271,13 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
     );
   }
 
-  refrescar(msg: string){
+  refrescar(msg: string) {
     this.toastr.success(msg);
     this.ActividadTareaUsuarioForm.reset();
     this.files = [];
     this.fileUpload = [];
     this.validar();
-      this.listarTareaEstudiante(this.ActividadTareaUsuario);
+    this.listarTareaEstudiante(this.ActividadTareaUsuario);
   }
 
   //Para Estudiante
@@ -265,7 +285,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
     this.actividadService.listarTareaEstudiante(ActividadTareaUsuario)
       .subscribe(res => {
         console.log(res);
-        if(typeof res.id!== 'undefined'){
+        if (typeof res.id !== 'undefined') {
           this.ActividadTareaUsuario.id = res.id;
         }
         this.tareaHermano = res;
@@ -284,7 +304,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   listarDocs() {
     this.tareasUsuariosDocs = this.archivosEstudiante.filter(ActividadTareaUsuario => ActividadTareaUsuario.extension !== 'image/jpeg' && ActividadTareaUsuario.extension !== 'image/png');
   }
-  
+
   listarImgs() {
     this.cargando = true;
     setTimeout(() => {
@@ -293,21 +313,53 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  listarRetro(){
+  patch(enunciado, respuesta) {
+    return this._builder.group({
+      enunciado: [enunciado],
+      respuesta: [respuesta]
+    });
+  }
+  listarRetro() {
     this.actividadService.listarRetro(this.tareaHermano.id).subscribe(
       (res: Retroalimentacion) => {
         if (res) {
-          let passosObject: Object= JSON.parse(res.pasos);
+          let passosObject: Object = JSON.parse(res.pasos);
           this.retroalimentacion = res;
           this.retroalimentacion.pasos = passosObject;
-          this.validarRetro();
-        };
+        
+
+        //   for (let i = 0; i < this.retroalimentacion.pasos.expresar.length; i++) {
+            
+        // }
+
+        // this.expresar.push(this._builder.group({
+        //   enunciado: 'js',
+        //   respuesta: 'nsn'
+        // }
+        // ));
+        this.expresar = <FormArray>this.retroForm.controls['expresar'];
+          
+        this.validarRetro();
+
+        this.retroalimentacion.pasos.expresar.forEach(x => { // iterate the array          
+          (<FormArray>this.retroForm.controls['expresar']).push(this.patch(x.enunciado, x.respuesta)) // push values
+        });
+
+        console.log('control->',this.expresar);
+        
+      }
       },
       err => {
         this.toastr.error('Ha ocurrido un error inesperado');
         console.log(err);
       }
     );
+  }
+
+  agregarExpresar(event){
+    event.preventDefault();
+    (<FormArray>this.retroForm.controls['expresar']).push(this.patch(null, null)) // push values
+
   }
 
   eliminarTarea(obj: ActividadTareaUsuario) {
@@ -405,28 +457,40 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
 
   quitarTareas(i: number) {
     this.files.splice(i, 1);
-    this.archivos.value.splice(i,1);
-    this.archivos.controls.splice(i,1);
-    this.fileUpload.splice(i,1);
-    if(this.archivos.controls.length === 0){
+    this.archivos.value.splice(i, 1);
+    this.archivos.controls.splice(i, 1);
+    this.fileUpload.splice(i, 1);
+    if (this.archivos.controls.length === 0) {
       this.validar();
-    }    
+    }
   }
 
-  mensajeError(group: string, control: string): string{
-   
+  quitarExpresar(i: number, event) {
+    event.preventDefault();
+    console.log(i);
+    
+    let control  = <FormArray>this.retroForm.controls['expresar'];
+    control.removeAt(i);
+
+    // (<FormArray>this.retroForm.controls['expresar'].value).removeAt(i);
+    // this.expresar.value.splice(i, 1);
+    // this.expresar.controls.splice(i, 1);
+  }
+
+  mensajeError(control: string): string {
+
     let mensaje: string;
-    if(this.retroForm.controls['pasos'].get(group).get(control).errors.required){
-      mensaje = `El campo es requerido`;
+    if (this.retroForm.get(control).errors.required) {
+      mensaje = `Es requerido que complete antes de registrar`;
     }
     return mensaje;
   }
 
-  campoValido(group: string, control: string): boolean{
+  campoValido(control: string): boolean {
 
     return (
-      (this.retroForm.controls['pasos'].get(group).get(control).touched || this.retroForm.controls['pasos'].get(group).get(control).dirty) && 
-      !this.retroForm.controls['pasos'].get(group).get(control).valid
+      (this.retroForm.get(control).touched || this.retroForm.get(control).dirty) &&
+      !this.retroForm.get(control).valid
     )
   }
 

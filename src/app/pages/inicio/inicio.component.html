@@ -7,103 +7,74 @@
                         <i class="material-icons">language</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Global Sales by Top Locations</h4>
-                        <div class="row">
+                        <h4 class="card-title">{{anioEscolar.nombre}}</h4>
+                       
+                        <div class="row" style="height: 30em;">
                             <div class="col-md-5">
-                                <div class="table-responsive table-sales">
+                                <app-carga *ngIf="cargando">
+
+                                </app-carga>
+                                <div  *ngIf="!cargando" class="table-responsive table-sales pre-scrollable">
                                     <table class="table">
                                         <tbody>
-                                            <tr>
+                                            <tr *ngFor="let area of aulaEnCursoAreasHijo; let i = index">
+                                                <td>
+                                                    <p>{{i+1}}</p>
+                                                </td>
                                                 <td>
                                                     <div class="flag">
-                                                        <img src="../../../assets/img/flags/US.png">
+                                                        <img [src]="url+area.imagen">
                                                     </div>
                                                 </td>
-                                                <td>USA</td>
+                                                <td>{{area.nombre_area}}</td>
                                                 <td class="text-right">
-                                                    2.920
-                                                </td>
-                                                <td class="text-right">
-                                                    53.23%
+                                                    <button (click)="consultarArea(area)" class="btn btn-round btn-info btn-mini">
+                                                        <i class="material-icons">book_online</i>
+                                                    </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../../../assets/img/flags/DE.png">
-                                                    </div>
-                                                </td>
-                                                <td>Germany</td>
-                                                <td class="text-right">
-                                                    1.300
-                                                </td>
-                                                <td class="text-right">
-                                                    20.43%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../../../assets/img/flags/AU.png">
-                                                    </div>
-                                                </td>
-                                                <td>Australia</td>
-                                                <td class="text-right">
-                                                    760
-                                                </td>
-                                                <td class="text-right">
-                                                    10.35%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../../../assets/img/flags/GB.png">
-                                                    </div>
-                                                </td>
-                                                <td>United Kingdom</td>
-                                                <td class="text-right">
-                                                    690
-                                                </td>
-                                                <td class="text-right">
-                                                    7.87%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../../../assets/img/flags/RO.png">
-                                                    </div>
-                                                </td>
-                                                <td>Romania</td>
-                                                <td class="text-right">
-                                                    600
-                                                </td>
-                                                <td class="text-right">
-                                                    5.94%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/BR.png">
-                                                    </div>
-                                                </td>
-                                                <td>Brasil</td>
-                                                <td class="text-right">
-                                                    550
-                                                </td>
-                                                <td class="text-right">
-                                                    4.34%
-                                                </td>
-                                            </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
+                                
                             </div>
-                            <div class="col-md-6 col-md-offset-1">
-                                <div id="worldMap" class="map"></div>
+
+                            
+                            <div  class="col-md-7 ">
+                                <app-carga *ngIf="cargando2">
+
+                                </app-carga>
+                                <div *ngIf="!cargando2" id="worldMap" class="map">
+                                    <carousel >
+                                        <slide>
+                                            <img src="../../../assets/img/reyes-patio.jpg" alt="First slide"
+                                                style="display: block; width: 100%;">
+                                            <div class="carousel-caption d-none d-md-block">
+                                               
+                                               
+                                            </div>
+                                        </slide>
+                                        <slide>
+                                            <img src="../../../assets/img/reyes-patio2.png" alt="First slide"
+                                                style="display: block; width: 100%;">
+                                            <div class="carousel-caption d-none d-md-block">
+                                               
+                                               
+                                            </div>
+                                        </slide>
+                                        <slide>
+                                            <img src="../../../assets/img/reyes-patio3.png" alt="First slide"
+                                                style="display: block; width: 100%;">
+                                            <div class="carousel-caption d-none d-md-block">
+                                               
+                                               
+                                            </div>
+                                        </slide>
+                                    </carousel>
+                                </div>
                             </div>
+                        
                         </div>
                     </div>
                 </div>

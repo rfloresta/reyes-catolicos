@@ -20,9 +20,8 @@
             <div class="col-md-12">
                 <div class="form-group label-floating" [ngClass]="campoValido('descripcion')?'has-error':''">
                     <label class="control-label">Descripción*</label>
-                    <textarea formControlName="descripcion" class="form-control" required>
-
-                    </textarea>
+                    <quill-editor formControlName="descripcion">
+                    </quill-editor>
                     <ng-container *ngIf="campoValido('descripcion')" class="text-danger">
                         <span class="error-message">{{ mensajeError("descripcion") }}</span>
                     </ng-container>

@@ -6,12 +6,14 @@ import { CheckLoginGuard } from './shared/guards/check-login.guard';
 //CanLoad: Lo podemos utilizar para evitar al usuario cargar módulos innecesarios.
 
 const routes: Routes = [
+  { path: '',redirectTo:'login', pathMatch: 'full'
+},  
   { path: 'principal', loadChildren: () => 
     import('./shared/default/default.module').then(m => m.DefaultModule),
     canActivate: [CheckLoginGuard],
-    
   },
-  { path: '', loadChildren: () => 
+ 
+  { path: 'login', loadChildren: () => 
     import('./auth/login/login.module').then(m => m.LoginModule)
   }
 ];

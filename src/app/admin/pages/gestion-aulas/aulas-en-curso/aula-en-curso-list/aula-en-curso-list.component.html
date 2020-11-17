@@ -5,8 +5,10 @@
     <div class="col-md-4 espacio" *ngFor="let aulaEnCurso of aulasEnCursoHijo">
         <div class="card card-profile">
             <div class="card-avatar">
-                <a href="#pablo">
-                    <img class="img" src="../../../../../../assets/img/faces/marc.jpg" />
+                <a href="javascript:void(0);" (click)="irAula(aulaEnCurso)">
+                    <img *ngIf="aulaEnCurso.foto==='' || aulaEnCurso.foto ===null || aulaEnCurso.foto ==null" class="avatar" src="../../../../../../assets/img/faces/default-user.png" alt="foto local">
+
+                    <img *ngIf="aulaEnCurso.foto!=='' && aulaEnCurso.foto !==null && aulaEnCurso.foto !=null" class="avatar" [src]="url+aulaEnCurso.foto" alt="Foto del estudiante url">
                 </a>
             </div>
             <div class="card-content">
@@ -17,13 +19,13 @@
                 </p>
             </div>
             <div class="card-footer">
-                <button (click)="irAula(aulaEnCurso)"  class="btn btn-orange btn-round" rel="tooltip" type="button" data-original-title="Ver" title="Ver">
+                <button (click)="irAula(aulaEnCurso)"  class="btn btn-info btn-simple " rel="tooltip" type="button" data-original-title="Ver" title="Ver">
                     <i class="material-icons">remove_red_eye</i>
                 <div class="ripple-container"></div></button>
-                <button class="btn btn-primary btn-round" rel="tooltip" type="button" data-original-title="Editar" title="Editar">
+                <button (click)="editar(aulaEnCurso)" class="btn btn-primary btn-simple " rel="tooltip" type="button" data-original-title="Editar" title="Editar">
                     <i class="material-icons">edit</i>
                 </button>
-                <button class="btn btn-rose btn-round" rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
+                <button (click)="eliminar(aulaEnCurso)" class="btn btn-danger btn-simple " rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
                     <i class="material-icons">close</i>
                 </button>
             </div>

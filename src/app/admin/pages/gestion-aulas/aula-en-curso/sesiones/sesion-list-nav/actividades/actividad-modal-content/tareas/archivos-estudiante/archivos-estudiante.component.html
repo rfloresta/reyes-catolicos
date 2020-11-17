@@ -46,7 +46,7 @@
                         <a href="#documentos" data-toggle="tab">Documentos</a>
                     </li>
                     <li *ngIf="tipoTataranieto===3">
-                        <a (click)="listarRetro()" href="#retro" data-toggle="tab">Retroalimentación</a>
+                        <a href="#retro" data-toggle="tab">Retroalimentación</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -134,117 +134,124 @@
                             </table>
                         </div>
                     </div>
+                      
+
                     <!-- Retroalimentación -->
                     <div *ngIf="tipoTataranieto===3" class="tab-pane" id="retro">
-                        <div class="pre-scrollable">
                             <form [formGroup]="retroForm" (ngSubmit)="onSubmitRetro()">
-                                <!-- <div class="row"> -->
-                                    <div class="col-md-12">
-                                        <div class="card ">
-                                            <div class="card-header">
-                                                <h5 class="card-title">Aclarar</h5>
-                                            </div>
-                                            <div class="card-content">
-                                                <div [formGroup]="retroForm.controls['aclarar']">
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.aclarar.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
-                                                        <label class="control-label">Enunciado</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="enunciado" />
-                                                    </div>
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.aclarar.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
-                                                        <label class="control-label">Respuesta</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="respuesta" />
-                                                    </div>
+                                <div class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Aclarar</h5>
+                                        </div>
+                                        <div class="card-content">
+                                            <div [formGroup]="retroForm.controls['aclarar']">
+                                                <div
+                                                    [ngClass]="retroalimentacion.pasos.aclarar.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                    <label class="control-label">Enunciado</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="enunciado" />
+                                                </div>
+                                                <div
+                                                    [ngClass]="retroalimentacion.pasos.aclarar.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                    <label class="control-label">Respuesta</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="respuesta" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                <!-- </div>
-                                <div class="row"> -->
-                                    <div class="col-md-12">
-                                        <div class="card ">
-                                            <div class="card-header">
-                                                <h5 class="card-title">Sugerir</h5>
-                                            </div>
-                                            <div class="card-content">
-                                                <div [formGroup]="retroForm.get('sugerir')" class="col-md-12">
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.sugerir.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
-                                                        <label class="control-label">Enunciado</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="enunciado" />
-                                                    </div>
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.sugerir.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
-                                                        <label class="control-label">Respuesta</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="respuesta" />
-                                                    </div>
+                                </div>
+                            <!-- </div> 
+                            <div class="row"> -->
+                                <div class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Sugerir</h5>
+                                        </div>
+                                        <div class="card-content">
+                                            <div [formGroup]="retroForm.get('sugerir')" class="col-md-12">
+                                                <div
+                                                    [ngClass]="retroalimentacion.pasos.sugerir.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                    <label class="control-label">Enunciado</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="enunciado" />
+                                                </div>
+                                                <div
+                                                    [ngClass]="retroalimentacion.pasos.sugerir.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                    <label class="control-label">Respuesta</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="respuesta" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                <!-- </div>
-                                <div class="row"> -->
-                                    <div class="col-md-12">
-                                        <div class="card ">
-                                            <div class="card-header">
-                                                <h5 class="card-title">Valorar</h5>
-                                            </div>
-                                            <div class="card-content">
-                                                <div [formGroup]="retroForm.get('valorar')" class="col-md-12">
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.valorar.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
-                                                        <label class="control-label">Enunciado</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="enunciado" />
-                                                    </div>
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.valorar.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
-                                                        <label class="control-label">Respuesta</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="respuesta" />
-                                                    </div>
+                                </div>
+                            <!-- </div>
+                            <div class="row"> -->
+                                <div class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Valorar</h5>
+                                        </div>
+                                        <div class="card-content">
+                                            <div [formGroup]="retroForm.get('valorar')" class="col-md-12">
+                                                <div
+                                                    [ngClass]="retroalimentacion.pasos.valorar.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                    <label class="control-label">Enunciado</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="enunciado" />
+                                                </div>
+                                                <div
+                                                    [ngClass]="retroalimentacion.pasos.valorar.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                    <label class="control-label">Respuesta</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="respuesta" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                <!-- </div>
-                                <div class="row"> -->
-                                    <div class="col-md-12">
-                                        <div class="card ">
-                                            <div class="card-header">
-                                                <h5 class="card-title">Expresar</h5>
-                                            </div>
-                                            <div class="card-content">
-                                                <div [formGroup]="retroForm.get('expresar')" class="col-md-12">
-                                                    <div
-                                                        [ngClass]="retroalimentacion.pasos.expresar.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                </div>
+                            <!-- </div>
+                            <div class="row"> -->
+                                <div class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Expresar sus inquietudes</h5>
+                                            <button   (click)="agregarExpresar($event)" class="pull-rigth" 
+                                             class="btn btn-info btn-simple pull-right">
+                                             <i class="material-icons">add</i></button>
+                                        </div>
+                                        <div class="card-content">
+                                                <div class="col-md-12" formArrayName="expresar" *ngFor="let creds of retroForm.controls.expresar.controls; let i = index">
+                                                    <ng-container [formGroupName]="i">
+                                                        <div
+                                                        [ngClass]="retroalimentacion.pasos.expresar[i]?.enunciado === null?'form-group label-floating is-empty':  'form-group label-floating'">
                                                         <label class="control-label">Enunciado</label>
                                                         <input type="text" class="form-control" formControlName="enunciado"
                                                             required />
                                                     </div>
                                                     <div
-                                                        [ngClass]="retroalimentacion.pasos.expresar.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
+                                                        [ngClass]="retroalimentacion.pasos.expresar[i]?.respuesta === null?'form-group label-floating is-empty':  'form-group label-floating'">
                                                         <label class="control-label">Respuesta</label>
                                                         <input type="text" class="form-control" formControlName="respuesta"
                                                             required />
                                                     </div>
-                                                </div>
-                                            </div>
+                                                   
+                                <button (click)="quitarExpresar(i, $event)" type="button" class="btn btn-danger btn-simple pull-right" rel="tooltip" data-placement="bottom" title="Eliminar">
+                                    <i class="material-icons">close</i>
+                                </button>
+                                                    </ng-container>
+                                                  </div>
                                         </div>
                                     </div>
-                                <!-- </div> -->
-    
-                                <!-- [disabled]="retroForm.invalid" -->
-                               
+                                </div>
+                            <!-- </div> -->
+
+                            <!-- [disabled]="retroForm.invalid" -->
                             </form>
-                        </div>
                         <div class="col-md-12">
-                            <button (click)="onSubmitRetro()"class="pull-rigth" type="submit"
+                            <button [disabled]="retroForm.invalid" (click)="onSubmitRetro()"class="pull-rigth" type="submit"
                             class="btn btn-fill btn-info pull-right">
                                 Guardar</button>
                         </div>

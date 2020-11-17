@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouteReuseStrategy } from '@angular/router';
+import { AnioEscolar } from '@models/AnioEscolar';
+import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 import { pipe, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from 'src/app/models/Usuario';
@@ -27,7 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private loginService: LoginService,
     private _builder: FormBuilder,
     private router: Router,
-    private flujoService: FlujoService
+    private flujoService: FlujoService,
+    private anioEscolarService: AnioEscolarService
   ) {
   }
 
@@ -46,13 +49,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.suscription$=this.loginService.login(this.usuario).subscribe((res) => {
         if (res) {
-          this.router.navigate(["/principal"]);
+          this.anioEscolarService.obtenerAnioActivo().subscribe((res: AnioEscolar)=>{
+            localStorage.setItem('anio_activo', JSON.stringify(res));
+            this.router.navigate(["/principal"]);
+          });          
         }
       },
       err => {
         console.log(err);
         if(err.status===400){
-          this.msgError=JSON.stringify(err.error.mensaje);
+          this.msgError="Email y/o contraseña incorrectos";
         }
       }
       

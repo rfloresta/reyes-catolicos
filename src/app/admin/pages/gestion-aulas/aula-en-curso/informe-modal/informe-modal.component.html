@@ -1,0 +1,59 @@
+<form [formGroup]="informeForm" (ngSubmit)="generarPdf()">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Reporte de Evidencia</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef2.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title font-weight-bold">Evidencia de la semana</h5>
+                        <small class="card-description">Seleccione fecha en intervalo de una semana
+                        </small>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group label-floating"
+                                    [ngClass]="campoValido('fecha_inicio')?'form-group label-floating is-empty has-error':'form-group label-floating'">
+                                    <label class="control-label">Fecha inicio*</label>
+                                    <input class="form-control" formControlName="fecha_inicio" required
+                                        [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                                    <owl-date-time [pickerType]="'calendar'" #dt></owl-date-time>
+                                    <ng-container *ngIf="campoValido('fecha_inicio')" class="text-danger">
+                                        <span class="error-message">{{ mensajeError("fecha_inicio") }}</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group label-floating"
+                                    [ngClass]="campoValido('fecha_fin')?'form-group label-floating is-empty has-error':'form-group label-floating'">
+                                    <label class="control-label">Fecha fin*</label>
+                                    <input [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" formControlName="fecha_fin"
+                                        class="form-control" required>
+                                    <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                                    <ng-container *ngIf="campoValido('fecha_fin')" class="text-danger">
+                                        <span class="error-message">{{ mensajeError("fecha_fin") }}</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button [disabled]="informeForm.invalid" type="submit" class="btn btn-fill btn-info">
+            Generar
+        </button>
+        <button class="btn btn-danger btn-simple" (click)="bsModalRef2.hide()" type="button">Cerrar<div
+                class="ripple-container">
+                <div class="ripple ripple-on ripple-out"></div>
+            </div></button>
+    </div>
+</form>

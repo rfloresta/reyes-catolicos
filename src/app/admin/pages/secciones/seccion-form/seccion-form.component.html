@@ -1,0 +1,23 @@
+<form [formGroup]="seccionForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group label-floating" [ngClass]="campoValido('nombre')?'has-error':''">
+                <label class="control-label">Nombre*</label>
+                <input type="text" class="form-control" formControlName="nombre" required />
+                <ng-container *ngIf="campoValido('nombre')" class="text-danger">
+                    <span class="error-message">{{ mensajeError("nombre") }}</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" [disabled]="seccionForm.invalid"
+                class="btn btn-fill btn-info">
+                Guardar</button>
+        </div>
+    </div>
+
+
+</form>

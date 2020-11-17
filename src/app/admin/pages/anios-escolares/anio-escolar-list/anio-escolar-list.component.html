@@ -9,7 +9,7 @@
         class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
         <thead>
             <tr *ngIf="!cargando">
-                <th>Año</th>
+                <!-- <th>Año</th> -->
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
                 <th>Estado</th>
@@ -20,7 +20,7 @@
         <tbody>
 
             <tr *ngFor="let anioEscolar of aniosEscolaresHijo; index as i" id="lista">
-                <td>{{anioEscolar.anio}}</td>
+                <!-- <td>{{anioEscolar.anio}}</td> -->
                 <td>{{anioEscolar.fecha_inicio | date:'fullDate'}}</td>
                 <td>{{anioEscolar.fecha_fin  | date:'fullDate'}}</td>
                 <td>           
@@ -51,7 +51,7 @@
         </tbody>
         <tfoot>
             <tr *ngIf="!cargando">
-                <th>Año</th>
+                <!-- <th>Año</th> -->
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
                 <th>Estado</th>

@@ -56,7 +56,8 @@ export class AnioEscolarFormComponent implements OnInit {
   validar(){
       this.anioEscolarForm = this._builder.group({
       id: this.anioEscolarHijo.id,
-    anio: [this.anioEscolarHijo.anio, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],    
+    // anio: [this.anioEscolarHijo.anio, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],    
+    nombre: [this.anioEscolarHijo.nombre],    
     fecha_inicio: [this.anioEscolarHijo.fecha_inicio,[Validators.required, Validators.pattern(this.validarFecha)]],
     fecha_fin: [this.anioEscolarHijo.fecha_fin,[Validators.required, Validators.pattern(this.validarFecha)]],
     });
@@ -101,19 +102,18 @@ export class AnioEscolarFormComponent implements OnInit {
     }else if (this.anioEscolarForm.get(campo).hasError('pattern')){
       mensaje = `Ingrese una fecha válida`;
     }
-    if (this.anioEscolarForm.get(campo).hasError("minlength")){
-      const minLength = this.anioEscolarForm.get(campo).errors?.minlength.requiredLength;
-      mensaje = `Ingrese un año válido`;
-    }
-    if (this.anioEscolarForm.get(campo).hasError("maxlength")){
-      const minLength = this.anioEscolarForm.get(campo).errors?.minlength.requiredLength;
-      mensaje = `Ingrese un año válido`;
-    }
+    // if (this.anioEscolarForm.get(campo).hasError("minlength")){
+    //   const minLength = this.anioEscolarForm.get(campo).errors?.minlength.requiredLength;
+    //   mensaje = `Ingrese un año válido`;
+    // }
+    // if (this.anioEscolarForm.get(campo).hasError("maxlength")){
+    //   const minLength = this.anioEscolarForm.get(campo).errors?.minlength.requiredLength;
+    //   mensaje = `Ingrese un año válido`;
+    // }
     return mensaje;
   }
 
   campoValido(campo: string): boolean{
-
     return (
       (this.anioEscolarForm.get(campo).touched || this.anioEscolarForm.get(campo).dirty) && 
       !this.anioEscolarForm.get(campo).valid

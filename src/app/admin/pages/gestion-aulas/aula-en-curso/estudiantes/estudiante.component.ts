@@ -36,11 +36,9 @@ export class EstudianteComponent implements OnInit {
     this.usuario = JSON.parse(usuarioString);
     this.tipo = this.usuario.tipo;
 
-      this.path = "/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/estudiantes/";
-      this.path2= "/principal/dashboard/gestion-aulas//aulas-en-curso/aula-en-curso/estudiantes/registrar";  
-    
-
-    // this.flujoService.enviarBool(false);
+      this.path = "/principal/dashboard/aulas-en-curso/aula-en-curso/estudiantes";
+      this.path2= "/principal/dashboard/aulas-en-curso/aula-en-curso/estudiantes/registrar";  
+  
   }
 
   //Para destruir la suscripcion anterior al registrar

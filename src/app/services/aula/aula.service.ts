@@ -35,3 +35,4 @@ export class AulaService {
     return this.httpClient.patch(`${environment.API_URL}/api/gestion-aulas/aulas/${id}`, Aula)
   }
 }
+  

@@ -5,33 +5,40 @@
         (click)="abrirModalRegistrar(template)"><i class="material-icons">add</i></button>
     </h3>
 
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let recurso of recursosHijo">
-        <div class="card card-pricing card-raised ">
-            <div class="content">
-                <h6 class="category">{{recurso.tipo_nombre}}</h6>
-                <div class="icon icon-danger">
-                    <a *ngIf="recurso.formato_id!==4" href="javascript:void(0);" (click)="abrirModalArchivo(templateArchivo,recurso)"> <i class="material-icons">{{recurso.nombre_icono}}</i></a>
-                    <a *ngIf="recurso.formato_id===4" [href]="url+recurso.contenido"><i class="material-icons">{{recurso.nombre_icono}}</i></a>
+    <app-carga *ngIf="cargando">
+
+    </app-carga>
+
+    <ng-container *ngIf="!cargando">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let recurso of recursosHijo">
+            <div class="card card-pricing card-raised ">
+                <div class="content">
+                    <h6 class="category">{{recurso.tipo_nombre}}</h6>
+                    <div class="icon icon-danger">
+                        <a *ngIf="recurso.formato_id!==4" href="javascript:void(0);" (click)="abrirModalArchivo(templateArchivo,recurso)"> <i class="material-icons">{{recurso.nombre_icono}}</i></a>
+                        <a *ngIf="recurso.formato_id===4" [href]="url+recurso.contenido"><i class="material-icons">{{recurso.nombre_icono}}</i></a>
+                    </div>
+                    <div *ngIf="tipoHijo===3" class="btn-contenido">
+                        <button (click)="abrirModalEditar(template,recurso)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button (click)="eliminar(recurso)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Eliminar">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                            <span class="card-title">{{recurso.titulo}}</span   >
+                            
+                   
                 </div>
-                <div *ngIf="tipoHijo===3" class="btn-contenido">
-                    <button (click)="abrirModalEditar(template,recurso)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
-                        <i class="material-icons">edit</i>
-                    </button>
-                    <button (click)="eliminar(recurso)" type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Eliminar">
-                        <i class="material-icons">close</i>
-                    </button>
+                <div class="card-footer">
+                        <small class="category">
+                            {{ humanFormatStart(recurso.fecha)}}
+                        </small>
                 </div>
-                        <span class="card-title">{{recurso.titulo}}</span   >
-                        
-               
-            </div>
-            <div class="card-footer">
-                    <small class="category">
-                        {{ humanFormatStart(recurso.fecha)}}
-                    </small>
             </div>
         </div>
-    </div>
+    </ng-container>
+ 
 </div>
 
 <ng-template #template>

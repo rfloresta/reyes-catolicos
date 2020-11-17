@@ -1,47 +1,48 @@
-    <!-- foro -->
-    <div  class="row">
-        <form *ngIf="tipoVisnieto===4 && estadoNieto!=='_off'" [formGroup]="actividadForoUsuarioForm" (ngSubmit)="onSubmit()">
+<!-- foro -->
+<div class="row">
+    <form *ngIf="tipoVisnieto===4 && estadoNieto!=='_off'" [formGroup]="actividadForoUsuarioForm"
+        (ngSubmit)="onSubmit()">
         <div class="col-md-12">
             <div class="form-group label-floating" [ngClass]="campoValido('respuesta')?'has-error':''">
                 <label class="control-label">Respuesta*</label>
-                <textarea formControlName="respuesta" class="form-control" required>
-                </textarea>
+                <quill-editor formControlName="respuesta">
+                </quill-editor> 
                 <ng-container *ngIf="campoValido('respuesta')" class="text-danger">
                     <span class="error-message">{{ mensajeError("respuesta") }}</span>
                 </ng-container>
             </div>
         </div>
-        <div  class="col-md-12">
-            <button [disabled]="actividadForoUsuarioForm.invalid" class="btn btn-info pull-right" type="submit">Responder<div class="ripple-container">
+        <div class="col-md-12">
+            <button [disabled]="actividadForoUsuarioForm.invalid" class="btn btn-info pull-right"
+                type="submit">Responder<div class="ripple-container">
                 </div>
             </button>
         </div>
-        </form>
-        <!-- foro -->
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        Respuestas
+    </form>
+    <!-- foro -->
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    Respuestas
+                </div>
+            </div>
+            <div class="card-content pre-scrollable">
+                <app-carga *ngIf="cargando"></app-carga>
+                <ng-container *ngIf="!cargando">
+                    <div class="card" *ngFor="let foroUsuario of foroUsuarios">
+                        <div class="card-header">
+                            <span class="card-title">{{foroUsuario.estudiante}}</span><br>
+                            <small class="card-description">
+                                {{foroUsuario.fecha | date: 'short'}}
+                            </small>
+                        </div>
+                        <div class="card-content">
+                            {{foroUsuario.respuesta}}
+                        </div>
                     </div>
-                </div>
-                <div class="card-content pre-scrollable">
-                    <app-carga *ngIf="cargando"></app-carga>
-                    <ng-container *ngIf="!cargando">
-                        <div  class="card" *ngFor="let foroUsuario of foroUsuarios">
-                            <div class="card-header">
-                                <span class="card-title">{{foroUsuario.estudiante}}</span><br>
-                                <small class="card-description">
-                                    {{foroUsuario.fecha | date: 'short'}}
-                                </small>
-                            </div>
-                            <div class="card-content">
-                                {{foroUsuario.respuesta}}
-                            </div>
-                        </div>  
-                    </ng-container>   
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>
- 
+</div>

@@ -82,10 +82,8 @@ export class SesionFormComponent implements OnInit, OnDestroy {
       this.sesionForm = this._builder.group({
       id: this.sesionHijo.id,
       numero: [this.sesionHijo.numero, [Validators.required,Validators.pattern(this.numeroPositivo),Validators.pattern]],
-      
       fecha: [this.sesionHijo.fecha, Validators.required],
-      
-      link: [this.sesionHijo.link, [Validators.required,Validators.pattern(this.validarLink)]],
+      link: [this.sesionHijo.link, [Validators.pattern(this.validarLink)]],
       tema: [this.sesionHijo.tema, [Validators.required]],
       competencia: [this.sesionHijo.competencia, [Validators.required]],
       area_aula_anio_id: this.area.id

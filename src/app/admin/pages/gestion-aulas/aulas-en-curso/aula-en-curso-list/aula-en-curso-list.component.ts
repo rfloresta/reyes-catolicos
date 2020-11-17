@@ -8,6 +8,7 @@ import { AulaEnCurso } from '@models/AulaEnCurso';
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 import { AnioEscolar } from '@models/AnioEscolar';
 import { switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-aula-en-curso-list',
@@ -25,10 +26,12 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
     aula_id: null,
     anio_id: null,
     estado: null,
-    capacidad_actual: null
+    capacidad: null,
+    cantidad_estudiantes: null
   };
 
-  anioId: number= 0;
+  anioId: number;
+  url: string = `${environment.API_URL}/`;
 
   accionEstado: string = "Activa";
 
@@ -44,10 +47,9 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.cargando=true;
-    this.anioEscolarService.obtenerAnioActivo()
-    .pipe(
-      switchMap((res: AnioEscolar) => this.aulaEnCursoService.listar(res.id))
-    ).subscribe(
+    let anioActivoString=localStorage.getItem('anio_activo');
+    let anio = JSON.parse(anioActivoString)
+    this.aulaEnCursoService.listar(anio.id).subscribe(
       (res: AulaEnCurso[]) => {
         setTimeout(() => {
           this.aulasEnCursoHijo = res;
@@ -62,21 +64,19 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
     this.flujoService.enviarObjeto(this.aulaEnCursoHijo);
     this.flujoService.enviarAccion("Registrar");
     // this.flujoService.enviarBool(true);
-    $.getScript('../../../../../../assets/js/init/initMenu.js');
+    // $.getScript('../../../../../../assets/js/init/initMenu.js');
 
   }
 
 
   editar(aulaEnCurso: AulaEnCurso) {
-    console.log(aulaEnCurso);
-
+    console.log('Aula res',aulaEnCurso);
     this.flujoService.enviarObjeto(aulaEnCurso);
     this.flujoService.enviarAccion("Actualizar");
-    this.router.navigate(['principal/dashboard/gestion-aulas/aulas-en-curso/form']);
+    this.router.navigate(['principal/dashboard/aulas-en-curso/form']);
   }
 
   eliminar(aulaEnCurso: AulaEnCurso) {
-
     Swal.fire({
       title: `¿Está seguro de eliminar al aula en curso ${aulaEnCurso.aula}?`,
       text: "Una vez eliminado no se podrá revertir",
@@ -142,7 +142,7 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
 
   irAula(aulaEnCurso: AulaEnCurso){
     localStorage.setItem('ai', aulaEnCurso.id.toString());
-    this.router.navigate(['/principal/dashboard/gestion-aulas/aulas-en-curso/aula-en-curso/areas']);
+    this.router.navigate(['/principal/dashboard/aulas-en-curso/aula-en-curso/areas']);
   }
   
   // mostrarBarra(){

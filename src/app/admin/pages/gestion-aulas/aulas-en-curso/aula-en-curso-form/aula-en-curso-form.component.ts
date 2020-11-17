@@ -9,6 +9,8 @@ import { UsuarioService } from '@services/usuario/usuario.service';
 import { AulaService } from '@services/aula/aula.service';
 import { FlujoService } from '@services/flujo.service';
 import { ToastrService } from 'ngx-toastr';
+import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
+import { AnioEscolar } from '@models/AnioEscolar';
 
 declare var $:any;
 @Component({
@@ -25,7 +27,7 @@ export class AulaEnCursoFormComponent implements OnInit {
   accionSuscription$: Subscription;
 
   aulaEnCursoForm: FormGroup;
-
+  anioId: number;
   aulas: Aula[] = [];
   profesores: Usuario[] = [];
 
@@ -36,7 +38,8 @@ export class AulaEnCursoFormComponent implements OnInit {
     private usuarioService: UsuarioService,
     private flujoService: FlujoService,
     private _builder: FormBuilder,
-    private toastr: ToastrService) {  }
+    private toastr: ToastrService,
+    private anioEscolarService: AnioEscolarService) {  }
 
   ngOnInit(): void {
 
@@ -50,20 +53,18 @@ export class AulaEnCursoFormComponent implements OnInit {
     this.usuarioService.listarProfesores().subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
-      }, 150);
-      console.log(this.profesores);
-      
-    this.profesores=res;
+      }, 150);      
+      this.profesores=res;
     });
 
     this.aulaEnCursoSuscription$ = this.flujoService.enviarObjeto$
-      .subscribe((res: Aula) => {
-        console.log(res);
+      .subscribe((res: AulaEnCurso) => {
+        console.log('Aula in suscribe',res);
         this.aulaEnCursoHijo = res;
       });
 
       this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accionHijo=accion)
-
+      this.obtenerAnioid();
     this.validar();
   }
 
@@ -72,6 +73,9 @@ export class AulaEnCursoFormComponent implements OnInit {
       return;
     }
     this.aulaEnCursoHijo = this.aulaEnCursoForm.value;
+    this.aulaEnCursoHijo.usuario_id = Number(this.aulaEnCursoHijo.usuario_id);
+    console.log('Submit form',this.aulaEnCursoHijo);
+    
     if (this.aulaEnCursoHijo.id===null) {
       this.registrar(this.aulaEnCursoHijo);
     } else this.actualizar(this.aulaEnCursoHijo);
@@ -82,8 +86,22 @@ export class AulaEnCursoFormComponent implements OnInit {
       id: this.aulaEnCursoHijo.id,
       aula_id: [this.aulaEnCursoHijo.aula_id, Validators.required],
       usuario_id: [this.aulaEnCursoHijo.usuario_id, Validators.required],
-      anio_id: 1
+      anio_id: this.anioId,
+      aula_anio_usuario_id: this.aulaEnCursoHijo.aula_anio_usuario_id
     });
+  }
+
+  obtenerAnioid() {
+    this.anioEscolarService.obtenerAnioActivo().subscribe(
+      (res: AnioEscolar) => {
+        console.log(res.id);
+        
+          this.anioId = res.id;
+          this.validar();
+
+      },
+      err => console.error(err)
+    );
     
   }
 
@@ -103,12 +121,12 @@ export class AulaEnCursoFormComponent implements OnInit {
     )
   }
 
-  actualizar(aula: Aula) {
+  actualizar(aula: AulaEnCurso) {
     console.log("actualizar",aula);
     
-    this.aulaService.actualizar(aula).subscribe(
+    this.aulaEnCursoService.actualizar(aula).subscribe(
       res => {
-        if (res === "ok")this.toastr.success('El aula se actualizó correctamente')        
+        if (res === "ok")this.toastr.success('El aula en curso se actualizó correctamente')        
       },
       err => {
         this.toastr.error('Ha ocurrido un error inesperado');

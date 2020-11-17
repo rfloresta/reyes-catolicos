@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AnioEscolar } from '@models/AnioEscolar';
+import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 import { FlujoService } from 'src/app/services/flujo.service';
 declare var $:any;
 @Component({
@@ -8,11 +10,11 @@ declare var $:any;
 })
 export class DefaultComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(    private anioEscolarService: AnioEscolarService    ) { }
+  anioEscolar: AnioEscolar={};
   ngOnInit(): void {
-    $.getScript('../../../../assets/js/init/initMenu.js');
    
+    
   }
 
   

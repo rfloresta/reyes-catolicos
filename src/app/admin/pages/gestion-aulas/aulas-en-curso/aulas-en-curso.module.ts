@@ -17,8 +17,6 @@ import { AulaService } from '@services/aula/aula.service';
 import { UsuarioService } from '@services/usuario/usuario.service';
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 
-import { AulaEnCursoModule } from "@pages/gestion-aulas/aula-en-curso/aula-en-curso.module";
-
 // import { TipoAulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @NgModule({
@@ -32,8 +30,8 @@ import { AulaEnCursoModule } from "@pages/gestion-aulas/aula-en-curso/aula-en-cu
     AulaEnCursoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CargaModule,
-    AulaEnCursoModule
+    CargaModule
+    // AulaEnCursoModule
   ],
   providers:[
     FlujoService,
