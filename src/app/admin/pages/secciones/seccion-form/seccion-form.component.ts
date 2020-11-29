@@ -69,7 +69,7 @@ export class SeccionFormComponent implements OnInit, OnDestroy {
       res => {
         console.log(res);
         if(res === "ok"){
-          this.toastr.success("Nueva seccion registrada");
+          this.toastr.success("Nueva sección registrada");
         }else{
           this.toastr.error('Ha ocurrido un probema al registrar');
         }

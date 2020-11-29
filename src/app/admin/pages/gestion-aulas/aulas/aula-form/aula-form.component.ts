@@ -78,9 +78,7 @@ export class AulaFormComponent implements OnInit, OnDestroy {
 
     this.aulaSuscription$ = this.flujoService.enviarObjeto$
       .subscribe((res: Aula) => {
-        console.log(res);
         this.aulaHijo = res;
-        
       });
 
       this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accionHijo=accion)
@@ -112,10 +110,8 @@ export class AulaFormComponent implements OnInit, OnDestroy {
   }
 
   registrar(aula: Aula) {
-    console.log(aula);
     this.aulaService.registrar(aula).subscribe(
       res => {
-        console.log(res);
         if(res){
           this.toastr.success("Nueva aula registrada");
         }
@@ -127,9 +123,7 @@ export class AulaFormComponent implements OnInit, OnDestroy {
     )
   }
 
-  actualizar(aula: Aula) {
-    console.log("actualizar",aula);
-    
+  actualizar(aula: Aula) {    
     this.aulaService.actualizar(aula).subscribe(
       res => {
         if (res === "ok")this.toastr.success('El aula se actualizó correctamente')        

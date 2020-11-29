@@ -153,11 +153,11 @@
 
 
 /*animation*/
--webkit-animation:move 5s;
-   -moz-animation:move 5s;
-    -ms-animation:move 5s;
-     -o-animation:move 5s;
-        animation:move 5s;
+-webkit-animation:move 10s;
+   -moz-animation:move 10s;
+    -ms-animation:move 10s;
+     -o-animation:move 10s;
+        animation:move 10s;
 /*animation-iteration-count*/
 -webkit-animation-iteration-count:infinite;
    -moz-animation-iteration-count:infinite;

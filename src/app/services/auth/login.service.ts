@@ -8,8 +8,6 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { FlujoService } from '../flujo.service';
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
-import { AnioEscolar } from '@models/AnioEscolar';
-
 const helper = new JwtHelperService();
 
 @Injectable({
@@ -31,7 +29,6 @@ export class LoginService {
     .post<UsuarioResponse>(`${environment.API_URL}/api/login`, Usuario)
     .pipe( 
       map((res: UsuarioResponse) => {
-        console.log(res);
         this.guardarLocalStorage(res);
         this.flujoService.logeado(true);
         return res;
@@ -44,12 +41,16 @@ export class LoginService {
   logout():void {
     localStorage.removeItem('usuario');
     localStorage.removeItem('anio_activo');
-
+    localStorage.removeItem('sesion');
+    localStorage.removeItem('area');
+    localStorage.removeItem('areas');
+    localStorage.removeItem('nuevoNumero');
+    localStorage.removeItem('numeroMayor');
     localStorage.removeItem('ai');
     this.flujoService.logeado(false);
-    this.router.navigate(["/login"]);
     setTimeout(() => {
-      window.location.reload();
+      this.router.navigate(["/login"]);
+
     }, 2);
 
   }

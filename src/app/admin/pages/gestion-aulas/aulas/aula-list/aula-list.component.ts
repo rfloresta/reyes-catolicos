@@ -79,8 +79,6 @@ export class AulaListComponent implements OnInit, OnDestroy {
   }
   
   editar(aula: Aula) {
-    console.log(aula);
-
     this.flujoService.enviarObjeto(aula);
     this.flujoService.enviarAccion("Actualizar");
     this.router.navigate(['principal/dashboard/administracion/aulas/form']);

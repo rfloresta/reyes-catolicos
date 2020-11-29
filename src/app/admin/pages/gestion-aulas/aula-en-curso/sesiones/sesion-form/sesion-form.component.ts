@@ -49,11 +49,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
       this.sesionSuscription$ = this.flujoService.enviarObjeto$
       .subscribe((res: Sesion) => {
         this.sesionHijo = res;
-        console.log('Sesion sus FormComponent',this.sesionHijo);
-
       });
-      console.log('Sesion fuera sus FormComponent',this.sesionHijo);
-
       this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accionHijo=accion)
 
 
@@ -92,10 +88,8 @@ export class SesionFormComponent implements OnInit, OnDestroy {
   }
 
   registrar(sesion: Sesion) {
-    console.log(sesion);
     this.sesionService.registrar(sesion).subscribe(
       res => {
-        console.log(res);
         if(res){
           this.toastr.success("Nueva sesion registrada");
         }
@@ -107,9 +101,7 @@ export class SesionFormComponent implements OnInit, OnDestroy {
     )
   }
 
-  actualizar(sesion: Sesion) {
-    console.log("actualizar",sesion);
-    
+  actualizar(sesion: Sesion) {    
     this.sesionService.actualizar(sesion).subscribe(
       res => {
         if (res === "ok")this.toastr.success('La sesion se actualizó correctamente')        

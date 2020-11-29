@@ -61,7 +61,6 @@ export class ForosComponent implements OnInit, OnDestroy {
   registrarForo(obj: ActividadForoUsuario) {
     this.actividadService.registrarForo(obj).subscribe(
       res => {
-        console.log(res);
         if (res === "ok") {
           this.toastr.success("El foro ha sido registrado");
           this.actividadForoUsuarioForm.reset();

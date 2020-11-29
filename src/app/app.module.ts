@@ -32,17 +32,12 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
+    // FormsModule,
+    // ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    
-    QuillModule.forRoot(),
-    RouterModule.forRoot([])
-
-
-    
-  ],
+    QuillModule.forRoot()
+    ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-PE' }
   ],

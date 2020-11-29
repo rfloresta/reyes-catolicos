@@ -59,7 +59,6 @@ export class AulaEnCursoFormComponent implements OnInit {
 
     this.aulaEnCursoSuscription$ = this.flujoService.enviarObjeto$
       .subscribe((res: AulaEnCurso) => {
-        console.log('Aula in suscribe',res);
         this.aulaEnCursoHijo = res;
       });
 
@@ -73,9 +72,7 @@ export class AulaEnCursoFormComponent implements OnInit {
       return;
     }
     this.aulaEnCursoHijo = this.aulaEnCursoForm.value;
-    this.aulaEnCursoHijo.usuario_id = Number(this.aulaEnCursoHijo.usuario_id);
-    console.log('Submit form',this.aulaEnCursoHijo);
-    
+    this.aulaEnCursoHijo.usuario_id = Number(this.aulaEnCursoHijo.usuario_id);    
     if (this.aulaEnCursoHijo.id===null) {
       this.registrar(this.aulaEnCursoHijo);
     } else this.actualizar(this.aulaEnCursoHijo);
@@ -93,9 +90,7 @@ export class AulaEnCursoFormComponent implements OnInit {
 
   obtenerAnioid() {
     this.anioEscolarService.obtenerAnioActivo().subscribe(
-      (res: AnioEscolar) => {
-        console.log(res.id);
-        
+      (res: AnioEscolar) => {        
           this.anioId = res.id;
           this.validar();
 
@@ -106,24 +101,19 @@ export class AulaEnCursoFormComponent implements OnInit {
   }
 
   registrar(aulaEnCurso: AulaEnCurso) {
-    console.log(aulaEnCurso);
     this.aulaEnCursoService.registrar(aulaEnCurso).subscribe(
       res => {
-        console.log(res);
         if(res){
           this.toastr.success("Nueva aula en curso registrada");
         }
       },
       err => {
         this.toastr.error('Ha ocurrido un error inesperado');
-        console.log(err);
       }
     )
   }
 
-  actualizar(aula: AulaEnCurso) {
-    console.log("actualizar",aula);
-    
+  actualizar(aula: AulaEnCurso) {    
     this.aulaEnCursoService.actualizar(aula).subscribe(
       res => {
         if (res === "ok")this.toastr.success('El aula en curso se actualizó correctamente')        

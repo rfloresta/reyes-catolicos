@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Sesion } from '@models/sesion';
 import { FormatoService } from '@services/formato/formato.service';
 import { Formato } from '@models/Formato';
-import { UploadService } from '@services/upload/upload.service';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 declare var $: any;
 
@@ -115,7 +114,6 @@ export class RecursoModalComponent implements OnInit {
   registrarArchivo(obj: FormData) {
     this.recursoservice.registrarArchivo(obj).subscribe(
       res => {
-        console.log(res);
         if (res === "ok") {
           this.toastr.success("Nuevo Recurso registrado");
           this.listarRecursos();
@@ -131,7 +129,6 @@ export class RecursoModalComponent implements OnInit {
   registrarLink(obj: Recurso) {
     this.recursoservice.registrarLink(obj).subscribe(
       res => {
-        console.log(res);
         if (res === "ok") {
           this.toastr.success("Nuevo Recurso registrado");
           this.listarRecursos();
@@ -144,7 +141,6 @@ export class RecursoModalComponent implements OnInit {
     );
   }
   actualizar(obj: Recurso) {
-    console.log("actualizar", obj);
     this.recursoservice.actualizar(obj).subscribe(
       res => {
         if (res === "ok") {

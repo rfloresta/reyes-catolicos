@@ -70,9 +70,7 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
     this.sesionService.listar(this.areaEnCurso.id).subscribe(
       (res: Sesion[]) => {
         setTimeout(() => {
-          this.sesionesHijo = res;
-          console.log(this.sesionesHijo);
-          
+          this.sesionesHijo = res;          
           let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
             this.sesionFrm.numero=numeroMayor+1;  
           this.cargando = false;
@@ -91,25 +89,13 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
         err => console.error(err)
       );
 
-
-      console.log('sesion',this.sesion);
-
     this.flujoService.enviarObjeto(this.sesionFrm);
     this.flujoService.enviarAccion("Registrar");
     this.recursoService.enviarRecurso$.subscribe((res: Recurso[])=> 
     {
-      this.recursos=res;
-      console.log('Res sesion-list->',res);
-      
+      this.recursos=res;      
     }
     );
-
-
-    // this.flujoService.$itemValue.subscribe((val)=>{
-    //   this.sesionHijo = JSON.parse(val);
-    //   console.log('sesionHijo ->', this.sesionHijo);
-    // });
-
 
 
     // this.accionSuscription$=this.flujoService.enviarAccion$.subscribe((accion) => this.accion=accion);
@@ -133,7 +119,6 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
 
   consultarSesion(sesion: Sesion) {
     //Propiedad para comparar con la lista de sesiones y adignar la clase active
-    console.log('sesion',sesion);
     this.sesion = sesion;
 
     if(Object.keys(this.sesion).length === 0){

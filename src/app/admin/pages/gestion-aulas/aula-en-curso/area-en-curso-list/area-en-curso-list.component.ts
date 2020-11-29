@@ -38,12 +38,9 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
     this.tipo = this.usuario.tipo;
     this.cargando = true;
     if (this.tipo === 1 || this.tipo === 2) {
-      let aula_anio_id = localStorage.getItem('ai');
-      console.log(aula_anio_id);
-  
+      let aula_anio_id = localStorage.getItem('ai');  
       this.aulaEnCursoAreaService.listar(aula_anio_id).subscribe(
         (res: AulaEnCursoArea[]) => {
-          console.log(res);
           setTimeout(() => {
             this.aulaEnCursoAreasHijo = res;
             this.cargando = false;
@@ -58,12 +55,6 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
         this.cargando = false;
       }, 1000);
     }
-    // Listar aulaEnCursos
-    
-    console.log('areas', this.aulaEnCursoAreasHijo);
-
-
-
   }
 
   consultarArea(area: AulaEnCursoArea) {

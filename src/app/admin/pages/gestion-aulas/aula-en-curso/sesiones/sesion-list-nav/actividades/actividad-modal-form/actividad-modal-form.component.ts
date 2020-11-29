@@ -80,7 +80,6 @@ export class ActividadModalFormComponent implements OnInit {
   registrar(obj: Actividad) {
     this.actividadService.registrar(obj).subscribe(
       res => {
-        console.log(res);
         if (res) {
           this.toastr.success("Nueva actividad registrada");
           this.listarActividades();
@@ -101,7 +100,6 @@ export class ActividadModalFormComponent implements OnInit {
   }
 
   actualizar(obj: Actividad) {
-    console.log("actualizar", obj);
     this.actividadService.actualizar(obj).subscribe(
       res => {
         if (res === "ok") {

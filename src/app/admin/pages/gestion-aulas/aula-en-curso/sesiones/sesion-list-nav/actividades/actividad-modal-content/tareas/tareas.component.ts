@@ -49,15 +49,12 @@ export class TareasComponent implements OnInit, OnDestroy {
      this.ActividadTareaUsuario.actividad_id = this.actividadNieto.id;
  
     this.listarTareasEstudiantes(this.ActividadTareaUsuario.actividad_id);
-    console.log(this.tareasUsuarios);
-
   }
 
   //Para Profesores
   listarTareasEstudiantes(id: number) {
     this.actividadService.listarTareasEstudiantes(id)
       .subscribe(res => {
-        console.log(res);
         if(res){
           this.tareasUsuarios = res;
           if (this.isDtInitialized) {

@@ -25,7 +25,6 @@ import { RecursosComponent } from './sesion-list-nav/recursos/recursos.component
 import { ActividadModalFormComponent } from './sesion-list-nav/actividades/actividad-modal-form/actividad-modal-form.component';
 import { ArchivoModalComponent } from './sesion-list-nav/recursos/archivo-modal/archivo-modal.component';
 import { SafePipe } from '@shared/pipes/safe.pipe';
-import { UploadService } from '@services/upload/upload.service';
 import { ActividadModalContentComponent } from './sesion-list-nav/actividades/actividad-modal-content/actividad-modal-content.component';
 import { DataTablesModule } from 'angular-datatables';
 import { ForosComponent } from './sesion-list-nav/actividades/actividad-modal-content/foros/foros.component';
@@ -69,7 +68,6 @@ import { ArchivosEstudianteComponent } from './sesion-list-nav/actividades/activ
     RecursoService,
     ActividadService,
     FormatoService,
-    UploadService,
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'es'},
     {provide: OwlDateTimeIntl, useClass: SesionModule}, 
   ]

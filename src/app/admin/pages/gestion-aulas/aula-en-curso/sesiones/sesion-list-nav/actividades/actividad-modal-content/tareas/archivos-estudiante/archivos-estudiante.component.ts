@@ -148,7 +148,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       form.append('ruta_archivo', this.fileUpload[i]);
     }
     form.append('fecha', this.ActividadTareaUsuario.fecha);
-    console.log('id tarea->', this.ActividadTareaUsuario.id);
     if (typeof this.ActividadTareaUsuario.id === 'undefined') {
       // form.append('descripcion', this.ActividadTareaUsuarioForm.get('descripcion').value);
       form.append('actividad_id', this.ActividadTareaUsuario.actividad_id.toString());
@@ -158,9 +157,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       form.append('actividad_tarea_usuario_id', this.ActividadTareaUsuario.id.toString());
       this.registrarArchivosEnTarea(form);
     }
-
-    console.log('files->', this.fileUpload);
-
   }
 
   onSubmitRetro() {
@@ -187,8 +183,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   validarRetro() {
-    console.log('valid retro->', this.retroalimentacion);
-
     this.retroForm = this._builder.group({
       aclarar: this._builder.group({
         enunciado: this.retroalimentacion.pasos.aclarar.enunciado,
@@ -209,7 +203,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   registrarTarea(obj: FormData) {
     this.actividadService.registrarTarea(obj).subscribe(
       res => {
-        console.log(res);
         if (res === "ok") {
           this.refrescar('La tarea ha sido registrada');
         } else {
@@ -284,7 +277,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   listarTareaEstudiante(ActividadTareaUsuario: ActividadTareaUsuario) {
     this.actividadService.listarTareaEstudiante(ActividadTareaUsuario)
       .subscribe(res => {
-        console.log(res);
         if (typeof res.id !== 'undefined') {
           this.ActividadTareaUsuario.id = res.id;
         }
@@ -343,10 +335,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
 
         this.retroalimentacion.pasos.expresar.forEach(x => { // iterate the array          
           (<FormArray>this.retroForm.controls['expresar']).push(this.patch(x.enunciado, x.respuesta)) // push values
-        });
-
-        console.log('control->',this.expresar);
-        
+        });        
       }
       },
       err => {
@@ -363,8 +352,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   eliminarTarea(obj: ActividadTareaUsuario) {
-    console.log(obj);
-
     Swal.fire({
       title: `¿Está seguro de eliminar el archivo ${obj.descripcion}?`,
       text: "Una vez eliminado no se podrá revertir",
@@ -466,9 +453,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   quitarExpresar(i: number, event) {
-    event.preventDefault();
-    console.log(i);
-    
+    event.preventDefault();    
     let control  = <FormArray>this.retroForm.controls['expresar'];
     control.removeAt(i);
 
