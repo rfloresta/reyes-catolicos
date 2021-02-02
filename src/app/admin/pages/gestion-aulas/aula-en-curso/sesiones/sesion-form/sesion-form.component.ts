@@ -69,7 +69,6 @@ export class SesionFormComponent implements OnInit, OnDestroy {
     if (this.sesionHijo.id===null) {  
       this.registrar(this.sesionHijo);
     } else this.actualizar(this.sesionHijo);
-    this.router.navigate(['/principal/inicio/aula-en-curso/areas/sesiones']);
   }
 
   validar(){
@@ -90,12 +89,20 @@ export class SesionFormComponent implements OnInit, OnDestroy {
   registrar(sesion: Sesion) {
     this.sesionService.registrar(sesion).subscribe(
       res => {
-        if(res){
+        if (res === "ok") {
           this.toastr.success("Nueva sesion registrada");
+          this.router.navigate(['/principal/inicio/aula-en-curso/areas/sesiones']);
+
+        } else {
+          this.toastr.error('Hubo un error al registrar');
         }
       },
       err => {
-        this.toastr.error('Ha ocurrido un error inesperado');
+        if(err.status===400){
+          this.toastr.warning(err.error.mensaje);
+        }else{
+          this.toastr.error('Ha ocurrido un error inesperado');
+        }
         console.log(err);
       }
     )
@@ -104,10 +111,19 @@ export class SesionFormComponent implements OnInit, OnDestroy {
   actualizar(sesion: Sesion) {    
     this.sesionService.actualizar(sesion).subscribe(
       res => {
-        if (res === "ok")this.toastr.success('La sesion se actualizó correctamente')        
+        if (res === "ok") {
+          this.toastr.success("El sesion se actualizó correctamente");
+          this.router.navigate(['/principal/inicio/aula-en-curso/areas/sesiones']);
+        } else {
+          this.toastr.error('Hubo un error al actualizar');
+        }
       },
       err => {
-        this.toastr.error('Ha ocurrido un error inesperado');
+        if(err.status===400){
+          this.toastr.warning(err.error.mensaje);
+        }else{
+          this.toastr.error('Ha ocurrido un error inesperado');
+        }
         console.log(err);
       }
     )

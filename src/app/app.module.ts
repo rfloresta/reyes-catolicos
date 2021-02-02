@@ -16,11 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 //components
 import { AppComponent } from './app.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuillModule } from 'ngx-quill';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { RouterModule } from '@angular/router';
 // service
 // import { FlujoService } from './services/flujo.service';
 
@@ -32,11 +27,9 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    // FormsModule,
-    // ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    QuillModule.forRoot()
+    ToastrModule.forRoot()
+    // QuillModule.forRoot()
     ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-PE' }

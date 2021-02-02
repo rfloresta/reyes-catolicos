@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import { AulaEnCursoEstudiante } from '@models/AulaEnCursoEstudiante';
 import { FlujoService } from '@services/flujo.service';
 import { environment } from 'src/environments/environment';
+import { UsuarioResponse } from '@models/Usuario';
 
 @Component({
   selector: 'app-estudiante-list',
@@ -28,9 +29,12 @@ export class EstudianteListComponent implements OnInit, OnDestroy {
 
   aula_anio_id: string;
   url: string = `${environment.API_URL}/`;
-
+  usuario: UsuarioResponse;
+  tipo: number;
   cargando: boolean;
-snap: RouterStateSnapshot;
+  snap: RouterStateSnapshot;
+  p: number = 1;
+
   constructor(private aulaEnCursoEstudianteService: AulaEnCursoEstudianteService,
     private flujoService: FlujoService,
     private activatedRouter: ActivatedRoute,
@@ -40,7 +44,9 @@ snap: RouterStateSnapshot;
   urlTree: any;
 
   ngOnInit(): void {
-    // Configuración de datatable
+    let usuarioString = localStorage.getItem('usuario');
+    this.usuario = JSON.parse(usuarioString);
+    this.tipo = this.usuario.tipo;
 
     // Listar aulaEnCursos
     this.cargando = true;
@@ -62,7 +68,7 @@ snap: RouterStateSnapshot;
 
   eliminar(aulaEnCursoEstudiante: AulaEnCursoEstudiante) {
     console.log(aulaEnCursoEstudiante);
-    
+
     Swal.fire({
       title: `¿Está seguro de eliminar al estudiante ${aulaEnCursoEstudiante.estudiante} del aula?`,
       text: "Una vez eliminado no se podrá revertir",

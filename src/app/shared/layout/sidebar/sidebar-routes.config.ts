@@ -4,7 +4,7 @@ export const ROUTES: RouteInfo[] = [
 //-------------ADMINISTRADOR/COORDINADOR-----------------------------------------
     { path: 'dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'material-icons' },
     //Administracion IE
-        { path: 'dashboard/administracion/areas-curriculares', title: 'Areas Curriculares', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
+        { path: 'dashboard/administracion/areas-curriculares', title: 'Áreas Curriculares', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
         { path: 'dashboard/administracion/aulas', title: 'Aulas', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
         { path: 'dashboard/administracion/secciones', title: 'Secciones', menuType: MenuType.LEFT, icon:'pe-7s-plugin' },
 

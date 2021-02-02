@@ -237,6 +237,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       res => {
         if (res === "ok") {
           this.toastr.success('La retroalimentación ha sido guardada.');
+          this.listarRetro();
         } else {
           this.toastr.error('Ha ocurrido un problema al guardar.');
         }
@@ -314,7 +315,9 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   listarRetro() {
     this.actividadService.listarRetro(this.tareaHermano.id).subscribe(
       (res: Retroalimentacion) => {
-        if (res) {
+        if (Object.keys(res).length>0) {
+          console.log(res);
+          
           let passosObject: Object = JSON.parse(res.pasos);
           this.retroalimentacion = res;
           this.retroalimentacion.pasos = passosObject;
@@ -339,7 +342,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       }
       },
       err => {
-        this.toastr.error('Ha ocurrido un error inesperado');
+        // this.toastr.error('Ha ocurrido un error inesperado');
         console.log(err);
       }
     );
@@ -353,7 +356,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
 
   eliminarTarea(obj: ActividadTareaUsuario) {
     Swal.fire({
-      title: `¿Está seguro de eliminar el archivo ${obj.descripcion}?`,
+      title: `¿Está seguro de eliminar el archivo?`,
       text: "Una vez eliminado no se podrá revertir",
       width: 500,
       buttonsStyling: false,

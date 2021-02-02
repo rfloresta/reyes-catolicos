@@ -11,9 +11,13 @@ export class FormatoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listar(tipo_recurso_id: string): Observable<Formato[]>{
-    return this.httpClient.get<Formato[]>(`${environment.API_URL}/api/formatos/${tipo_recurso_id}`);
+  listar(): Observable<Formato[]>{
+    return this.httpClient.get<Formato[]>(`${environment.API_URL}/api/formatos`);
   }
+
+  // listarPorTipoRecurso(tipo_recurso_id: string): Observable<Formato[]>{
+  //   return this.httpClient.get<Formato[]>(`${environment.API_URL}/api/formatos/${tipo_recurso_id}`);
+  // }
 
   registrar(obj: Formato){
     return this.httpClient.post(`${environment.API_URL}/api/formatoes`, obj);

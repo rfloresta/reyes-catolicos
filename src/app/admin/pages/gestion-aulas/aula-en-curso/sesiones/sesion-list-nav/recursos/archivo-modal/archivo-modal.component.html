@@ -17,7 +17,7 @@
                 <div class="card card-plain">
                     <div class="card-content">
                         <div  class="iframe-container hidden-sm hidden-xs">
-                            <iframe [src]="url | safe">
+                            <iframe [src]="url | safe: 'resourceUrl'">
                                 <p>Su navegador no soporta iframes.</p>
                             </iframe>
                         </div>

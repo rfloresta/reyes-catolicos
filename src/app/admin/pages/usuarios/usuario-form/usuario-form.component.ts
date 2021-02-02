@@ -154,8 +154,8 @@ export class UsuarioFormComponent implements OnInit {
           this.toastr.warning(err.error.mensaje);
         }else{
           this.toastr.error('Ha ocurrido un error inesperado');
+          console.log(err);
         }
-        console.log(err);
       }
     )
   }

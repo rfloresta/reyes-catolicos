@@ -12,7 +12,6 @@ import { RecursoService } from '@services/recurso/recurso.service';
 import { Actividad } from '@models/actividad';
 import { Recurso } from '@models/recurso';
 import { switchMap } from 'rxjs/operators';
-import { isNumber } from 'util';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
@@ -62,38 +61,20 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    
-    let areaEnCursoString = localStorage.getItem('area');
-    this.areaEnCurso = JSON.parse(areaEnCursoString);
 
-    this.cargando = true;
-    this.sesionService.listar(this.areaEnCurso.id).subscribe(
-      (res: Sesion[]) => {
-        setTimeout(() => {
-          this.sesionesHijo = res;          
-          let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
-            this.sesionFrm.numero=numeroMayor+1;  
-          this.cargando = false;
-        }, 1000);
-
-
-        // localStorage.setItem('nuevoNumero', numeroMayor + 1);
-      },
-      err => console.error(err)
-    );
+    this.listarSesiones();
 
     this.sesionService.obtenerSesionActual(this.areaEnCurso.id)
       .subscribe((res: Sesion) => {
-          this.consultarSesion(res);
-        },
+        this.consultarSesion(res);
+      },
         err => console.error(err)
       );
 
     this.flujoService.enviarObjeto(this.sesionFrm);
     this.flujoService.enviarAccion("Registrar");
-    this.recursoService.enviarRecurso$.subscribe((res: Recurso[])=> 
-    {
-      this.recursos=res;      
+    this.recursoService.enviarRecurso$.subscribe((res: Recurso[]) => {
+      this.recursos = res;
     }
     );
 
@@ -117,44 +98,80 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
 
   }
 
+  listarSesiones() {
+    let areaEnCursoString = localStorage.getItem('area');
+    this.areaEnCurso = JSON.parse(areaEnCursoString);
+
+    this.cargando = true;
+    this.sesionService.listar(this.areaEnCurso.id).subscribe(
+      (res: Sesion[]) => {
+        if(res){
+          setTimeout(() => {
+            this.sesionesHijo = res;
+            let numeroMayor = Math.max.apply(Math, this.sesionesHijo.map((num) => num.numero));
+            this.sesionFrm.numero = numeroMayor + 1;
+            this.cargando = false
+          }, 1000);
+        }
+      },
+      err => {
+        console.error(err);
+        this.cargando = false
+      }
+    );
+  }
+
   consultarSesion(sesion: Sesion) {
     //Propiedad para comparar con la lista de sesiones y adignar la clase active
+    this.cargando2 = true;
     this.sesion = sesion;
-
-    if(Object.keys(this.sesion).length === 0){
+    if (Object.keys(this.sesion).length === 0) {
       this.objetoValido = false;
-    }else{
+      this.cargando2 = false;      
+    } else {
       this.objetoValido = true;
+      let id = this.sesion.id;
+      setTimeout(() => {
+        this.actividadService.listar(id)
+          .subscribe((res: Actividad[]) => {
+            if(res){
+              this.actividades = res;
+            } 
+          },
+          err => {
+            console.log(err);
+            if(err.status===404){
+              console.log('Error');
+              this.actividades = [];
+              console.log(err.error);
+            }
+          }
+          );
+        this.recursoService.listar(id)
+          .subscribe((res: Recurso[]) => {
+            this.recursos = res;            
+          },
+          err => {
+            console.log(err);
+            if(err.status===404){
+              this.recursos = [];
+              console.log(err.error);
+            }
+          }
+          
+          );
+          this.cargando2 = false;
+
+      }, 1000);
+
     }
-
-    let id=this.sesion.id;
-
-    this.cargando2=true;
-    setTimeout(() => {
-      this.actividadService.listar(id)
-      .subscribe((res: Actividad[]) => {
-        this.actividades = res
-      }
-      );
-  
-      this.recursoService.listar(id)
-      .subscribe((res: Recurso[]) => {
-        
-          this.recursos = res
-        }
-      );
-      this.cargando2=false;
-
-    }, 1000);
-    
-
   }
 
   editar(obj: Sesion) {
     this.flujoService.enviarObjeto(obj);
     this.flujoService.enviarAccion("Actualizar");
-  
-      this.router.navigate(['principal/inicio/aula-en-curso/areas/sesiones/form']);
+
+    this.router.navigate(['principal/inicio/aula-en-curso/areas/sesiones/form']);
 
   }
 
@@ -180,7 +197,10 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
       if (result.value) {
         this.sesionService.eliminar(obj.id).subscribe(
           res => {
-            if (res === "ok") Swal.fire('¡Eliminado!', 'La sesión fue eliminado.', 'success')
+            if (res === "ok") {
+              Swal.fire('¡Eliminado!', 'La sesión fue eliminada.', 'success')
+              this.consultarSesion({});
+            }
           },
           err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) },
           () => {

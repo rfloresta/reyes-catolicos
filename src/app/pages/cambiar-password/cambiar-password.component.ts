@@ -36,9 +36,7 @@ export class CambiarPasswordComponent implements OnInit, OnDestroy {
     }
     let usuarioString = localStorage.getItem('usuario');
     let usuario: UsuarioResponse = JSON.parse(usuarioString);
-    this.cambioPassword = this.passwordForm.value;
-    console.log(this.passwordForm.get('passwordNuevo').value,this.cambioPassword.passwordNuevo);
-    
+    this.cambioPassword = this.passwordForm.value;    
     this.usuarioService.cambiarPassword(usuario.id,this.cambioPassword).subscribe(
       res => {
         if (res === "ok"){

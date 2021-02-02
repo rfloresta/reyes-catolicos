@@ -85,7 +85,6 @@ export class AreaFormComponent implements OnInit, OnDestroy {
   registrar(form: FormData) {
     this.areaService.registrar(form).subscribe(
       res => {
-        console.log(res);
         if (res === "ok") {
           this.toastr.success("Nueva area registrada");
         } else {

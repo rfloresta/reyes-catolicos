@@ -1,0 +1,40 @@
+<div id="informeId">
+    <div style="padding: 0 5rem; margin: 1rem;">
+        <div style="text-align: center; border: 2px solid red;"><strong style="color: #4472c4;"> INFORME DE EVIDENCIAS SEMANA N&deg; 1</strong></div>
+        </div>
+        <table style="height: 114px; width: 585px;" border="1">
+        <thead>
+        <tr style="height: 18px; background-color: #f7cabc;">
+        <td style="height: 26px; width: 151.25px;"><strong>&Aacute;REA</strong></td>
+        <td style="height: 26px; width: 417.75px;"><strong>CIENCIA Y TECNOLOG&Iacute;A</strong></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="background-color: #ccff66;">
+        <td style="width: 151.25px;">
+        <p><b>COMPETENCIA</b></p>
+        </td>
+        <td style="width: 417.75px;">
+        <p><b>EXPLICA EL MUNDO F&Iacute;SICO BAS&Aacute;NDOSE EN CONOCIMIENTOS SOBRE LOS SERES VIVOS, MATERIA Y ENERG&Iacute;A, BIODIVERSIDAD, TIERRA Y UNIVERSO.</b></p>
+        </td>
+        </tr>
+        <tr style="background-color: #ccecff;">
+        <td style="width: 151.25px;">
+        <p><b>ACTIVIDAD</b></p>
+        </td> 
+        <td style="width: 417.75px;">
+        <p><b> &iquest;Las plantas tienen vida?</b></p>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        <p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>GAHEL A. ARANA FLORES</b></p>
+        <div style="display: flex; justify-content: center;">
+        <div style="border: 2px solid black; padding: 5px; margin: 5px; display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; justify-content: center; width: 60%;">
+        <div *ngFor="let s of imgs" style="padding: 0 5px 5px;">
+            <img [src]="getBase64ImageFromUrl(url+s.ruta_archivo) | async"width="150" height="100" />
+        </div>
+        </div>
+        <div style="text-align: center; border: 2px solid black; padding: 5px; margin: 5px; width: 40%;"><strong style="color: #4472c4;"> INFORME DE EVIDENCIAS SEMANA N&deg; 1</strong></div>
+        </div>
+</div>

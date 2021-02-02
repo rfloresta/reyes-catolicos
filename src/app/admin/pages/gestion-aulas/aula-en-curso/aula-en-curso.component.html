@@ -24,7 +24,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);"  (click)="abrirInformeModal()">
+                                        <a href="javascript:void(0);" *ngIf="tipo===1 || tipo===2 || tipo===3" (click)="abrirInformeModal()">
                                             <i class="material-icons">picture_as_pdf</i> Informe de evidencias
                                         </a>
                                     </li>

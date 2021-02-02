@@ -6,6 +6,8 @@ import { EstudianteRoutingModule } from '@pages/gestion-aulas/aula-en-curso/estu
 
 import { CargaModule } from "@shared/carga/carga.module";
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 // componentes
 // import { AulaFormComponent } from './aula-en-curso-form/aula-en-curso-form.component';
 import { EstudianteComponent } from './estudiante.component';
@@ -27,6 +29,7 @@ import { FlujoService } from '@services/flujo.service';
     EstudianteRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     CargaModule
   ],
   providers:[ 

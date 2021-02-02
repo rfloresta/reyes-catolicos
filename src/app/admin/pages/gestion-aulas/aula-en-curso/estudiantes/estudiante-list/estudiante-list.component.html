@@ -6,9 +6,7 @@
                 <h5 class="car-tittle">{{aulaEnCursoEstudiantesHijo[0].cantidad_estudiantes}} de {{aulaEnCursoEstudiantesHijo[0].capacidad}}</h5>
             </div>
         
-
-        <div class="col-md-3 tarjeta-espacio" *ngFor="let estudiante of aulaEnCursoEstudiantesHijo">
-
+        <div class="col-md-3 tarjeta-espacio" *ngFor="let estudiante of aulaEnCursoEstudiantesHijo | paginate: { itemsPerPage: 6, currentPage: p }; let i = index">
         <div class="card card-profile card-hidden">
             <div class="card-avatar">
                 <a href="javascript:void(0);">
@@ -18,7 +16,7 @@
 
                 </a>
             </div>
-            <div class="card-content">
+            <div class="card-content" style="height: 13em;">
                 <h4 class="card-title">{{estudiante.estudiante}}</h4>
                 <p class="description">
                     {{ estudiante.email }}
@@ -27,11 +25,17 @@
                     {{ estudiante.edad }}
                 </p>
             </div>
-            <div class="card-footer">
+            <div *ngIf="tipo===1 || tipo===2" class="card-footer">
                 <button (click)="eliminar(estudiante)" class="btn btn-danger btn-simple btn-mini btn-sm" rel="tooltip" type="button" data-original-title="Eliminar" title="Eliminar">
                     <i class="material-icons">close</i>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-md-offset-4">
+        <div class="center-block">
+            <pagination-controls  (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
     </ng-container>

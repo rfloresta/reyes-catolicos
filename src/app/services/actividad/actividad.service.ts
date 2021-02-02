@@ -5,6 +5,7 @@ import { Actividad } from '@models/actividad';
 import { ActividadForoUsuario } from '@models/ActividadForoUsuario';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
 import { Retroalimentacion } from '@models/Retroalimentacion';
+import { Usuario } from '@models/Usuario';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -27,8 +28,8 @@ export class ActividadService {
     return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/tareas/${actividad_id}`);
   }
 
-  listarForosEstudiante(id: number): Observable<ActividadForoUsuario[]>{
-    return this.httpClient.get<ActividadForoUsuario[]>(`${environment.API_URL}/api/actividades/foro/${id}`);
+  listarForosEstudiante(actividadUsuario: any): Observable<ActividadForoUsuario[]>{
+    return this.httpClient.get<ActividadForoUsuario[]>(`${environment.API_URL}/api/actividades/foro/${JSON.stringify(actividadUsuario)}`);
   }
 
   listarFotosInforme(sesionId: number): Observable<ActividadForoUsuario[]>{

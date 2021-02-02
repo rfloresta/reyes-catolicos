@@ -17,9 +17,9 @@
                 <div class="col-md-12">
                     <div class="form-group label-floating" [ngClass]="campoValido('tipo_recurso_id')?'has-error':''">
                         <label class="control-label">Tipo de Recurso*</label>
-                        <select (change)="actualizarLista($event)" formControlName="tipo_recurso_id"  class="selectpicker" data-style="select-with-transition"
+                        <select required (change)="actualizarLista($event)" formControlName="tipo_recurso_id"  class="selectpicker" data-style="select-with-transition"
                             data-size="7">
-                            <option disabled selected value="">Seleccione</option>
+                            <option value="">Seleccione</option>
                             <option  value="1">Archivo</option>
                             <option value="2">Link</option>
                         </select>
@@ -31,10 +31,10 @@
                 <div class="col-md-12">
                     <div class="form-group label-floating" [ngClass]="campoValido('formato_id')?'has-error':''">
                         <label class="control-label">Formato*</label>
-                        <select  formControlName="formato_id" class="selectpicker" data-style="select-with-transition"
-                            data-size="7">
-                            <option disabled selected value="">Seleccione</option>
-                            <option [value]="formato.id" *ngFor="let formato of formatos">{{formato.nombre}}
+                        <select required formControlName="formato_id" class="selectpicker" data-style="select-with-transition"
+                            data-size="5">
+                            <option value="">Seleccione</option>
+                            <option  [value]="formato.id" *ngFor="let formato of formatosFiltrados">{{formato.nombre}}
                             </option>
                         </select>
                         <ng-container *ngIf="campoValido('formato_id')" class="text-danger">
@@ -49,7 +49,7 @@
             <div class="col-md-12">
                 <div class="form-group label-floating" [ngClass]="campoValido('titulo')?'has-error':''">
                     <label class="control-label">Titulo*</label>
-                    <input type="text" formControlName="titulo" class="form-control" />
+                    <input required type="text" formControlName="titulo" class="form-control" />
                     <ng-container *ngIf="campoValido('titulo')" class="text-danger">
                         <span class="error-message">{{ mensajeError("titulo") }}</span>
                     </ng-container>

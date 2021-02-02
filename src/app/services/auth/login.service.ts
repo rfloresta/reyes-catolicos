@@ -7,7 +7,6 @@ import { catchError, map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { FlujoService } from '../flujo.service';
-import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 const helper = new JwtHelperService();
 
 @Injectable({
@@ -19,8 +18,7 @@ export class LoginService {
   tipo: number;
   constructor(private httpClient: HttpClient, 
     private router: Router, 
-    private flujoService: FlujoService,
-    private anioEscolarService: AnioEscolarService) {
+    private flujoService: FlujoService) {
     this.verificarToken();
        }
    

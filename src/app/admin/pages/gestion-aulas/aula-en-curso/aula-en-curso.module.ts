@@ -16,13 +16,16 @@ import { AulaEnCursoAreaService } from '@services/aula-en-curso-area/aula-en-cur
 import { SesionService } from '@services/sesion/sesion.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ActividadService } from '@services/actividad/actividad.service';
-import { InformeModalComponent } from './informe-modal/informe-modal.component';
+import { InformeModalComponent } from './informe/informe-modal/informe-modal.component';
 import { OwlDateTimeIntl, OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+import { ImageService } from '@services/image.service';
+import { InformeTemplateComponent } from './informe/informe-template/informe-template.component';
 @NgModule({
   declarations: [
     AulaEnCursoComponent,
     AreaEnCursoListComponent,
-    InformeModalComponent
+    InformeModalComponent,
+    InformeTemplateComponent
   ],
   exports:[
     AulaEnCursoComponent
@@ -43,6 +46,7 @@ import { OwlDateTimeIntl, OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_T
     AulaEnCursoAreaService,
     SesionService,
     ActividadService,
+    ImageService,
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'es'},
     {provide: OwlDateTimeIntl, useClass: AulaEnCursoModule}
   ]

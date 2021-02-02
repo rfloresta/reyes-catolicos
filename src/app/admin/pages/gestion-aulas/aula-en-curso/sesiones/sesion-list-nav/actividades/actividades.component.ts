@@ -35,6 +35,7 @@ export class ActividadesComponent implements OnInit {
     ignoreBackdropClick: true
   };
   iconState: string;
+  pruebaHtml: string;
   constructor(private actividadService: ActividadService,
     private modalService: BsModalService,
   ) {

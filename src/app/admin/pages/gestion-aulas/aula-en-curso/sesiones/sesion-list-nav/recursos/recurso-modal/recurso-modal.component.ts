@@ -5,7 +5,6 @@ import { Recurso } from '@models/recurso';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Sesion } from '@models/sesion';
 import { FormatoService } from '@services/formato/formato.service';
 import { Formato } from '@models/Formato';
@@ -27,6 +26,7 @@ export class RecursoModalComponent implements OnInit {
 
   tipoRecursoId: string = '';
   formatos: any[] = [];
+  formatosFiltrados: any[] = [];
   recursoForm: FormGroup;
   archivo: any;
   fileUpload: File;
@@ -40,13 +40,37 @@ export class RecursoModalComponent implements OnInit {
 
   ngOnInit() {
     
+    //Formatos por default hasta que se realice el mantenimiento de formatos
+    this.formatos = [
+      {
+        id: 1,
+        nombre: 'PDF',
+        tipo_recurso_id: '1'
+      },
+      {
+        id: 2,
+        nombre: 'Youtube',
+        tipo_recurso_id: '2'
+      },
+      {
+        id: 3,
+        nombre: 'Link',
+        tipo_recurso_id: '2'
+      },
+      {
+        id: 4,
+        nombre: 'Archivos',
+        tipo_recurso_id: '1'
+      }
+    ]
+
     setTimeout(() => {
       $('.selectpicker').selectpicker('refresh');
     }, 75);
 
       if (this.recursoHijo.tipo_recurso_id !== null) {
       let id = this.recursoHijo.tipo_recurso_id.toString();
-      this.listarFormatos(id);
+      this.filtrarFormatos(id);
       this.tipoRecursoId = id;
     }
 
@@ -108,7 +132,6 @@ export class RecursoModalComponent implements OnInit {
       delete this.recursoHijo['tipo_recurso_id'];
       this.actualizar(this.recursoHijo);
     }
-
   }
 
   registrarArchivo(obj: FormData) {
@@ -166,19 +189,29 @@ export class RecursoModalComponent implements OnInit {
     this.hide.emit();
   }
 
+  // listarFormatos() {
+  //   this.formatoService.listar().subscribe((formatos: Formato[]) => {
+  //     if(formatos){
+  //       this.formatos = formatos
+  //     }
+  //   });
+  // }
 
-  listarFormatos(tipoRecursoId: string) {
-    setTimeout(() => {
-      $('.selectpicker').selectpicker('refresh');
-    }, 75);
-    this.formatoService.listar(tipoRecursoId).subscribe((formatos: Formato[]) => this.formatos = formatos);
+  filtrarFormatos(tipoRecursoId: string) {
+    if(tipoRecursoId===""){
+      return;
+    }
+        setTimeout(() => {
+          $('.selectpicker').selectpicker('refresh');
+        }, 75);
+        this.formatosFiltrados = this.formatos.filter(a => a.tipo_recurso_id === tipoRecursoId);
   }
 
 
   actualizarLista(event: any) {
     this.tipoRecursoId = event.target.value;
     //para que se muestre el tipo de contenido a insertar
-    this.listarFormatos(this.tipoRecursoId);
+    this.filtrarFormatos(this.tipoRecursoId);
   }
 
   mensajeError(campo: string): string {

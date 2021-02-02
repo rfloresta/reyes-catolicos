@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '', component: AulasEnCursoComponent,
     children: [
       { path: '', component: AulaEnCursoListComponent },
-      { path: 'form', component: AulaEnCursoFormComponent },
+      { path: 'form', component: AulaEnCursoFormComponent }
       // { path: 'aula-en-curso', loadChildren: () => import('@pages/gestion-aulas/aula-en-curso/aula-en-curso.module').then(m => m.AulaEnCursoModule) },
     ]
   }

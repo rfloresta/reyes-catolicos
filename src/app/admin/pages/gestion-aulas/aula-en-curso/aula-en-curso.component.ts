@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AulaEnCurso } from '@models/AulaEnCurso';
 import { UsuarioResponse } from '@models/Usuario';
@@ -11,7 +11,7 @@ import { SesionService } from '@services/sesion/sesion.service';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { InformeModalComponent } from './informe-modal/informe-modal.component';
+import { InformeModalComponent } from './informe/informe-modal/informe-modal.component';
 // @ts-ignore
 // Set the fonts to use
 // PdfMakeWrapper.setFonts(pdfFonts);
@@ -23,7 +23,7 @@ import { InformeModalComponent } from './informe-modal/informe-modal.component';
   templateUrl: './aula-en-curso.component.html',
   styleUrls: ['./aula-en-curso.component.css']
 })
-export class AulaEnCursoComponent implements OnInit {
+export class AulaEnCursoComponent implements OnInit, OnDestroy {
   bsModalRef: BsModalRef;
   accion: string;
   accionSuscription$: Subscription;

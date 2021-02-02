@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div class="form-group label-floating" [ngClass]="campoValido('descripcion')?'has-error':''">
                     <label class="control-label">Descripción*</label>
-                    <quill-editor formControlName="descripcion">
+                    <quill-editor [modules]="editorOptions" formControlName="descripcion">
                     </quill-editor>
                     <ng-container *ngIf="campoValido('descripcion')" class="text-danger">
                         <span class="error-message">{{ mensajeError("descripcion") }}</span>
@@ -38,14 +38,16 @@
                     </label>
                 </div>
             </div> -->
-            <div class="col-md-6">
-                <div class="form-group label-floating">
+            <div class="col-md-6">  
+                <div class="form-group label-floating"
+                [ngClass]="campoValido('fecha_inicio')?'form-group label-floating is-empty has-error':'form-group label-floating'">
                     <label class="control-label">Fecha de inicio</label>
 
                     <!-- <input [disabled]="!activo" formControlName="fecha_inicio" class="form-control" [owlDateTimeTrigger]="activo?dt:false" [owlDateTime]="activo?dt:false"/>
                     <owl-date-time [disabled]="!activo"  #dt></owl-date-time> -->
                     
-                    <input nbInput status="info" formControlName="fecha_inicio" class="form-control" [owlDateTimeTrigger]="dt" [owlDateTime]="dt"/>
+                    <input formControlName="fecha_inicio" class="form-control" required
+                    [owlDateTimeTrigger]="dt" [owlDateTime]="dt"/>
                     <owl-date-time #dt></owl-date-time>
 
                     <ng-container *ngIf="campoValido('fecha_inicio')" class="text-danger">
@@ -54,11 +56,13 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group label-floating">
+                <div class="form-group label-floating"
+                [ngClass]="campoValido('fecha_fin')?'form-group label-floating is-empty has-error':'form-group label-floating'">
                     <label class="control-label">Fecha de fin</label>
                     <!-- <input class="form-control" formControlName="fecha_fin"   [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
                 <owl-date-time #dt2></owl-date-time> -->
-                <input  nbInput status="info" class="form-control" formControlName="fecha_fin"  [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                <input class="form-control" formControlName="fecha_fin"  required
+                [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
                 <owl-date-time  #dt2></owl-date-time>
                     <ng-container *ngIf="campoValido('fecha_fin')" class="text-danger">
                         <span class="error-message">{{ mensajeError("fecha_fin") }}</span>

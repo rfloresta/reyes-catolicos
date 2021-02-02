@@ -49,11 +49,20 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <app-recursos [tipoHijo]="tipo" [sesionHijo]="sesion" [recursosHijo]="recursos"></app-recursos>
+                <div class="row espacio">
+                    <div class="col-md-12">
+                        <app-recursos [tipoHijo]="tipo" [sesionHijo]="sesion" [recursosHijo]="recursos"></app-recursos>
 
-                    <app-actividades [tipoHijo]="tipo" [sesionHijo]="sesion" [actividadesHijo]="actividades">
-                    </app-actividades>
+                    </div>
+
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <app-actividades [tipoHijo]="tipo" [sesionHijo]="sesion" [actividadesHijo]="actividades">
+                        </app-actividades>
+                    </div>
+                    
                 </div>
             </ng-container>
             <ng-template #objetoInvalido>

@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="form-group label-floating" [ngClass]="campoValido('respuesta')?'has-error':''">
                 <label class="control-label">Respuesta*</label>
-                <quill-editor formControlName="respuesta">
+                <quill-editor [modules]="editorOptions" formControlName="respuesta">
                 </quill-editor> 
                 <ng-container *ngIf="campoValido('respuesta')" class="text-danger">
                     <span class="error-message">{{ mensajeError("respuesta") }}</span>
@@ -34,11 +34,10 @@
                         <div class="card-header">
                             <span class="card-title">{{foroUsuario.estudiante}}</span><br>
                             <small class="card-description">
-                                {{foroUsuario.fecha | date: 'short'}}
+                                {{foroUsuario.fecha | date: 'M/d/yy, h:mm a'}}
                             </small>
                         </div>
-                        <div class="card-content">
-                            {{foroUsuario.respuesta}}
+                        <div [innerHTML]="foroUsuario.respuesta" class="card-content">
                         </div>
                     </div>
                 </ng-container>

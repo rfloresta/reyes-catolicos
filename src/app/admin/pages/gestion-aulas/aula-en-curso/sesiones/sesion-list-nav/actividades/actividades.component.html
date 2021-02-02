@@ -1,4 +1,4 @@
-<div class="col-md-12">
+
     <h3 class="card-title">Actividades
         <button *ngIf="tipoHijo===3" title="Agregar Nueva Actividad" 
         class="btn btn-primary btn-round btn-fab btn-fab-mini" 
@@ -44,8 +44,6 @@
     
         </div>
         </ng-container>
-
-</div>
 
 <ng-template #modalForm>
     <app-actividad-modal-form (hide)="bsModalRef.hide()" (actividades)="refrescarLista($event)" [accionHijo]="accion" [sesionNieto]="sesionHijo" [actividadHijo]="actividad"></app-actividad-modal-form>

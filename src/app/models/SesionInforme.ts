@@ -6,6 +6,8 @@ export interface SesionInforme{
     actividad: string,
     retro: any,
     pasos?: any,   
+    numero?: number,
+    competencia?: string,
     fecha_inicio?: string,
     fecha_fin?: string 
 }

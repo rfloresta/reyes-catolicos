@@ -24,6 +24,7 @@ export class ActividadModalFormComponent implements OnInit {
   actividadForm: FormGroup;
   activo: boolean = true;
   tipoActividades:any = [];
+  editorOptions:any;
   constructor(
     private actividadService: ActividadService,
     private _builder: FormBuilder,
@@ -31,6 +32,17 @@ export class ActividadModalFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.editorOptions= {
+      toolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],   
+        [{ 'align': [] }],
+        ['clean'], 
+        ['link'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }]
+      ]
+  };
+
     setTimeout(() => {
       $('.selectpicker').selectpicker('refresh');
     }, 75);

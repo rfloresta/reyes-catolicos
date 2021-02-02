@@ -46,9 +46,10 @@ export class RecursosComponent implements OnInit {
 
   ngOnInit(): void {
     moment.locale('es');
+
   }
 
-  humanFormatStart(fecha: string) {
+  humanFormatStart(fecha: string) {        
     let fechaFormat = moment(fecha).format("YYYYMMDD HH:mm:ss");
     return moment(fechaFormat, "YYYYMMDD HH:mm:ss").fromNow();
   }

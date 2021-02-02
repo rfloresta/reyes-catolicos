@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef,
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Actividad } from '@models/actividad';
 import { ActividadForoUsuario } from '@models/ActividadForoUsuario';
-import { UsuarioResponse } from '@models/Usuario';
+import { Usuario, UsuarioResponse } from '@models/Usuario';
 import { ActividadService } from '@services/actividad/actividad.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -18,24 +18,40 @@ export class ForosComponent implements OnInit, OnDestroy {
   @Input() usuarioResponseHijo: UsuarioResponse;
   @Input() tipoVisnieto: number;
   @Input() estadoNieto: string;
-
   @Output() hide = new EventEmitter();
   actividadForoUsuario: ActividadForoUsuario = {};
   foroUsuarios: ActividadForoUsuario[] = [];
   actividadForoUsuarioForm: FormGroup;
+  actividadUsuario: Object;
   cargando: boolean;
+  editorOptions: any;
   constructor(private actividadService: ActividadService,
     private _builder: FormBuilder,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    
+
+    this.editorOptions= {
+      toolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],   
+        [{ 'align': [] }],
+        ['clean'], 
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }]
+      ]
+  };
+
     this.actividadForoUsuario.usuario_id = this.usuarioResponseHijo.id;
     this.actividadForoUsuario.actividad_id = this.actividadNieto.id;
 
     this.validar();
-      this.listarForosEstudiante(this.actividadForoUsuario.actividad_id);
+    this.actividadUsuario= {
+      id: this.actividadNieto.id,
+      usuario_id: this.usuarioResponseHijo.id,
+      tipo_usuario_id: this.usuarioResponseHijo.tipo
+    }
+      this.listarForosEstudiante(this.actividadUsuario);
   }
 
   onSubmit() {
@@ -65,7 +81,7 @@ export class ForosComponent implements OnInit, OnDestroy {
           this.toastr.success("El foro ha sido registrado");
           this.actividadForoUsuarioForm.reset();
           this.validar();
-          this.listarForosEstudiante(this.actividadForoUsuario.actividad_id);
+          this.listarForosEstudiante(this.actividadUsuario);
         }else{
           this.toastr.error('Ha ocurrido un problema al registrar');
         }
@@ -77,13 +93,16 @@ export class ForosComponent implements OnInit, OnDestroy {
     );
   }
 
-  listarForosEstudiante(id: number) {
+  listarForosEstudiante(actividadUsuario: any) {
     this.cargando = true;
     setTimeout(() => {
-      this.actividadService.listarForosEstudiante(id)
+      this.actividadService.listarForosEstudiante(actividadUsuario)
     .subscribe(res => {
-      this.foroUsuarios = res;
-    });
+      if(res){
+        this.foroUsuarios = res;
+      }
+    },err => console.log(err)
+    );
       this.cargando = false;
     }, 1000); 
   }
