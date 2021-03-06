@@ -65,7 +65,6 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
     this.flujoService.enviarAccion("Registrar");
     // this.flujoService.enviarBool(true);
     // $.getScript('../../../../../../assets/js/init/initMenu.js');
-
   }
 
 
