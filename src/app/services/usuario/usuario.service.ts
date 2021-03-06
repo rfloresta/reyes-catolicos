@@ -22,7 +22,7 @@ export class UsuarioService {
 
 
   listarProfesores(): Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/api/usuarios/profesores`);
+    return this.httpClient.get<Usuario[]>(`${environment.API_URL}/api/usuarios/profesores-sin-aula`);
   }
 
   listarEstudiantesSinAula(): Observable<Usuario[]>{

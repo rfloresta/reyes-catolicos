@@ -11,6 +11,7 @@ import { FlujoService } from '@services/flujo.service';
 import { ToastrService } from 'ngx-toastr';
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 import { AnioEscolar } from '@models/AnioEscolar';
+import { map } from 'rxjs/operators';
 
 declare var $:any;
 @Component({
@@ -42,8 +43,12 @@ export class AulaEnCursoFormComponent implements OnInit {
     private anioEscolarService: AnioEscolarService) {  }
 
   ngOnInit(): void {
-
-    this.aulaService.listar().subscribe((res) => {
+    this.aulaService.listar()
+    .pipe(
+      map((res) => res.filter(x => x.estado === 1)
+      )
+    )
+    .subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);

@@ -13,6 +13,7 @@ import { Grado } from '@models/Grado';
 import { Nivel } from '@models/Nivel';
 import { Turno } from '@models/Turno';
 import { Seccion } from '@models/Seccion';
+import { map } from 'rxjs/operators';
 
 declare var $:any;
 @Component({
@@ -48,28 +49,48 @@ export class AulaFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     
-    this.gradoService.listar().subscribe((res) => {
+    this.gradoService.listar()
+    .pipe(
+      map((res) => res.filter(x => x.estado === 1)
+      )
+    )
+    .subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);
     this.grados=res;
     });
 
-    this.seccionService.listar().subscribe((res) => {
+    this.seccionService.listar()
+    .pipe(
+      map((res) => res.filter(x => x.estado === 1)
+      )
+    )
+    .subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);
     this.secciones=res;
     });
 
-    this.turnoService.listar().subscribe((res) => {
+    this.turnoService.listar()
+    .pipe(
+      map((res) => res.filter(x => x.estado === 1)
+      )
+    )
+    .subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);
     this.turnos=res;
     });
 
-    this.nivelService.listar().subscribe((res) => {
+    this.nivelService.listar()
+    .pipe(
+      map((res) => res.filter(x => x.estado === 1)
+      )
+    )
+    .subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);

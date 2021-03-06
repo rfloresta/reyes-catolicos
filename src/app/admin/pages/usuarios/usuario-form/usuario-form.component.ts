@@ -9,6 +9,7 @@ import { TipoUsuarioService } from 'src/app/services/tipo-usuario/tipo-usuario.s
 import { TipoUsuario } from 'src/app/models/TipoUsuario';
 import { UsuarioComponent } from '../usuario.component';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 declare var $:any;
 @Component({
@@ -47,7 +48,12 @@ export class UsuarioFormComponent implements OnInit {
   ngOnInit(): void {
 
     
-    this.tipoUsuarioService.listar().subscribe((res) => {
+    this.tipoUsuarioService.listar()
+    .pipe(
+      map((res) => res.filter(x => x.estado === 1)
+      )
+    )
+    .subscribe((res) => {
       setTimeout(() => {
         $('.selectpicker').selectpicker('refresh');
       }, 150);
