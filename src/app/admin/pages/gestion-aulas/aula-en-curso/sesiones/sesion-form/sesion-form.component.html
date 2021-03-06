@@ -51,9 +51,10 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button class="btn-pull-right" type="submit" [disabled]="sesionForm.invalid"
-                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+            <button class="pull-right btn btn-fill" type="submit" [disabled]="sesionForm.invalid"
+                [ngClass]="accionHijo == 'Actualizar' ? 'btn-info' : 'btn-success'">
                 Guardar</button>
+
                 <button (click)="atras()"  class="btn btn-default">
                 <i class="material-icons">undo</i>
                 </button>

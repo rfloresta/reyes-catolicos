@@ -13,9 +13,10 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" [disabled]="seccionForm.invalid"
-                class="btn btn-fill btn-info">
-                Guardar</button>
+            <button class="pull-right btn btn-fill" type="submit" [disabled]="seccionForm.invalid"
+                [ngClass]="accionHijo == 'Actualizar' ? 'btn-info' : 'btn-success'">
+                Guardar
+            </button>
         </div>
     </div>
 

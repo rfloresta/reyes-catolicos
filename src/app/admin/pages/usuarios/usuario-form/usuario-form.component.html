@@ -51,7 +51,8 @@
             </div>
         </div>
         <div class="col-md-3 ">
-            <div class="form-group label-floating is-focused" [ngClass]="campoValido('fecha_nacimiento')?'has-error':''">
+            <div class="form-group label-floating is-focused"
+                [ngClass]="campoValido('fecha_nacimiento')?'has-error':''">
                 <label class="control-label">Fecha de Nacimiento*</label>
                 <input type="date" class="form-control" formControlName="fecha_nacimiento" required />
             </div>
@@ -67,7 +68,7 @@
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio"  formControlName="sexo" [value]=2> Femenino
+                    <input type="radio" formControlName="sexo" [value]=2> Femenino
                 </label>
             </div>
             <ng-container *ngIf="campoValido('sexo')" class="text-danger">
@@ -87,11 +88,11 @@
     <div class="row espacio">
         <div class="col-md-3" *ngIf="tipoUsuarios">
             <div class="form-group label-floating" [ngClass]="campoValido('tipo_usuario_id')?'has-error':''">
-               
+
                 <label class="control-label">Tipo de Usuario*</label>
 
-                <select  class="selectpicker" data-style="select-with-transition" formControlName="tipo_usuario_id" 
-                     data-size="7">
+                <select class="selectpicker" data-style="select-with-transition" formControlName="tipo_usuario_id"
+                    data-size="7">
                     <option disabled selected value="">Seleccione</option>
                     <option *ngFor="let tipo of tipoUsuarios" [value]="tipo.id">
                         {{tipo.nombre}}
@@ -131,12 +132,13 @@
     </div>
     <div class="row">
         <div>
-        <div class="col-md-12">
-            <button type="submit" [disabled]="usuarioForm.invalid"
-                class="btn btn-fill btn-info">
-                Guardar</button>
+            <div class="col-md-12">
+                <button class="pull-right btn btn-fill" type="submit" [disabled]="usuarioForm.invalid"
+                    [ngClass]="accionHijo == 'Actualizar' ? 'btn-info' : 'btn-success'">
+                    Guardar
+                </button>
+            </div>
         </div>
-    </div>
     </div>
 
 

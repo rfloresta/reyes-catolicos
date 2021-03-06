@@ -23,8 +23,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" [disabled]="aulaEnCursoEstudianteForm.invalid" class="btn btn-fill btn-primary pull-right"
-                       >
+                        <button type="submit" [disabled]="aulaEnCursoEstudianteForm.invalid"
+                        class="pull-right"
+                        [ngClass]="accionHijo == 'Actualizar' ? 'btn btn-fill btn-info' : 'btn btn-fill btn-success'">
                         Guardar</button>
                         <div class="clearfix"></div>
                 </form>

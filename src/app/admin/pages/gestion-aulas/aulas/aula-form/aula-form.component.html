@@ -3,11 +3,11 @@
     <div class="row">
         <div class="col-md-4" *ngIf="grados">
             <div class="form-group label-floating" [ngClass]="campoValido('grado_id')?'has-error':''">
-               
+
                 <label class="control-label">Grado*</label>
 
-                <select  class="selectpicker" data-style="select-with-transition" formControlName="grado_id" 
-                     data-size="7">
+                <select class="selectpicker" data-style="select-with-transition" formControlName="grado_id"
+                    data-size="7">
                     <option disabled selected value="">Seleccione</option>
                     <option *ngFor="let grado of grados" [value]="grado.id">
                         {{grado.nombre}}
@@ -20,11 +20,11 @@
         </div>
         <div class="col-md-4" *ngIf="secciones">
             <div class="form-group label-floating" [ngClass]="campoValido('seccion_id')?'has-error':''">
-               
+
                 <label class="control-label">SecciÓn*</label>
 
-                <select  class="selectpicker" data-style="select-with-transition" formControlName="seccion_id" 
-                     data-size="7">
+                <select class="selectpicker" data-style="select-with-transition" formControlName="seccion_id"
+                    data-size="7">
                     <option disabled selected value="">Seleccione</option>
                     <option *ngFor="let seccion of secciones" [value]="seccion.id">
                         {{seccion.nombre}}
@@ -37,11 +37,11 @@
         </div>
         <div class="col-md-4" *ngIf="niveles">
             <div class="form-group label-floating" [ngClass]="campoValido('nivel_id')?'has-error':''">
-               
+
                 <label class="control-label">Nivel*</label>
 
-                <select  class="selectpicker" data-style="select-with-transition" formControlName="nivel_id" 
-                     data-size="7">
+                <select class="selectpicker" data-style="select-with-transition" formControlName="nivel_id"
+                    data-size="7">
                     <option disabled selected value="">Seleccione</option>
                     <option *ngFor="let nivel of niveles" [value]="nivel.id">
                         {{nivel.nombre}}
@@ -56,11 +56,11 @@
     <div class="row espacio">
         <div class="col-md-6" *ngIf="turnos">
             <div class="form-group label-floating" [ngClass]="campoValido('turno_id')?'has-error':''">
-               
+
                 <label class="control-label">Turno*</label>
 
-                <select  class="selectpicker" data-style="select-with-transition" formControlName="turno_id" 
-                     data-size="7">
+                <select class="selectpicker" data-style="select-with-transition" formControlName="turno_id"
+                    data-size="7">
                     <option disabled selected value="">Seleccione</option>
                     <option *ngFor="let turno of turnos" [value]="turno.id">
                         {{turno.nombre}}
@@ -83,9 +83,10 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" [disabled]="aulaForm.invalid"
-                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
-                Guardar</button>
+            <button class="pull-right btn btn-fill" type="submit" [disabled]="aulaForm.invalid"
+                [ngClass]="accionHijo == 'Actualizar' ? 'btn-info' : 'btn-success'">
+                Guardar
+            </button>
         </div>
     </div>
 

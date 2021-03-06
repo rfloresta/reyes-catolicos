@@ -10,48 +10,47 @@
                 <form [formGroup]="aulaEnCursoForm" (ngSubmit)="onSubmit()">
                     <input type="hidden" formControlName="id">
                     <div class="row">
-                            <div class="col-md-6" *ngIf="aulas">
-                                <div class="form-group label-floating"
-                                    [ngClass]="campoValido('aula_id')?'has-error':''">
+                        <div class="col-md-6" *ngIf="aulas">
+                            <div class="form-group label-floating" [ngClass]="campoValido('aula_id')?'has-error':''">
 
-                                    <label class="control-label">Aula*</label>
+                                <label class="control-label">Aula*</label>
 
-                                    <select class="selectpicker" data-style="select-with-transition"
-                                        formControlName="aula_id" data-size="7">
-                                        <option disabled selected value="">Seleccione</option>
-                                        <option *ngFor="let aula of aulas" [value]="aula.id">
-                                            {{aula.aula_join}}
-                                        </option>
-                                    </select>
-                                    <ng-container *ngIf="campoValido('aula_id')" class="text-danger">
-                                        <span class="error-message">{{ mensajeError("aula_id") }}</span>
-                                    </ng-container>
-                                </div>
-                            </div>
-                            <div class="col-md-6" *ngIf="profesores">
-                                <div class="form-group label-floating"
-                                    [ngClass]="campoValido('usuario_id')?'has-error':''">
-
-                                    <label class="control-label">Profesor* ({{aulaEnCursoHijo.profesor}})</label>
-
-                                    <select class="selectpicker" data-style="select-with-transition"
-                                        formControlName="usuario_id" data-size="7">
-                                        <option disabled selected value="">Seleccione</option>
-                                        <option *ngFor="let profesor of profesores" [value]="profesor.id">
-                                            {{profesor.primer_nombre}} {{profesor.segundo_nombre}}
-                                            {{profesor.apellido_paterno}} {{profesor.apellido_materno}}
-                                        </option>
-                                    </select>
-                                    <ng-container *ngIf="campoValido('usuario_id')" class="text-danger">
-                                        <span class="error-message">{{ mensajeError("usuario_id") }}</span>
-                                    </ng-container>
-                                </div>
+                                <select class="selectpicker" data-style="select-with-transition"
+                                    formControlName="aula_id" data-size="7">
+                                    <option disabled selected value="">Seleccione</option>
+                                    <option *ngFor="let aula of aulas" [value]="aula.id">
+                                        {{aula.aula_join}}
+                                    </option>
+                                </select>
+                                <ng-container *ngIf="campoValido('aula_id')" class="text-danger">
+                                    <span class="error-message">{{ mensajeError("aula_id") }}</span>
+                                </ng-container>
                             </div>
                         </div>
-                        <button type="submit" [disabled]="aulaEnCursoForm.invalid"
-                         class="btn btn-fill btn-info pull-right">
-                        Guardar</button>
-                        <div class="clearfix"></div>
+                        <div class="col-md-6" *ngIf="profesores">
+                            <div class="form-group label-floating" [ngClass]="campoValido('usuario_id')?'has-error':''">
+
+                                <label class="control-label">Profesor* ({{aulaEnCursoHijo.profesor}})</label>
+
+                                <select class="selectpicker" data-style="select-with-transition"
+                                    formControlName="usuario_id" data-size="7">
+                                    <option disabled selected value="">Seleccione</option>
+                                    <option *ngFor="let profesor of profesores" [value]="profesor.id">
+                                        {{profesor.primer_nombre}} {{profesor.segundo_nombre}}
+                                        {{profesor.apellido_paterno}} {{profesor.apellido_materno}}
+                                    </option>
+                                </select>
+                                <ng-container *ngIf="campoValido('usuario_id')" class="text-danger">
+                                    <span class="error-message">{{ mensajeError("usuario_id") }}</span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="pull-right btn btn-fill" type="submit" [disabled]="aulaEnCursoForm.invalid"
+                        [ngClass]="accionHijo == 'Actualizar' ? 'btn-info' : 'btn-success'">
+                        Guardar
+                    </button>
+                    <div class="clearfix"></div>
                 </form>
             </div>
         </div>

@@ -34,7 +34,8 @@
     <div class="row">
         <div class="col-md-12">
             <button type="submit" [disabled]="anioEscolarForm.invalid"
-                [ngClass]="accionHijo == 'Registrar' ? 'btn btn-fill btn-primary' : 'btn btn-fill btn-success'">
+            class="pull-right"
+                [ngClass]="accionHijo == 'Actualizar' ? 'btn btn-fill btn-info' : 'btn btn-fill btn-success'">
                 Guardar</button>
         </div>
     </div>

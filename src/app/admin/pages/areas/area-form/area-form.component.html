@@ -20,7 +20,7 @@
                     <span class="btn btn-round btn-simple btn-file">
                         <span class="fileinput-new">Imagen</span>
                         <span class="fileinput-exists">Cambiar</span>
-                        <input type="file" #file accept=".png,.jpg,jpeg"/>
+                        <input type="file" #file accept=".png,.jpg,jpeg" />
                     </span>
                     <a href="#pablo" class="btn btn-simple btn-round fileinput-exists" data-dismiss="fileinput"><i
                             class="fa fa-times"></i>Quitar</a>
@@ -30,9 +30,9 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" [disabled]="areaForm.invalid"
-                class="btn btn-fill btn-info pull-right">
-                {{accionHijo}}</button>
+            <button type="submit" [disabled]="areaForm.invalid" class="pull-right"
+                [ngClass]="accionHijo == 'Actualizar' ? 'btn btn-fill btn-info' : 'btn btn-fill btn-success'">
+                Guardar</button>
         </div>
     </div>
 
