@@ -105,7 +105,7 @@ export class RecursoModalComponent implements OnInit {
       }
 
       let fecha = moment().format("YYYY-MM-DD HH:mm:ss");
-      if (this.recursoHijo.tipo_recurso_id == 1) {//Solo para archivos
+      if (this.recursoHijo.tipo_recurso_id == '1') {//Solo para archivos
         
         //ve cambios del input contenido
         let fi = this.file.nativeElement;
@@ -121,7 +121,7 @@ export class RecursoModalComponent implements OnInit {
 
         this.registrarArchivo(form);
 
-      } else if (this.recursoHijo.tipo_recurso_id == 2) {//solo para links
+      } else if (this.recursoHijo.tipo_recurso_id == '2') {//solo para links
         
         //campo solo para la vista es por eso que se elimina
         delete this.recursoHijo['tipo_recurso_id'];
@@ -132,6 +132,7 @@ export class RecursoModalComponent implements OnInit {
       delete this.recursoHijo['tipo_recurso_id'];
       this.actualizar(this.recursoHijo);
     }
+    // this.validar();
   }
 
   registrarArchivo(obj: FormData) {
@@ -179,6 +180,7 @@ export class RecursoModalComponent implements OnInit {
   }
 
   listarRecursos(){
+    //Se está consultando a la API porque se envia un FormData (Conversión Objeto)
     this.recursoservice.listar(this.sesionNieto.id).subscribe(res => {
       this.recursos.emit(res);
       // this.form = null;
@@ -212,6 +214,8 @@ export class RecursoModalComponent implements OnInit {
     this.tipoRecursoId = event.target.value;
     //para que se muestre el tipo de contenido a insertar
     this.filtrarFormatos(this.tipoRecursoId);
+    this.recursoHijo.tipo_recurso_id = this.tipoRecursoId;
+    this.validar();
   }
 
   mensajeError(campo: string): string {

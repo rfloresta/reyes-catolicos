@@ -5,5 +5,5 @@ export interface Recurso{
     fecha?: string,
     sesion_id?: number,
     formato_id?: number,
-    tipo_recurso_id?: number
+    tipo_recurso_id?: string
 }

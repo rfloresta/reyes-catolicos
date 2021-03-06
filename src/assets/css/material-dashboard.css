@@ -1598,12 +1598,12 @@ div.dtr-modal div.dtr-modal-close {
   position: absolute;
   top: 6px;
   right: 6px;
-  width: 22px;
-  height: 22px;
+  width: 50px;
+  height: 50px;
   border: 1px solid #eaeaea;
   background-color: #f9f9f9;
   text-align: center;
-  border-radius: 3px;
+  border-radius: 10px;
   cursor: pointer;
   z-index: 12;
 }
@@ -6972,7 +6972,7 @@ h2.title {
   color: #FFFFFF;
 }
 .close i {
-  font-size: 11px;
+  font-size: 50px;
 }
 
 .loader {
@@ -9594,7 +9594,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   opacity: 1;
 }
 .modal .modal-header .close i {
-  font-size: 16px;
+  font-size: 100px;
 }
 
 .modal-notice .instruction {

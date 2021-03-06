@@ -1,15 +1,9 @@
-<app-carga *ngIf="cargando">
-
-</app-carga>
-
+<app-carga *ngIf="cargando"></app-carga>
 <ng-container *ngIf="!cargando">
-
     <ng-container *ngIf="sesionesHijo.length >0; else vacio">
         <div class="nav-center">
             <ul class="nav nav-pills nav-pills-info nav-pills-icons ul-pagination" role="tablist">
-
-                <li 
-                    *ngFor="let s of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                <li *ngFor="let s of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
                     [ngClass]="sesion.numero === s.numero ? 'active':''">
                     <a class="btn btn-simple" (click)="consultarSesion(s)" role="tab" data-toggle="tab">
                         <i class="material-icons">date_range</i>Sesión {{ s.numero }}
@@ -25,7 +19,6 @@
                             <i class="material-icons">close</i>
                         </button>
                     </div>
-
                 </li>
             </ul>
             <div class="center-block">
@@ -42,42 +35,34 @@
                                 <p class="card-description">{{sesion.fecha | date: 'EEEE, MMMM d, y'}}</p>
                             </div>
                             <div class="col-md-4" *ngIf="sesion.link !== null">
-                                <a target="_blank" [href]="sesion.link" class="btn btn-info pull-right"><i class="material-icons">videocam</i> Clase en
+                                <a target="_blank" [href]="sesion.link" class="btn btn-info pull-right"><i
+                                        class="material-icons">videocam</i> Clase en
                                     Google Meet</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row espacio">
+                    <!-- Para registrar/editar recursos -->
                     <div class="col-md-12">
                         <app-recursos [tipoHijo]="tipo" [sesionHijo]="sesion" [recursosHijo]="recursos"></app-recursos>
-
                     </div>
-
                 </div>
                 <div class="row">
-                    
                     <div class="col-md-12">
                         <app-actividades [tipoHijo]="tipo" [sesionHijo]="sesion" [actividadesHijo]="actividades">
                         </app-actividades>
                     </div>
-                    
                 </div>
             </ng-container>
             <ng-template #objetoInvalido>
             </ng-template>
         </ng-container>
-
-        <app-carga *ngIf="cargando2">
-
-        </app-carga>
-
+        <app-carga *ngIf="cargando2"></app-carga>
     </ng-container>
     <ng-template #vacio>
         <div class="col-md-12">
             <p class="text-center">No hay sesiones registradas</p>
         </div>
     </ng-template>
-
 </ng-container>

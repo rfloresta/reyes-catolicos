@@ -19,9 +19,9 @@ export class ArchivoModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.recursoHijo.tipo_recurso_id===1){
+    if(this.recursoHijo.tipo_recurso_id=='1'){
       this.url=`${environment.API_URL}/${this.recursoHijo.contenido}`;
-    }else if (this.recursoHijo.tipo_recurso_id===2){
+    }else if (this.recursoHijo.tipo_recurso_id=='2'){
       this.url=this.recursoHijo.contenido;
     }
   }

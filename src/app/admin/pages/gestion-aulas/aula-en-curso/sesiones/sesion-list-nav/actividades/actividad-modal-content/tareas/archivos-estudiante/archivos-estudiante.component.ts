@@ -312,6 +312,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       respuesta: [respuesta]
     });
   }
+  
   listarRetro() {
     this.actividadService.listarRetro(this.tareaHermano.id).subscribe(
       (res: Retroalimentacion) => {
