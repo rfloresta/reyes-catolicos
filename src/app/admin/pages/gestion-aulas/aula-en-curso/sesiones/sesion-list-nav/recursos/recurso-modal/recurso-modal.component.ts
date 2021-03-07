@@ -109,6 +109,11 @@ export class RecursoModalComponent implements OnInit {
         
         //ve cambios del input contenido
         let fi = this.file.nativeElement;
+        console.log('fi.target.files[0]',fi.files[0]);
+        
+        if(fi.files[0].size>5242880){
+          return this.toastr.warning("El archivo no debe superar los 5MB");
+         }
         if (fi.files && fi.files[0]) {
           this.fileUpload = fi.files[0];
         }

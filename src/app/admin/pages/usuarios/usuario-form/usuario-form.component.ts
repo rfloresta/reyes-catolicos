@@ -80,6 +80,9 @@ export class UsuarioFormComponent implements OnInit {
       return;
     }
     let fi = this.file.nativeElement;
+    if(fi.files[0].size>5242880){
+      return this.toastr.warning("El archivo no debe superar los 5MB");
+     }
     if (fi.files && fi.files[0]) {
       this.fileUpload = fi.files[0];
     }
