@@ -1,13 +1,9 @@
 import { NgModule, Component, ContentChild } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AreaComponent } from 'src/app/admin/pages/areas/area.component';
-import { DashboardComponent } from 'src/app/admin/pages/dashboard/dashboard.component';
-import { TurnoComponent } from 'src/app/admin/pages/turnos/turno.component';
+// import { TurnoComponent } from 'src/app/admin/pages/turnos/turno.component';
 import { InicioComponent } from 'src/app/pages/inicio/inicio.component';
-import { CheckLoginGuard } from '../guards/check-login.guard';
 import { IsAdminGuard } from "../guards/is-admin.guard";
 import { DefaultComponent } from './default.component';
-
 
 export const routes: Routes = [
   {//RUTAS SOLO PARA EL ADMIN

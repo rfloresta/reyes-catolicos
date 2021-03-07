@@ -27,15 +27,21 @@ export class TareasComponent implements OnInit, OnDestroy {
   @Output() hide = new EventEmitter();
   @Output() show = new EventEmitter<Object>();
 
-  ActividadTareaUsuario: ActividadTareaUsuario = {};
-  tareasUsuarios: ActividadTareaUsuario[] = [];   
+  actividadTareaUsuario: ActividadTareaUsuario = {};
+  tareaEstudiantes: ActividadTareaUsuario[] = [];
+  sinTareaEstudiantes: ActividadTareaUsuario[] = [];   
+  cantidad_estudiantes: string;
   cargando: boolean;
   constructor(private actividadService: ActividadService,
     private modalService: BsModalService
 
   ) { }
 
+
   ngOnInit() {
+
+    this.cantidad_estudiantes = localStorage.getItem('cantidad_estudiantes');
+
     this.dtOptions = {
       pagingType: "full_numbers",
       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -46,17 +52,19 @@ export class TareasComponent implements OnInit, OnDestroy {
       }
     }
 
-     this.ActividadTareaUsuario.actividad_id = this.actividadNieto.id;
+     this.actividadTareaUsuario.actividad_id = this.actividadNieto.id;
  
-    this.listarTareasEstudiantes(this.ActividadTareaUsuario.actividad_id);
+    this.listarTareaEstudiantes(this.actividadNieto.id);
+    this.listarEstudiantesSinTarea(this.actividadNieto.id);
+
   }
 
   //Para Profesores
-  listarTareasEstudiantes(id: number) {
-    this.actividadService.listarTareasEstudiantes(id)
+  listarTareaEstudiantes(id: number) {
+    this.actividadService.listarTareaEstudiantes(id)
       .subscribe(res => {
         if(res){
-          this.tareasUsuarios = res;
+          this.tareaEstudiantes = res;
           if (this.isDtInitialized) {
             this.rerender();
           } else {
@@ -68,7 +76,19 @@ export class TareasComponent implements OnInit, OnDestroy {
       });
   }
 
-
+  listarEstudiantesSinTarea(id: number) {
+    const object: any = {
+      actividad_id: id,
+      aula_anio_id: localStorage.getItem('ai')
+    }
+    this.actividadService.listarEstudiantesSinTarea(object)
+      .subscribe(res => {
+        if(res){
+          this.sinTareaEstudiantes = res;
+        }
+      });
+  }
+  
   ocultarModal() {
     this.hide.emit();
   }

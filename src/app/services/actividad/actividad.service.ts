@@ -24,12 +24,24 @@ export class ActividadService {
     return this.httpClient.get<ActividadTareaUsuario>(`${environment.API_URL}/api/actividades/tarea/`+JSON.stringify(obj));
   }
 
-  listarTareasEstudiantes(actividad_id: number): Observable<ActividadTareaUsuario[]>{
+  listarTareaEstudiantes(actividad_id: number): Observable<ActividadTareaUsuario[]>{
     return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/tareas/${actividad_id}`);
   }
 
-  listarForosEstudiante(actividadUsuario: any): Observable<ActividadForoUsuario[]>{
+  listarEstudiantesSinTarea(object: any): Observable<ActividadTareaUsuario[]>{
+    return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/tareas/sin-participacion/${JSON.stringify(object)}`);
+  }
+
+  listarRespuestasForosEstudiante(actividadUsuario: any): Observable<ActividadForoUsuario[]>{
     return this.httpClient.get<ActividadForoUsuario[]>(`${environment.API_URL}/api/actividades/foro/${JSON.stringify(actividadUsuario)}`);
+  }
+
+  listarParticipacionForoEstudiantes(actividad_id: number): Observable<ActividadTareaUsuario[]>{
+    return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/foros/participacion/${actividad_id}`);
+  }
+
+  listarSinParticipacionForoEstudiantes(object: any): Observable<ActividadTareaUsuario[]>{
+    return this.httpClient.get<ActividadTareaUsuario[]>(`${environment.API_URL}/api/actividades/foros/sin-participacion/${JSON.stringify(object)}`);
   }
 
   listarFotosInforme(sesionId: number): Observable<ActividadForoUsuario[]>{

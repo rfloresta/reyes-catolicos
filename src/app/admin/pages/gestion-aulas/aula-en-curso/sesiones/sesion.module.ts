@@ -28,6 +28,8 @@ import { SafePipe } from '@shared/pipes/safe.pipe';
 import { ActividadModalContentComponent } from './sesion-list-nav/actividades/actividad-modal-content/actividad-modal-content.component';
 import { DataTablesModule } from 'angular-datatables';
 import { ForosComponent } from './sesion-list-nav/actividades/actividad-modal-content/foros/foros.component';
+import { InformacionForoModalComponent } from './sesion-list-nav/actividades/actividad-modal-content/foros/informacion/informacion-foro-modal.component';
+
 import { TareasComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/tareas.component';
 import { ArchivosEstudianteModalComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/archivos-estudiante-modal/archivos-estudiante-modal.component';
 import { ArchivosEstudianteComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/archivos-estudiante/archivos-estudiante.component';
@@ -46,7 +48,8 @@ import { ArchivosEstudianteComponent } from './sesion-list-nav/actividades/activ
     ForosComponent,
     TareasComponent,
     ArchivosEstudianteModalComponent,
-    ArchivosEstudianteComponent
+    ArchivosEstudianteComponent,
+    InformacionForoModalComponent
     ],
   imports: [
     CommonModule,

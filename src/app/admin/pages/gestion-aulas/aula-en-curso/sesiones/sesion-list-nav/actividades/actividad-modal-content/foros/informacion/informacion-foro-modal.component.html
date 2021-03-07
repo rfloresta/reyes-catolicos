@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef2.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Total de estudiantes: {{cantidad_estudiantes}}</h4>
+                            <ul class="nav nav-pills nav-pills-warning">
+                                <li class="active">
+                                    <a href="#participaron" data-toggle="tab">Participaron ({{estudiantesParticipacion.length}}) </a>
+                                </li>
+                                <li>
+                                    <a href="#pendientes" data-toggle="tab">Pendientes ({{estudiantesSinParticipacion.length}}) </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <!-- participaron -->
+                                <div class="tab-pane active" id="participaron">
+                                    <div class="material-datatables table-responsive">
+                                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                        class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%"
+                                        style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <!-- profe -->
+                                                    <th style="width: 350px;">Estudiante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+        
+                                                <!-- Usar optimizador de For -->
+                                                <tr *ngFor="let tarea of estudiantesParticipacion">
+                                                    <td >{{tarea.estudiante}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="pendientes">
+                                    <div class="material-datatables table-responsive">
+                                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                            class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                                            width="100%" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estudiante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let tarea of estudiantesSinParticipacion">
+                                                    <td >{{tarea.estudiante}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger btn-simple" (click)="bsModalRef2.hide()" type="button">Cerrar<div
+            class="ripple-container">
+            <div class="ripple ripple-on ripple-out"></div>
+        </div></button>
+</div>

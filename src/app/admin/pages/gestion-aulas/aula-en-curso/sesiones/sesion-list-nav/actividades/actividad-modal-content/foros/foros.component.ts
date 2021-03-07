@@ -2,10 +2,12 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef,
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Actividad } from '@models/actividad';
 import { ActividadForoUsuario } from '@models/ActividadForoUsuario';
-import { Usuario, UsuarioResponse } from '@models/Usuario';
+import { UsuarioResponse } from '@models/Usuario';
 import { ActividadService } from '@services/actividad/actividad.service';
 import * as moment from 'moment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { InformacionForoModalComponent } from './informacion/informacion-foro-modal.component';
 
 @Component({
   selector: 'app-foros',
@@ -13,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./foros.component.css']
 })
 export class ForosComponent implements OnInit, OnDestroy {
+  bsModalRef: BsModalRef;
 
   @Input() actividadNieto: Actividad;
   @Input() usuarioResponseHijo: UsuarioResponse;
@@ -27,7 +30,8 @@ export class ForosComponent implements OnInit, OnDestroy {
   editorOptions: any;
   constructor(private actividadService: ActividadService,
     private _builder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -51,7 +55,7 @@ export class ForosComponent implements OnInit, OnDestroy {
       usuario_id: this.usuarioResponseHijo.id,
       tipo_usuario_id: this.usuarioResponseHijo.tipo
     }
-      this.listarForosEstudiante(this.actividadUsuario);
+      this.listarRespuestasForosEstudiante(this.actividadUsuario);
   }
 
   onSubmit() {
@@ -81,7 +85,7 @@ export class ForosComponent implements OnInit, OnDestroy {
           this.toastr.success("El foro ha sido registrado");
           this.actividadForoUsuarioForm.reset();
           this.validar();
-          this.listarForosEstudiante(this.actividadUsuario);
+          this.listarRespuestasForosEstudiante(this.actividadUsuario);
         }else{
           this.toastr.error('Ha ocurrido un problema al registrar');
         }
@@ -93,10 +97,10 @@ export class ForosComponent implements OnInit, OnDestroy {
     );
   }
 
-  listarForosEstudiante(actividadUsuario: any) {
+  listarRespuestasForosEstudiante(actividadUsuario: any) {
     this.cargando = true;
     setTimeout(() => {
-      this.actividadService.listarForosEstudiante(actividadUsuario)
+      this.actividadService.listarRespuestasForosEstudiante(actividadUsuario)
     .subscribe(res => {
       if(res){
         this.foroUsuarios = res;
@@ -120,6 +124,15 @@ export class ForosComponent implements OnInit, OnDestroy {
       (this.actividadForoUsuarioForm.get(campo).touched || this.actividadForoUsuarioForm.get(campo).dirty) &&
       !this.actividadForoUsuarioForm.get(campo).valid
     )
+  }
+
+  openModalInfo(){
+    const initialState = {
+      actividad_id: this.actividadNieto.id,
+      aula_anio_id: localStorage.getItem('ai'),
+      title: 'Información del foro '+this.actividadNieto.titulo
+    };
+    this.bsModalRef = this.modalService.show(InformacionForoModalComponent, {initialState,id:3,  ignoreBackdropClick: true});
   }
 
   ngOnDestroy(): void {

@@ -25,23 +25,29 @@
             <div class="card-header">
                 <div class="card-title">
                     Respuestas
+                        <button *ngIf="tipoVisnieto!==4" type="button" title="Información" class="btn btn-fill btn-info pull-right" (click)="openModalInfo()">
+Información                        </button> 
+                        </div>
+            </div>
+            <div class="card-body">
+               
+                <div class="card-content">
+                    <app-carga *ngIf="cargando"></app-carga>
+                    <ng-container *ngIf="!cargando">
+                        <div class="card" *ngFor="let foroUsuario of foroUsuarios">
+                            <div class="card-header">
+                                <span class="card-title">{{foroUsuario.estudiante}}</span><br>
+                                <small class="card-description">
+                                    {{foroUsuario.fecha | date: 'M/d/yy, h:mm a'}}
+                                </small>
+                            </div>
+                            <div [innerHTML]="foroUsuario.respuesta" class="card-content">
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
-            <div class="card-content pre-scrollable">
-                <app-carga *ngIf="cargando"></app-carga>
-                <ng-container *ngIf="!cargando">
-                    <div class="card" *ngFor="let foroUsuario of foroUsuarios">
-                        <div class="card-header">
-                            <span class="card-title">{{foroUsuario.estudiante}}</span><br>
-                            <small class="card-description">
-                                {{foroUsuario.fecha | date: 'M/d/yy, h:mm a'}}
-                            </small>
-                        </div>
-                        <div [innerHTML]="foroUsuario.respuesta" class="card-content">
-                        </div>
-                    </div>
-                </ng-container>
-            </div>
+           
         </div>
     </div>
 </div>

@@ -78,31 +78,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.modules = {
-      toolbar: [
-        // ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        // ['blockquote', 'code-block'],
-
-        // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-        // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-        // [{ 'direction': 'rtl' }],                         // text direction
-
-        // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-        // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-        // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        // [{ 'font': [] }],
-        // [{ 'align': [] }],
-
-        // ['clean'],                                         // remove formatting button
-
-        // ['link', 'image', 'video']                         // link and image, video
-      ]
-    };
-
-
     let actividadId: number;
     let usuarioId: number;
 
@@ -127,8 +102,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
     this.validar();
 
     this.listarTareaEstudiante(this.ActividadTareaUsuario);
-
-
   }
 
 
@@ -160,7 +133,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   onSubmitRetro() {
-
     this.retroalimentacion.pasos = this.retroForm.value;
     if (this.retroalimentacion.id === null) {
       this.registrarRetro(this.retroalimentacion)
@@ -352,7 +324,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   agregarExpresar(event){
     event.preventDefault();
     (<FormArray>this.retroForm.controls['expresar']).push(this.patch(null, null)) // push values
-
   }
 
   eliminarTarea(obj: ActividadTareaUsuario) {
@@ -419,6 +390,10 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   onFileChange(event) {
+    if(event.target.files[0].size>5242880){
+     return this.toastr.warning("El archivo no debe superar los 5MB");
+    }
+
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {

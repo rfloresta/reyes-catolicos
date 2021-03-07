@@ -42,7 +42,6 @@ export class AulaEnCursoComponent implements OnInit, OnDestroy {
 
   constructor(private flujoService: FlujoService,
     private aulaEnCursoService: AulaEnCursoService,
-    private sesionService: SesionService,
     private modalService: BsModalService
   ) {
 
@@ -50,7 +49,10 @@ export class AulaEnCursoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.aula_anio_id = localStorage.getItem('ai');
-    this.aulaEnCursoService.buscar(this.aula_anio_id).subscribe((res: AulaEnCurso) => this.aulaEnCurso = res);
+    this.aulaEnCursoService.buscar(this.aula_anio_id).subscribe((res: AulaEnCurso) => {
+      this.aulaEnCurso = res
+      localStorage.setItem('cantidad_estudiantes', this.aulaEnCurso.cantidad_estudiantes.toString());
+    });
     this.accionSuscription$ = this.flujoService.enviarAccion$.subscribe((accion) => this.accion = accion);
     let usuarioString = localStorage.getItem('usuario');
     this.usuario = JSON.parse(usuarioString);
