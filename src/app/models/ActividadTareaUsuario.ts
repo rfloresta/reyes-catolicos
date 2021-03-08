@@ -7,5 +7,6 @@ export interface ActividadTareaUsuario{
     actividad_id?: number,
     usuario_id?: number,
     estudiante?: string,
+    retroalimentacion?: string
     archivos?: any
 }

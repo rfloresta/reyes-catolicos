@@ -88,12 +88,13 @@
         </div>
  </div>
 <div class="modal-footer">
+    <button class="btn btn-simple" (click)="ocultarModal()" type="button">Cancelar<div class="ripple-container">
+        <div class="ripple ripple-on ripple-out"></div>
+    </div></button>
     <button [disabled]="actividadForm.invalid" class="pull-right" class="btn btn-fill btn-info">
         {{accionHijo}}
     </button>
-    <button class="btn btn-simple" (click)="ocultarModal()" type="button">Cancelar<div class="ripple-container">
-            <div class="ripple ripple-on ripple-out"></div>
-        </div></button>
+  
 </div>
 
 </form>

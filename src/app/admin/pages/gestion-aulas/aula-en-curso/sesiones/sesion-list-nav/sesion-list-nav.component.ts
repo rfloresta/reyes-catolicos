@@ -30,8 +30,9 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   path: string;
   path2: string;
   urlAnterior: string;
-  p: number = 1;
   sesionesHijo: Sesion[] = [];
+  p: number = 1;
+
   sesion: Sesion = {};
   sesionFrm: Sesion = {
     id: null,
@@ -63,7 +64,7 @@ export class SesionListNavComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.listarSesiones();
-
+    // this.p=this.sesionesHijo.length;
     this.sesionService.obtenerSesionActual(this.areaEnCurso.id)
       .subscribe((res: Sesion) => {
         this.consultarSesion(res);

@@ -23,7 +23,8 @@
                                         <tr>
                                             <!-- profe -->
                                             <th style="width: 350px;">Estudiante</th>
-                                            <th style="width: 250px;">Fecha</th>
+                                            <th>Fecha</th>
+                                            <th>Retroalimentación</th>
                                             <!-- <th>Descripción</th> -->
                                             <th style="width: 100px;" class="disabled-sorting text-right">Detalle</th>
                                         </tr>
@@ -34,7 +35,7 @@
                                         <tr *ngFor="let tarea of tareaEstudiantes">
                                             <td >{{tarea.estudiante}}</td>
                                             <td>{{tarea.fecha | date:'short'}}</td>        
-                                            <!-- <td>{{tarea.descripcion}}</td> -->
+                                            <td>{{tarea.retroalimentacion}}</td>
                                             <td  class="text-center">
                                                 <div  class="icon icon-info">
                                                     <button title="Ver detalle" class="btn btn-simple btn-info btn-icon like" (click)="abrirArchivosEstudianteModal(tarea)"><i class="material-icons">remove_red_eye</i></button>                   
