@@ -23,15 +23,17 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
+                <button *ngIf="tipoVisnieto!==4" type="button" title="Información" class="btn btn-fill btn-info pull-right" (click)="openModalInfo()">
+                    Información                        </button> 
                 <div class="card-title">
                     Respuestas
-                        <button *ngIf="tipoVisnieto!==4" type="button" title="Información" class="btn btn-fill btn-info pull-right" (click)="openModalInfo()">
-Información                        </button> 
+                      
                         </div>
             </div>
+
             <div class="card-body">
                
-                <div class="card-content">
+                <div class="col col-md-12 pre-scrollable card-content">
                     <app-carga *ngIf="cargando"></app-carga>
                     <ng-container *ngIf="!cargando">
                         <div class="card" *ngFor="let foroUsuario of foroUsuarios">
@@ -42,6 +44,11 @@ Información                        </button>
                                 </small>
                             </div>
                             <div [innerHTML]="foroUsuario.respuesta" class="card-content">
+                            </div>
+                            <div class="card-footer">
+                                    <rating [readonly]="usuarioResponseHijo.tipo===3?false:true" class="card-description" [max]="5"
+                                        (click)="actualizarValoracion(foroUsuario)"
+                                        [(ngModel)]="foroUsuario.valoracion"></rating>
                             </div>
                         </div>
                     </ng-container>

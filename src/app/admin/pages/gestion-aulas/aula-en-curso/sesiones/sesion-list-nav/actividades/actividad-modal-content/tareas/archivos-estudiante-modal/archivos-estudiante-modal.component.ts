@@ -33,7 +33,7 @@ export class ArchivosEstudianteModalComponent implements OnInit {
       const tarea:ActividadTareaUsuario  = {
         valoracion: this.tarea.valoracion
       }
-      this.actividadService.actualizarValoracion(this.tarea.id, tarea).subscribe(res => {
+      this.actividadService.actualizarValoracionTarea(this.tarea.id, tarea).subscribe(res => {
         return;
       }, err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) }
       );

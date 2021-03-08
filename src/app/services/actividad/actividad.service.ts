@@ -77,8 +77,11 @@ export class ActividadService {
   actualizar(obj: Actividad){
     return this.httpClient.put(`${environment.API_URL}/api/actividades/${obj.id}`, obj);
   }
-  actualizarValoracion(id: number, obj: ActividadTareaUsuario): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/api/actividades/actividad/${id}`, obj)
+  actualizarValoracionTarea(id: number, obj: ActividadTareaUsuario): Observable<any>{
+    return this.httpClient.patch(`${environment.API_URL}/api/actividades/actividad-tarea-usuario/${id}`, obj)
+  }
+  actualizarValoracionForo(id: number, obj: ActividadForoUsuario): Observable<any>{
+    return this.httpClient.patch(`${environment.API_URL}/api/actividades/actividad-foro-usuario/${id}`, obj)
   }
   actualizarRetro(obj: Retroalimentacion): Observable<any>{
     return this.httpClient.put(`${environment.API_URL}/api/actividades/tarea/retro/${obj.id}`, obj)

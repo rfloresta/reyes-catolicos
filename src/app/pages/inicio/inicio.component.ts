@@ -46,7 +46,6 @@ export class InicioComponent implements OnInit {
         })
       ).subscribe(
         (res: AulaEnCursoArea[]) => {
-          console.log(res);
           setTimeout(() => {
             this.aulaEnCursoAreasHijo = res;
             localStorage.setItem('areas', JSON.stringify(this.aulaEnCursoAreasHijo));

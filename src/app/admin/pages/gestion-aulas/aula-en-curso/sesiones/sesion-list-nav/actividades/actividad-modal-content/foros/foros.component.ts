@@ -7,6 +7,7 @@ import { ActividadService } from '@services/actividad/actividad.service';
 import * as moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { InformacionForoModalComponent } from './informacion/informacion-foro-modal.component';
 
 @Component({
@@ -135,6 +136,17 @@ export class ForosComponent implements OnInit, OnDestroy {
     this.bsModalRef = this.modalService.show(InformacionForoModalComponent, {initialState,id:3,  ignoreBackdropClick: true});
   }
 
+  actualizarValoracion(obj:ActividadForoUsuario) {
+      
+    const foro  = {
+      valoracion: obj.valoracion
+    }
+    this.actividadService.actualizarValoracionForo(obj.id, foro).subscribe(res => {
+      return;
+    }, err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) }
+    );
+
+  }
   ngOnDestroy(): void {
     // this.dtTrigger.unsubscribe();
   }

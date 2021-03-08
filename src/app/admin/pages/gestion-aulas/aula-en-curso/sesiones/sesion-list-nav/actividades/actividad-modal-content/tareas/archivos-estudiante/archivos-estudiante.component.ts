@@ -259,8 +259,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
         if (typeof res.id !== 'undefined') {
           this.actividadTareaUsuario.id = res.id;
         }
-        console.log('tarea', res);
-
         this.actividadTareaUsuario.valoracion = res.valoracion;
         this.archivosEstudiante = res.archivos;
         this.listarDocs();
@@ -297,8 +295,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
     this.actividadService.listarRetro(this.tareaHermano.id).subscribe(
       (res: Retroalimentacion) => {
         if (Object.keys(res).length>0) {
-          console.log(res);
-          
           let passosObject: Object = JSON.parse(res.pasos);
           this.retroalimentacion = res;
           this.retroalimentacion.pasos = passosObject;
@@ -367,17 +363,6 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
         );
       }
     })
-  }
-
-  actualizarValoracion(obj: ActividadTareaUsuario) {
-    this.actividadTareaUsuario = {
-      valoracion: obj.valoracion
-    }
-    this.actividadService.actualizarValoracion(obj.id, this.actividadTareaUsuario).subscribe(res => {
-
-    }, err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) }
-    );
-
   }
 
   ocultarModal() {
