@@ -2,7 +2,7 @@
 <ng-container *ngIf="!cargando">
     <ng-container *ngIf="sesionesHijo.length >0; else vacio">
         <div class="nav-center">
-            <ul class="nav nav-pills nav-pills-danger nav-pills-icons ul-pagination" role="tablist">
+            <ul class="nav nav-pills nav-pills-info nav-pills-icons ul-pagination" role="tablist">
                 <li *ngFor="let s of sesionesHijo | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
                     [ngClass]="sesion.numero === s.numero ? 'active':''">
                     <a class="btn btn-simple" (click)="consultarSesion(s)" role="tab" data-toggle="tab">
@@ -41,7 +41,7 @@
                                 <p class="card-description">{{sesion.fecha | date: 'EEEE, MMMM d, y'}}</p>
                             </div>
                             <div class="col-md-4" *ngIf="sesion.link !== null">
-                                <a target="_blank" [href]="sesion.link" class="btn btn-danger pull-right"><i
+                                <a target="_blank" [href]="sesion.link" class="btn btn-info pull-right"><i
                                         class="material-icons">videocam</i> Clase en
                                     Google Meet</a>
                             </div>

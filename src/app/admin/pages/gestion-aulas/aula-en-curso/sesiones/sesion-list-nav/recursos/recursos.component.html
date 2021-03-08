@@ -15,11 +15,11 @@
                 <div class="content">
                     <h6 class="category">{{recurso.tipo_nombre}}</h6>
                     <div class="icon icon-danger">
-                        <a *ngIf="recurso.formato_id!==4" href="javascript:void(0);" 
+                        <button class="btn btn-simple btn-danger" *ngIf="recurso.formato_id!==4" href="javascript:void(0);" 
                          (click)="abrirModalArchivo(templateArchivo,recurso)"> 
-                            <i class="material-icons">{{recurso.nombre_icono}}</i></a>
-                        <a *ngIf="recurso.formato_id===4" [href]="url+recurso.contenido">
-                            <i class="material-icons">{{recurso.nombre_icono}}</i></a>
+                            <i class="material-icons">{{recurso.nombre_icono}}</i></button>
+                        <button class="btn btn-simple btn-danger" *ngIf="recurso.formato_id===4" [href]="url+recurso.contenido">
+                            <i class="material-icons">{{recurso.nombre_icono}}</i></button>
                     </div>
                     <div *ngIf="tipoHijo===3" class="btn-contenido">
                         <button (click)="abrirModalEditar(template,recurso)" type="button" class="btn btn-success btn-simple"  data-placement="bottom" title="Editar">

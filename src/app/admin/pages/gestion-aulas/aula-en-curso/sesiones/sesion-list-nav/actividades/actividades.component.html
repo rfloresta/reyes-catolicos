@@ -17,10 +17,11 @@
                   
                     <h6 class="category">{{actividad.tipo_nombre}}</h6>
                     <div  class="icon icon-info">
-                        <a href="javascript:void(0);" 
-                        (click)="abrirModalContent(modalContent,actividad)"> 
-                        <i class="material-icons">
-                            {{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_inicio,actividad.fecha_fin)}}</i></a>                   
+                        <button class="btn btn-simple btn-danger" href="javascript:void(0);" 
+                        > 
+                        <i (click)="abrirModalContent(modalContent,actividad)" class="material-icons">
+                            {{actividad.nombre_icono}}{{comprobarVigencia(actividad.fecha_inicio,actividad.fecha_fin)}}</i>
+                        </button>                   
                     </div>
                     <div *ngIf="tipoHijo===3" class="btn-contenido">
                         <button  (click)="abrirModalEditar(modalForm,actividad)" type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Editar">
