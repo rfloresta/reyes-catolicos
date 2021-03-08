@@ -3,7 +3,7 @@
     <ng-container *ngIf="!cargando">
 
         <div class="col-md-4 espacio"
-            *ngFor="let aulaEnCurso of aulasEnCursoHijo | paginate: { itemsPerPage: 6, currentPage: p }">
+            *ngFor="let aulaEnCurso of aulasEnCursoHijo | paginate: { itemsPerPage: 9, currentPage: p }">
             <div class="card card-profile">
                 <div class="card-avatar">
                     <a href="javascript:void(0);" (click)="irAula(aulaEnCurso)">
@@ -42,7 +42,7 @@
 
             <div class="center-block">
                 <pagination-controls (pageChange)="p = $event" directionLinks="true" autoHide="true" responsive="true"
-                    previousLabel="Anterior" nextLabel="Seguiente">
+                    previousLabel="Anterior" nextLabel="Siguiente">
                 </pagination-controls>
             </div>
         </div>
