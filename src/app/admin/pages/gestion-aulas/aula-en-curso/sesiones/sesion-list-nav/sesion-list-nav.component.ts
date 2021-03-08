@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UsuarioResponse } from '@models/Usuario';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { Sesion } from '@models/sesion';
@@ -11,8 +11,6 @@ import { ActividadService } from '@services/actividad/actividad.service';
 import { RecursoService } from '@services/recurso/recurso.service';
 import { Actividad } from '@models/actividad';
 import { Recurso } from '@models/recurso';
-import { switchMap } from 'rxjs/operators';
-// import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
   selector: 'app-sesion-list-nav',

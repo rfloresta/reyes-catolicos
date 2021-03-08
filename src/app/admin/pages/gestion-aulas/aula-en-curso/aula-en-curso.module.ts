@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AulaEnCursoRoutingModule } from '@pages/gestion-aulas/aula-en-curso/aula-en-curso-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { CargaModule } from "@shared/carga/carga.module";
 
@@ -37,8 +38,11 @@ import { InformeTemplateComponent } from './informe/informe-template/informe-tem
     ReactiveFormsModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
+    NgxPaginationModule,
     CargaModule,
     ModalModule.forRoot()
+    
+
   ],
   providers:[
     FlujoService,

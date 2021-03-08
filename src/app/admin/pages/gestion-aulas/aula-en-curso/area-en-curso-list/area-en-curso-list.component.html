@@ -1,7 +1,7 @@
 <!-- <div class="col-md-12"> -->
     <app-carga *ngIf="cargando"></app-carga>
 <nd-container *ngIf="!cargando">
-    <div  class="col-lg-4 col-md-6" *ngFor="let area of aulaEnCursoAreasHijo">
+    <div  class="col-lg-4 col-md-6" *ngFor="let area of aulaEnCursoAreasHijo | paginate: { itemsPerPage: 6, currentPage: p }; let i = index">
         <div class="card card-product">
             <div (click)="consultarArea(area)" class="card-image" data-header-animation="false">
                 <a (click)="consultarArea(area)" href="javascript:void(0);">
@@ -25,6 +25,18 @@
             </div>
         </div>
     </div>
+    
 </nd-container>
-   
+<div class="col-md-12 col-md-offset-4">
+    <div class="center-block">
+        <pagination-controls  
+        (pageChange)="p = $event"
+        directionLinks="true"
+        autoHide="true"
+        responsive="true"
+        previousLabel="Anterior"
+        nextLabel="Seguiente">
+    </pagination-controls>
+    </div>
+</div>
 <!-- </div> -->

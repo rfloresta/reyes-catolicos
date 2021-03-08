@@ -26,7 +26,7 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
   cargando: boolean;
   urlAnterior: string;
   url: string = `${environment.API_URL}/`;
-
+  p:number =1;
   constructor(private aulaEnCursoAreaService: AulaEnCursoAreaService,
     private router: Router
   ) { }

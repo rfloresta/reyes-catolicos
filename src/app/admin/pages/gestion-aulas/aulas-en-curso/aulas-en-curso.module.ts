@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AulaEnCursoRoutingModule } from '@pages/gestion-aulas/aulas-en-curso/aulas-en-curso-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { CargaModule } from "@shared/carga/carga.module";
 
@@ -30,7 +31,9 @@ import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service'
     AulaEnCursoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CargaModule
+    CargaModule,
+    NgxPaginationModule,
+
     // AulaEnCursoModule
   ],
   providers:[

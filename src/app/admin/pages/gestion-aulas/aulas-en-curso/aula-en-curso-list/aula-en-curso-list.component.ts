@@ -38,6 +38,7 @@ export class AulaEnCursoListComponent implements OnInit, OnDestroy {
   cargando: boolean;
   mostrar: boolean;
 
+  P: number = 1;
   constructor(private aulaEnCursoService: AulaEnCursoService,
     private anioEscolarService: AnioEscolarService,
     private flujoService: FlujoService,
