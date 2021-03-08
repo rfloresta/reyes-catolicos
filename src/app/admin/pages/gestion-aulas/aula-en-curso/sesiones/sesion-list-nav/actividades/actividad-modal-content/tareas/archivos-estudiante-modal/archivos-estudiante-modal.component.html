@@ -16,6 +16,14 @@
                 <div class="card-content">
                     <span>{{tarea.descripcion}}</span>
                 </div>
+                <div class="card-footer">
+                    <small class="card-description">Valoración: </small> 
+                    <div *ngIf="tipo===3">
+                        <rating class="card-description" [max]="5"
+                            (click)="actualizarValoracion()"
+                            [(ngModel)]="tarea.valoracion"></rating>
+                    </div>
+                </div>
             </div>
 
         </div>

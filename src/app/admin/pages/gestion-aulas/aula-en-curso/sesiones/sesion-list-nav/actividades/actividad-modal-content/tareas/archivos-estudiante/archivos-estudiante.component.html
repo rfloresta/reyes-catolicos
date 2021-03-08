@@ -1,9 +1,13 @@
 <div class="card">
     <div *ngIf="tipoTataranieto===4" class="card-header">
         <h5 class="card-title">Responder Tarea</h5>
+            <small class="card-description">Valoración: </small> 
+            <rating [readonly]="true" class="card-description"
+                
+                [(ngModel)]="actividadTareaUsuario.valoracion"></rating>
     </div>
     <div class="card-content">
-        <form *ngIf="tipoTataranieto===4" [formGroup]="ActividadTareaUsuarioForm" (ngSubmit)="onSubmit()">
+        <form *ngIf="tipoTataranieto===4" [formGroup]="actividadTareaUsuarioForm" (ngSubmit)="onSubmit()">
             <div class="row" *ngIf="estadoNieto!=='_off'">
                 <div class="fileinput fileinput-new text-center col-md-6">
                     <div>
@@ -15,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 ">
-                    <button [disabled]="ActividadTareaUsuarioForm.invalid" class="btn btn-fill btn-info pull-right">
+                    <button [disabled]="actividadTareaUsuarioForm.invalid" class="btn btn-fill btn-info pull-right">
                         Enviar </button>
                 </div>
             </div>
@@ -48,7 +52,7 @@
                     <li *ngIf="tipoTataranieto===3">
                         <a href="#retro" data-toggle="tab">Retroalimentación</a>
                     </li>
-                </ul>
+                </ul>    
                 <div class="tab-content">
                     <!-- fotos -->
                     <div class="tab-pane active" id="fotos">
@@ -72,11 +76,7 @@
                                         <small class="card-description">{{i+1}} -
                                             {{actividadUsuario.estudiante}}</small>
                                         <!-- <small >{{actividadUsuario.fecha | date:'short'}}</small> -->
-                                        <!-- <div *ngIf="tipoTataranieto===3">
-                                            <rating class="card-description" [max]="5"
-                                                (click)="actualizarValoracion(actividadUsuario)"
-                                                [(ngModel)]="actividadUsuario.valoracion"></rating>
-                                        </div> -->
+                                        
                                         <div *ngIf="tipoTataranieto===4">
                                             <a (click)="eliminarTarea(actividadUsuario)" title="Eliminar"
                                                 class="btn btn-simple btn-danger btn-icon remove"><i

@@ -6,13 +6,14 @@ import { UsuarioResponse } from '@models/Usuario';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-archivos-estudiante-modal',
   templateUrl: './archivos-estudiante-modal.component.html',
   styleUrls: ['./archivos-estudiante-modal.component.css']
 })
-export class ArchivosEstudianteModalComponent implements OnInit, OnDestroy {
+export class ArchivosEstudianteModalComponent implements OnInit {
 
     actividad: Actividad;
     tipo: number;
@@ -27,12 +28,16 @@ export class ArchivosEstudianteModalComponent implements OnInit, OnDestroy {
     }
 
     
+    actualizarValoracion() {
+      
+      const tarea:ActividadTareaUsuario  = {
+        valoracion: this.tarea.valoracion
+      }
+      this.actividadService.actualizarValoracion(this.tarea.id, tarea).subscribe(res => {
+        return;
+      }, err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) }
+      );
   
-  
-  
-    ngOnDestroy(): void {
-      // this.dtTrigger.unsubscribe();
     }
-  
   
 }

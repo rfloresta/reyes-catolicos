@@ -27,10 +27,12 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   @Input() actividadVisnieto: Actividad;
   @Input() usuarioResponseNieto: UsuarioResponse;
   @Input() tipoTataranieto: number;
+
+  //Para otros que no sean estudiantes
   @Input() tareaHermano: ActividadTareaUsuario;
   @Input() estadoNieto: string;
   @Output() hide = new EventEmitter();
-  ActividadTareaUsuario: ActividadTareaUsuario = {};
+  actividadTareaUsuario: ActividadTareaUsuario = {};
   archivosEstudiante: ActividadTareaUsuarioArchivo[] = [];
   tareasUsuariosImg: ActividadTareaUsuario[] = [];
   tareasUsuariosDocs: ActividadTareaUsuario[] = [];
@@ -54,7 +56,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   };
   files: File[] = [];
   fileUpload: File[];
-  ActividadTareaUsuarioForm: FormGroup;
+  actividadTareaUsuarioForm: FormGroup;
   retroForm: FormGroup;
   pasosForm: FormGroup;
   url: string = `${environment.API_URL}/`;
@@ -68,6 +70,8 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+
+
     this.dtOptions = {
       pagingType: "full_numbers",
       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -96,38 +100,40 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
       usuarioId = this.usuarioResponseNieto.id;
     }
 
-    this.ActividadTareaUsuario.usuario_id = usuarioId;
-    this.ActividadTareaUsuario.actividad_id = actividadId;
+    this.actividadTareaUsuario.usuario_id = usuarioId;
+    this.actividadTareaUsuario.actividad_id = actividadId;
 
     this.validar();
 
-    this.listarTareaEstudiante(this.ActividadTareaUsuario);
+    this.listarTareaEstudiante(this.actividadTareaUsuario);
+
+
   }
 
 
   onSubmit() {
 
-    if (this.ActividadTareaUsuarioForm.invalid) {
+    if (this.actividadTareaUsuarioForm.invalid) {
       return;
     }
 
     //Validar que solo se suba 5MB
     let fecha = moment().format("YYYY-MM-DD HH:mm:ss");
-    this.ActividadTareaUsuario.fecha = fecha;
+    this.actividadTareaUsuario.fecha = fecha;
     let form: FormData = new FormData();
 
-    let archivo = <FormArray>this.ActividadTareaUsuarioForm.get('archivos');
+    let archivo = <FormArray>this.actividadTareaUsuarioForm.get('archivos');
     for (let i = 0; i < archivo.length; i++) {
       form.append('ruta_archivo', this.fileUpload[i]);
     }
-    form.append('fecha', this.ActividadTareaUsuario.fecha);
-    if (typeof this.ActividadTareaUsuario.id === 'undefined') {
-      // form.append('descripcion', this.ActividadTareaUsuarioForm.get('descripcion').value);
-      form.append('actividad_id', this.ActividadTareaUsuario.actividad_id.toString());
-      form.append('usuario_id', this.ActividadTareaUsuario.usuario_id.toString());
+    form.append('fecha', this.actividadTareaUsuario.fecha);
+    if (typeof this.actividadTareaUsuario.id === 'undefined') {
+      // form.append('descripcion', this.actividadTareaUsuarioForm.get('descripcion').value);
+      form.append('actividad_id', this.actividadTareaUsuario.actividad_id.toString());
+      form.append('usuario_id', this.actividadTareaUsuario.usuario_id.toString());
       this.registrarTarea(form);
     } else {
-      form.append('actividad_tarea_usuario_id', this.ActividadTareaUsuario.id.toString());
+      form.append('actividad_tarea_usuario_id', this.actividadTareaUsuario.id.toString());
       this.registrarArchivosEnTarea(form);
     }
   }
@@ -148,7 +154,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   validar() {
-    this.ActividadTareaUsuarioForm = this._builder.group({
+    this.actividadTareaUsuarioForm = this._builder.group({
       descripcion: null,
       archivos: this._builder.array([], this.validateSize)
     });
@@ -239,21 +245,23 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
 
   refrescar(msg: string) {
     this.toastr.success(msg);
-    this.ActividadTareaUsuarioForm.reset();
+    this.actividadTareaUsuarioForm.reset();
     this.files = [];
     this.fileUpload = [];
     this.validar();
-    this.listarTareaEstudiante(this.ActividadTareaUsuario);
+    this.listarTareaEstudiante(this.actividadTareaUsuario);
   }
 
   //Para Estudiante
-  listarTareaEstudiante(ActividadTareaUsuario: ActividadTareaUsuario) {
-    this.actividadService.listarTareaEstudiante(ActividadTareaUsuario)
+  listarTareaEstudiante(actividadTareaUsuario: ActividadTareaUsuario) {
+    this.actividadService.listarTareaEstudiante(actividadTareaUsuario)
       .subscribe(res => {
         if (typeof res.id !== 'undefined') {
-          this.ActividadTareaUsuario.id = res.id;
+          this.actividadTareaUsuario.id = res.id;
         }
-        this.tareaHermano = res;
+        console.log('tarea', res);
+
+        this.actividadTareaUsuario.valoracion = res.valoracion;
         this.archivosEstudiante = res.archivos;
         this.listarDocs();
         this.listarImgs();
@@ -267,13 +275,13 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   listarDocs() {
-    this.tareasUsuariosDocs = this.archivosEstudiante.filter(ActividadTareaUsuario => ActividadTareaUsuario.extension !== 'image/jpeg' && ActividadTareaUsuario.extension !== 'image/png');
+    this.tareasUsuariosDocs = this.archivosEstudiante.filter(actividadTareaUsuario => actividadTareaUsuario.extension !== 'image/jpeg' && actividadTareaUsuario.extension !== 'image/png');
   }
 
   listarImgs() {
     this.cargando = true;
     setTimeout(() => {
-      this.tareasUsuariosImg = this.archivosEstudiante.filter(ActividadTareaUsuario => ActividadTareaUsuario.extension === 'image/jpeg' || ActividadTareaUsuario.extension === 'image/png');
+      this.tareasUsuariosImg = this.archivosEstudiante.filter(actividadTareaUsuario => actividadTareaUsuario.extension === 'image/jpeg' || actividadTareaUsuario.extension === 'image/png');
       this.cargando = false;
     }, 1000);
   }
@@ -362,10 +370,10 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
   }
 
   actualizarValoracion(obj: ActividadTareaUsuario) {
-    this.ActividadTareaUsuario = {
+    this.actividadTareaUsuario = {
       valoracion: obj.valoracion
     }
-    this.actividadService.actualizarValoracion(obj.id, this.ActividadTareaUsuario).subscribe(res => {
+    this.actividadService.actualizarValoracion(obj.id, this.actividadTareaUsuario).subscribe(res => {
 
     }, err => { Swal.fire('¡Error!', `Ha ocurrido un error inesperado`, 'error'); console.log(err) }
     );
@@ -397,7 +405,7 @@ export class ArchivosEstudianteComponent implements OnInit, OnDestroy {
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
-        this.archivos = this.ActividadTareaUsuarioForm.get('archivos') as FormArray;
+        this.archivos = this.actividadTareaUsuarioForm.get('archivos') as FormArray;
         this.archivos.push(this._builder.group({
           archivo: event.target.files[i]
         }
