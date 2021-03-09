@@ -10,6 +10,7 @@ import { LoginComponent } from "./login.component";
 // Services
 import { LoginService } from "../../services/auth/login.service";
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
+// import { CargaModule } from '@shared/carga/carga.module';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service'
         CommonModule,
         LoginRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        // CargaModule
       ],
       providers: [
         LoginService,

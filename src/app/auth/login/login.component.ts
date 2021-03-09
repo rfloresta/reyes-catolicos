@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   };
   msgError: String;
   loginForm: FormGroup;
+  cargando: boolean;
 
   constructor(private loginService: LoginService,
     private _builder: FormBuilder,
@@ -45,12 +46,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.cargando=true;
     this.usuario = this.loginForm.value;
 
     this.suscription$=this.loginService.login(this.usuario).subscribe((res) => {
         if (res) {
           this.anioEscolarService.obtenerAnioActivo().subscribe((res: AnioEscolar)=>{
             localStorage.setItem('anio_activo', JSON.stringify(res));
+            this.cargando=false;
             this.router.navigate(["/principal"]);
           });          
         }
@@ -60,7 +63,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         if(err.status===400){
           this.msgError="Email y/o contraseña incorrectos";
         }
-      }
+        this.cargando=false;
+          this.cargando=false;
+      },
+      ()=> {this.cargando=false;
+}
       
       );
   }

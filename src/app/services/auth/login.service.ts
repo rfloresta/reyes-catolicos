@@ -44,6 +44,7 @@ export class LoginService {
     localStorage.removeItem('areas');
     localStorage.removeItem('nuevoNumero');
     localStorage.removeItem('numeroMayor');
+    //actividad_id
     localStorage.removeItem('ai');
     this.flujoService.logeado(false);
     setTimeout(() => {

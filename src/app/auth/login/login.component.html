@@ -132,8 +132,13 @@
                                         <button type="submit" [disabled]="loginForm.invalid" class="btn btn-round btn-rose btn-fill">Ingresar</button>
                                         
                                     </div>
+                                        <div *ngIf="cargando" class="loader">
+                                            <svg class="circular" viewBox="25 25 50 50">
+                                                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
                                     <div class="card-footer text-center">
-                                        <span class="text-danger">{{ msgError }}</span>
+                                        <span *ngIf="!cargando"  class="text-danger">{{ msgError }}</span>
                                     </div>
                                 </div>
                             </form>
