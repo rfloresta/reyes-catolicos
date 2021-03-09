@@ -7,6 +7,13 @@ import { AulaEnCursoEstudiante } from '@models/AulaEnCursoEstudiante';
 import { FlujoService } from '@services/flujo.service';
 import { environment } from 'src/environments/environment';
 import { UsuarioResponse } from '@models/Usuario';
+import { PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import { ITable } from 'pdfmake-wrapper/lib/interfaces';
+import { ContentTable, TableCell } from 'pdfmake/interfaces';
+PdfMakeWrapper.setFonts(pdfFonts);
+
+type TableRow = [number,string,string,string,string,string,string];
 
 @Component({
   selector: 'app-estudiante-list',
@@ -35,10 +42,7 @@ export class EstudianteListComponent implements OnInit, OnDestroy {
   snap: RouterStateSnapshot;
   p: number = 1;
 
-  constructor(private aulaEnCursoEstudianteService: AulaEnCursoEstudianteService,
-    private flujoService: FlujoService,
-    private activatedRouter: ActivatedRoute,
-    private router: Router
+  constructor(private aulaEnCursoEstudianteService: AulaEnCursoEstudianteService
   ) { }
 
   urlTree: any;
@@ -131,6 +135,34 @@ export class EstudianteListComponent implements OnInit, OnDestroy {
     })
   }
 
+  generarPdf() {
+    
+     const pdf = new PdfMakeWrapper();
+     const aula = localStorage.getItem('aula');
+           pdf.add(new Txt(`Lista de estudiantes del ${aula}`).alignment('center').bold().end);
+           pdf.add(
+                pdf.ln(2)
+              );
+               pdf.add(this.crearTabla(this.aulaEnCursoEstudiantesHijo));
+               pdf.add(
+                 pdf.ln(1),
+               );
+           
+           pdf.create().open();
+  }
+
+  crearTabla(estudiantes: AulaEnCursoEstudiante[]): ITable{
+    [{}]
+    return new Table([
+      ['N°', 'Estudiante','DNI','Sexo','Fecha Nac.','N° cel.', 'E-mail'],
+      ...this.formatearDataParaTabla(estudiantes)
+    ]).widths('auto').end;
+  }
+  
+
+  formatearDataParaTabla(estudiantes: AulaEnCursoEstudiante[]): TableRow[]{
+    return estudiantes.map((row, index) => [index+1,row.estudiante, row.dni, row.sexo,row.fecha_nacimiento,row.celular,row.email]);
+  }
   ngOnDestroy(): void {
     // this.dtTrigger.unsubscribe();
   }

@@ -12,8 +12,6 @@ import htmlToPdfmake from "html-to-pdfmake"
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import * as pdfMake from 'pdfmake/build/pdfmake';
-import { ImageService } from '@services/image.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +23,6 @@ export class InformeModalComponent implements OnInit, OnDestroy {
 
   informeForm: FormGroup;
   sesionInforme: SesionInforme;
-  isImageLoading: boolean;
   constructor(private actividadService: ActividadService,
     public bsModalRef2: BsModalRef,
     private sesionService: SesionService,
@@ -51,10 +48,10 @@ export class InformeModalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // this.sesionInforme = this.informeForm.value;
+    this.sesionInforme = this.informeForm.value;
 
-    let fecha_inicio= moment('11/02/2020').format("YYYY-MM-DD HH:mm:ss");
-    let fecha_fin= moment('11/06/2020').format("YYYY-MM-DD HH:mm:ss");
+    let fecha_inicio= moment(this.sesionInforme.fecha_inicio).format("YYYY-MM-DD HH:mm:ss");
+    let fecha_fin= moment(this.sesionInforme.fecha_fin).format("YYYY-MM-DD HH:mm:ss");
 
      const pdf = new PdfMakeWrapper();
      let arr = new Array;
@@ -93,12 +90,12 @@ export class InformeModalComponent implements OnInit, OnDestroy {
                  let foto: any = [];
                  let ex: any = [];
                  for (let img of retro.imgs) {
-                   foto.push(await new Img(`${environment.API_URL}/${img.ruta_archivo}`).width(250).height(150).margin(4).build());
+                   foto.push(await new Img(`${environment.API_URL}/${img.ruta_archivo}`).width(200).height(100).margin(4).build());
                  }
                  let expresar = [];
                  expresar.push(new Txt('3.-Expresar sus inquietudes: ').color('blue').bold().margin(2).end);
                  for (let exp of retro.pasos.expresar) {
-                   expresar.push(new Txt(exp.enunciado).end, new Txt(exp.respuesta).decoration("underline").margin(1).end);
+                   expresar.push(new Txt(exp.enunciado).end, new Txt(exp.respuesta).decoration("underline").margin(2).end);
                  }
                  let aclarar = [];
                  let valorar = [];

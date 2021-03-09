@@ -1,22 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AulaEnCurso } from '@models/AulaEnCurso';
 import { UsuarioResponse } from '@models/Usuario';
 import { AulaEnCursoService } from '@services/aula-en-curso/aula-en-curso.service';
 import { Subscription } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
-import { Cell, Columns, Img, Item, Ol, PdfMakeWrapper, Stack, Table, Toc, TocItem, Txt, Ul } from 'pdfmake-wrapper';
 // import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
-import { SesionService } from '@services/sesion/sesion.service';
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
-(window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { InformeModalComponent } from './informe/informe-modal/informe-modal.component';
-// @ts-ignore
-// Set the fonts to use
-// PdfMakeWrapper.setFonts(pdfFonts);
-
-// import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({
   selector: 'app-aula',
@@ -38,7 +28,6 @@ export class AulaEnCursoComponent implements OnInit, OnDestroy {
   usuario: UsuarioResponse;
   tipo: number;
   imagenes = [];
-  pdf: PdfMakeWrapper = new PdfMakeWrapper();
 
   constructor(private flujoService: FlujoService,
     private aulaEnCursoService: AulaEnCursoService,
@@ -52,6 +41,8 @@ export class AulaEnCursoComponent implements OnInit, OnDestroy {
     this.aulaEnCursoService.buscar(this.aula_anio_id).subscribe((res: AulaEnCurso) => {
       this.aulaEnCurso = res
       localStorage.setItem('cantidad_estudiantes', this.aulaEnCurso.cantidad_estudiantes.toString());
+      localStorage.setItem('aula', this.aulaEnCurso.aula.toString());
+
     });
     this.accionSuscription$ = this.flujoService.enviarAccion$.subscribe((accion) => this.accion = accion);
     let usuarioString = localStorage.getItem('usuario');
@@ -67,10 +58,6 @@ export class AulaEnCursoComponent implements OnInit, OnDestroy {
   }
 
   abrirInformeModal() {
-    // const initialState = {
-    //  aula: this.actividadNieto,
-    //  tipo: this.tipoVisnieto
-    // };
     this.bsModalRef = this.modalService.show(InformeModalComponent, {ignoreBackdropClick: true});
   }
 

@@ -46,30 +46,30 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.cargando=true;
+    this.cargando = true;
     this.usuario = this.loginForm.value;
 
-    this.suscription$=this.loginService.login(this.usuario).subscribe((res) => {
-        if (res) {
-          this.anioEscolarService.obtenerAnioActivo().subscribe((res: AnioEscolar)=>{
+    this.suscription$ = this.loginService.login(this.usuario).subscribe((res) => {
+      if (res) {
+        this.anioEscolarService.obtenerAnioActivo().subscribe((res: AnioEscolar) => {
+          setTimeout(() => {
             localStorage.setItem('anio_activo', JSON.stringify(res));
-            this.cargando=false;
             this.router.navigate(["/principal"]);
-          });          
-        }
-      },
+            this.cargando = false;
+          }, 1000)
+        });
+      }
+    },
       err => {
-        console.log(err);
-        if(err.status===400){
-          this.msgError="Email y/o contraseña incorrectos";
-        }
-        this.cargando=false;
-          this.cargando=false;
-      },
-      ()=> {this.cargando=false;
-}
-      
-      );
+        console.error(err);
+        setTimeout(() => {
+          if (err.status === 400) {
+            this.msgError = "Email y/o contraseña incorrectos";
+            this.cargando = false;
+          }
+        }, 1000);
+      }
+    );
   }
 
   validar() {
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     let mensaje: string;
     if (this.loginForm.get(campo).errors.required) {
       mensaje = `El campo es requerido`;
-    }else if (this.loginForm.get(campo).hasError('pattern')){
+    } else if (this.loginForm.get(campo).hasError('pattern')) {
       mensaje = `Ingrese un email válido`;
     }
     return mensaje;
