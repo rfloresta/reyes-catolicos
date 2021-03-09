@@ -51,11 +51,10 @@ export class InformeModalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.sesionInforme = this.informeForm.value;
+    // this.sesionInforme = this.informeForm.value;
 
-    let fecha_inicio= moment(this.sesionInforme.fecha_inicio).format("YYYY-MM-DD HH:mm:ss");
-    let fecha_fin= moment(this.sesionInforme.fecha_fin).format("YYYY-MM-DD HH:mm:ss");
-console.log(this.sesionInforme);
+    let fecha_inicio= moment('11/02/2020').format("YYYY-MM-DD HH:mm:ss");
+    let fecha_fin= moment('11/06/2020').format("YYYY-MM-DD HH:mm:ss");
 
      const pdf = new PdfMakeWrapper();
      let arr = new Array;
@@ -74,11 +73,14 @@ console.log(this.sesionInforme);
        },
          async () => {
            pdf.add(new Txt('INFORME DE EVIDENCIAS SEMANA N° ' + arr[0].numero).alignment('center').bold().end);
-           pdf.add(
-             pdf.ln(1)
-           );
+         
+          //  console.log('ses', arr);
+           
            for (let sesion of arr) {
-             if (sesion.retro.length !== 0) {
+             if (sesion.retro.length > 0) {
+              pdf.add(
+                pdf.ln(2)
+              );
                pdf.add(new Table([
                  ['Area', sesion.area],
                  ['Competencia', sesion.competencia],
@@ -91,19 +93,19 @@ console.log(this.sesionInforme);
                  let foto: any = [];
                  let ex: any = [];
                  for (let img of retro.imgs) {
-                   foto.push(await new Img(`${environment.API_URL}/${img.ruta_archivo}`).fit([200, 100]).build());
+                   foto.push(await new Img(`${environment.API_URL}/${img.ruta_archivo}`).width(250).height(150).margin(4).build());
                  }
                  let expresar = [];
-                 expresar.push(new Txt('3.-Expresar sus inquietudes: ').color('blue').bold().end);
+                 expresar.push(new Txt('3.-Expresar sus inquietudes: ').color('blue').bold().margin(2).end);
                  for (let exp of retro.pasos.expresar) {
-                   expresar.push(new Txt(exp.enunciado).end, new Txt(exp.respuesta).decoration("underline").end);
+                   expresar.push(new Txt(exp.enunciado).end, new Txt(exp.respuesta).decoration("underline").margin(1).end);
                  }
                  let aclarar = [];
                  let valorar = [];
                  let sugerir = [];
-                 aclarar.push(new Txt('1.-Aclarar: ').color('blue').bold().width(-1000).end, new Txt(retro.pasos.aclarar.enunciado).end, new Txt(retro.pasos.aclarar.respuesta).decoration("underline").end);
-                 valorar.push(new Txt('2.-Valorar: ').color('blue').bold().end, new Txt(retro.pasos.valorar.enunciado).end, new Txt(retro.pasos.valorar.respuesta).decoration("underline").end);
-                 sugerir.push(new Txt('4.-Sugerir: ').color('blue').bold().end, new Txt(retro.pasos.sugerir.enunciado).end, new Txt(retro.pasos.sugerir.respuesta).decoration("underline").end);
+                 aclarar.push(new Txt('1.-Aclarar: ').color('blue').bold().margin(2).end, new Txt(retro.pasos.aclarar.enunciado).end, new Txt(retro.pasos.aclarar.respuesta).decoration("underline").end);
+                 valorar.push(new Txt('2.-Valorar: ').color('blue').bold().margin(2).end, new Txt(retro.pasos.valorar.enunciado).end, new Txt(retro.pasos.valorar.respuesta).decoration("underline").end);
+                 sugerir.push(new Txt('4.-Sugerir: ').color('blue').bold().margin(2).end, new Txt(retro.pasos.sugerir.enunciado).end, new Txt(retro.pasos.sugerir.respuesta).decoration("underline").end);
                  pdf.add(new Stack([retro.estudiante, new Table([
                    [new Stack([foto]).headlineLevel("algo").end, new Stack([aclarar, valorar, expresar, sugerir]).alignment("justify").end]
                  ]).end,
