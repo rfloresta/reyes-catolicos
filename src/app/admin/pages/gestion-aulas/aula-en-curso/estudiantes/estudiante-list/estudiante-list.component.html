@@ -5,8 +5,8 @@
             <div class="col-md-4">
                 <h5 class="car-tittle">{{aulaEnCursoEstudiantesHijo[0].cantidad_estudiantes}} de {{aulaEnCursoEstudiantesHijo[0].capacidad}}</h5>
             </div>
-            <div class="col-md-5">
-                <button class="btn btn-info" (click)="generarPdf()"><i class="material-icons">picture_as_pdf</i></button>
+            <div class="col-md-8">
+                <button class="btn btn-danger pull-right" (click)="generarPdf()"><i class="material-icons">picture_as_pdf</i></button>
             </div>
         <div class="col-md-3 tarjeta-espacio" *ngFor="let estudiante of aulaEnCursoEstudiantesHijo | paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
         <div class="card card-profile card-hidden">

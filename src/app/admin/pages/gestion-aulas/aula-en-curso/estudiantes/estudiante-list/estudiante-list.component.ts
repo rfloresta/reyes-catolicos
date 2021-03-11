@@ -11,6 +11,7 @@ import { PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { ITable } from 'pdfmake-wrapper/lib/interfaces';
 import { ContentTable, TableCell } from 'pdfmake/interfaces';
+import * as moment from 'moment';
 PdfMakeWrapper.setFonts(pdfFonts);
 
 type TableRow = [number,string,string,string,string,string,string];
@@ -136,7 +137,6 @@ export class EstudianteListComponent implements OnInit, OnDestroy {
   }
 
   generarPdf() {
-    
      const pdf = new PdfMakeWrapper();
      const aula = localStorage.getItem('aula');
            pdf.add(new Txt(`Lista de estudiantes del ${aula}`).alignment('center').bold().end);
@@ -147,22 +147,30 @@ export class EstudianteListComponent implements OnInit, OnDestroy {
                pdf.add(
                  pdf.ln(1),
                );
-           
            pdf.create().open();
   }
 
   crearTabla(estudiantes: AulaEnCursoEstudiante[]): ITable{
     [{}]
     return new Table([
-      ['N°', 'Estudiante','DNI','Sexo','Fecha Nac.','N° cel.', 'E-mail'],
+      ['N', 'Estudiante','DNI','Sexo','Fecha Nac.','N° cel.', 'E-mail'],
       ...this.formatearDataParaTabla(estudiantes)
-    ]).widths('auto').end;
+    ]).widths(['auto',100,'auto','auto','auto','auto','auto'])
+    .layout({fillColor: (rowIndex: number, node: any, columnIndex: number)=>{
+      return rowIndex === 0 ? '#CCCCCC':'';
+    }})
+    .end;
   }
   
 
   formatearDataParaTabla(estudiantes: AulaEnCursoEstudiante[]): TableRow[]{
-    return estudiantes.map((row, index) => [index+1,row.estudiante, row.dni, row.sexo,row.fecha_nacimiento,row.celular,row.email]);
+    return estudiantes.map((row, index) => [index+1,row.estudiante, row.dni, row.sexo,this.formatFecha(row.fecha_nacimiento),row.celular,row.email]);
   }
+
+  formatFecha(fecha: string){
+    return moment(fecha).format("DD-MM-YYYY");
+  }
+  
   ngOnDestroy(): void {
     // this.dtTrigger.unsubscribe();
   }
