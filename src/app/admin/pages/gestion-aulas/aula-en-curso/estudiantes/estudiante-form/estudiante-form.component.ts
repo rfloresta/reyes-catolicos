@@ -1,11 +1,10 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AulaEnCursoEstudiante } from '@models/aulaEnCursoEstudiante';
+import { AulaEnCursoEstudiante } from '@models/AulaEnCursoEstudiante';
 import { Usuario } from "@models/Usuario";
 import { UsuarioService } from '@services/usuario/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { AulaEnCursoEstudianteService } from '@services/aula-en-curso-estudiante/aula-en-curso-estudiante.service';
-import { FlujoService } from '@services/flujo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 declare var $:any;

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { ActividadForoUsuario } from '@models/ActividadForoUsuario';
 import { UsuarioResponse } from '@models/Usuario';
 import { ActividadService } from '@services/actividad/actividad.service';

@@ -1,7 +1,7 @@
-import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { Area } from '@models/area';
+import { Subscription } from 'rxjs';
+import { Area } from '@models/Area';
 import { FlujoService } from '@services/flujo.service';
 import { AreaService } from '@services/area/area.service';
 import { ToastrService } from 'ngx-toastr';

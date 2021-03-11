@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { Recurso } from '@models/recurso';
+import { Recurso } from '@models/Recurso';
 import { environment } from 'src/environments/environment';
 
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';

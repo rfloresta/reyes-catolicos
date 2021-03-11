@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Area } from '@models/area';
+import { Area } from '@models/Area';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

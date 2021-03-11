@@ -1,11 +1,9 @@
 import { HttpClient, HttpParams, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Form } from '@angular/forms';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { ActividadForoUsuario } from '@models/ActividadForoUsuario';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
 import { Retroalimentacion } from '@models/Retroalimentacion';
-import { Usuario } from '@models/Usuario';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

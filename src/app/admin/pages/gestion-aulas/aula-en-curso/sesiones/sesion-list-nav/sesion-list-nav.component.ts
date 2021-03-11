@@ -4,13 +4,13 @@ import { UsuarioResponse } from '@models/Usuario';
 import { Subscription } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
 import Swal from 'sweetalert2';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { RecursoService } from '@services/recurso/recurso.service';
-import { Actividad } from '@models/actividad';
-import { Recurso } from '@models/recurso';
+import { Actividad } from '@models/Actividad';
+import { Recurso } from '@models/Recurso';
 
 @Component({
   selector: 'app-sesion-list-nav',

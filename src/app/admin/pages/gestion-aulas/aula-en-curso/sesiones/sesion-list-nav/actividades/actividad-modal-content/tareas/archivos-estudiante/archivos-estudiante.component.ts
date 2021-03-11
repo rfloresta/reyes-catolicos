@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
 import { ActividadTareaUsuarioArchivo } from '@models/ActividadTareaUsuarioArchivo';
 import { Retroalimentacion } from '@models/Retroalimentacion';

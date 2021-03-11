@@ -1,7 +1,7 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { AnioEscolar } from '@models/anioEscolar';
+import { Subscription } from 'rxjs';
+import { AnioEscolar } from '@models/AnioEscolar';
 import { FlujoService } from '@services/flujo.service';
 import { AnioEscolarService } from '@services/anio-escolar/anio-escolar.service';
 import { ToastrService } from 'ngx-toastr';

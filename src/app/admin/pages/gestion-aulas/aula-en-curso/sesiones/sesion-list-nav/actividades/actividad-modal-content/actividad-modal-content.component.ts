@@ -1,13 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { UsuarioResponse } from '@models/Usuario';
 import { ActividadService } from '@services/actividad/actividad.service';
-import { DataTableDirective } from 'angular-datatables';
-import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-actividad-modal-content',

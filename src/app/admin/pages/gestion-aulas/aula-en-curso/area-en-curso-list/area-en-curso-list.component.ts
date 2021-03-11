@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AulaEnCursoAreaService } from '@services/aula-en-curso-area/aula-en-curso-area.service';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { UsuarioResponse } from '@models/Usuario';
 import { environment } from 'src/environments/environment';
 

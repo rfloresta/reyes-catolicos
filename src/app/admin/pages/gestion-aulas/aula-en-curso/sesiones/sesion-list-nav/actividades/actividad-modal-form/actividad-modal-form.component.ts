@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActividadService } from '@services/actividad/actividad.service';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 declare var $: any;
 

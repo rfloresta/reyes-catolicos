@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { UsuarioResponse } from '@models/Usuario';
 import * as moment from 'moment';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 import { ActividadService } from '@services/actividad/actividad.service';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
 
 @Component({

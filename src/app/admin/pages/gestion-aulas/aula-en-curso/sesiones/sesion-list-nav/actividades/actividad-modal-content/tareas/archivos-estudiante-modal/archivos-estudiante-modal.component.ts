@@ -1,11 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actividad } from '@models/actividad';
+import { Component, OnInit } from '@angular/core';
+import { Actividad } from '@models/Actividad';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
-import { UsuarioResponse } from '@models/Usuario';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
 @Component({

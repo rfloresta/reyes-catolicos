@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Aula } from '@models/aula';
+import { Aula } from '@models/Aula';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

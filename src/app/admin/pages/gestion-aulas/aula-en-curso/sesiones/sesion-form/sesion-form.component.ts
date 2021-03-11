@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { FlujoService } from '@services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
 import { ToastrService } from 'ngx-toastr';

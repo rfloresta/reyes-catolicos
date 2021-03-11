@@ -4,10 +4,8 @@ import { UsuarioResponse } from '@models/Usuario';
 import { Observable, Subscription  } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
 import { SesionService } from '@services/sesion/sesion.service';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
-import { map, take } from 'rxjs/operators';
-import { async } from '@angular/core/testing';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';
 
 @Component({

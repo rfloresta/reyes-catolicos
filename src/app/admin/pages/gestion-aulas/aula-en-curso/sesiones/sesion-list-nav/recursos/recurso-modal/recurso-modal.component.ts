@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { FlujoService } from 'src/app/services/flujo.service';
 import { RecursoService } from '@services/recurso/recurso.service';
-import { Recurso } from '@models/recurso';
+import { Recurso } from '@models/Recurso';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { FormatoService } from '@services/formato/formato.service';
 import { Formato } from '@models/Formato';
 // import { TipoaulaService } from '@services/tipo-aula/tipo-aula.service';

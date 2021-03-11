@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { pipe, Subject } from 'rxjs';
 import { FlujoService } from '@services/flujo.service';
 import { AulaEnCursoService } from '@services/aula-en-curso/aula-en-curso.service';
 import Swal from 'sweetalert2'

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FlujoService } from 'src/app/services/flujo.service';
-// import { Tipoanio-escolarService } from '@services/tipo-anio-escolar/tipo-anio-escolar.service';
 
 @Component({
   selector: 'app-anio-escolar',

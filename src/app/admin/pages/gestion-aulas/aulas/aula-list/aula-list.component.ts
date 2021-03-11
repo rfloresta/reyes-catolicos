@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { Aula } from '@models/aula';
+import { Aula } from '@models/Aula';
 import { FlujoService } from '@services/flujo.service';
 import { AulaService } from '@services/aula/aula.service';
 import Swal from 'sweetalert2'

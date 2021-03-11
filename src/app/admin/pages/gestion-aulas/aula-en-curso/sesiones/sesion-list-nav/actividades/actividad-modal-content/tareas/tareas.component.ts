@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { Actividad } from '@models/actividad';
+import { Actividad } from '@models/Actividad';
 import { ActividadTareaUsuario } from '@models/ActividadTareaUsuario';
 import { ActividadTareaUsuarioArchivo } from '@models/ActividadTareaUsuarioArchivo';
 import { ActividadService } from '@services/actividad/actividad.service';
