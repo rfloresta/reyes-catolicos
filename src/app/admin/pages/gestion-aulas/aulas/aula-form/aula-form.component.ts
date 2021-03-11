@@ -1,7 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { Aula } from '@models/aula';
+import { Aula } from '@models/Aula';
 import { FlujoService } from '@services/flujo.service';
 import { AulaService } from '@services/aula/aula.service';
 import { ToastrService } from 'ngx-toastr';

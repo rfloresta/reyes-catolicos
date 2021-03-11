@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Sesion } from '@models/sesion';
+import { Sesion } from '@models/Sesion';
 import { SesionInforme } from '@models/SesionInforme';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
