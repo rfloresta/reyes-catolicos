@@ -16,12 +16,14 @@
                 </div> -->
             </div>
             <div class="card-footer">
-                <!-- <div class="price">
-                    <h4>dato</h4>
-                </div>  -->
-                <!-- <div class="stats pull-right">
-                    <p class="category"><i class="material-icons">place</i> otro dato</p>
-                </div> -->
+                <div class="stats">
+                    <a href="javascript:void(0)" class="a-success" title="Editar" (click)="abrirModal(area)"><i class="material-icons">edit</i></a>
+                </div> 
+                <div class="price pull-right">
+                    <a  [href]="area.link" target="_blank"  class="a-info"><i
+                        class="material-icons">videocam</i>Clase virtual</a>
+                   
+                </div>
             </div>
         </div>
     </div>

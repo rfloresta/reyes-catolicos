@@ -2,7 +2,7 @@
     <input type="hidden" formControlName="id">
     
     <div class="row espacio">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="form-group label-floating" [ngClass]="campoValido('numero')?'has-error':''">
                 <label class="control-label">Número*</label>
                 <input type="number" class="form-control" formControlName="numero" required />
@@ -11,7 +11,7 @@
                 </ng-container>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div  [ngClass]="campoValido('fecha')?'form-group label-floating is-empty has-error':'form-group label-floating'">
                 <label class="control-label">Fecha*</label>
                 <input class="form-control" [owlDateTimeTrigger]="dt" formControlName="fecha" required  [owlDateTime]="dt">
@@ -21,7 +21,7 @@
                 </ng-container>
             </div>
         </div>
-        <div class="col-md-5">
+        <!-- <div class="col-md-5">
             <div class="form-group label-floating" [ngClass]="campoValido('link')?'has-error':''">
                 <label class="control-label">Link de clase*</label>
                 <input type="url" class="form-control" formControlName="link" />
@@ -29,7 +29,7 @@
                     <span class="error-message">{{ mensajeError("link") }}</span>
                 </ng-container>
             </div>
-        </div>
+        </div> -->
         <div class="col-md-12">
             <div class="form-group label-floating" [ngClass]="campoValido('tema')?'has-error':''">
                 <label class="control-label">Actividad*</label>

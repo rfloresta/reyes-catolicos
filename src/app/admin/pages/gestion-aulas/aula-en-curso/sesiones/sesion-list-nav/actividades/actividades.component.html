@@ -12,11 +12,11 @@
     <ng-container *ngIf="!cargando">
 
         <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let actividad of actividadesHijo" >
-            <div class="card card-pricing card-raised card-contenido">
+            <div class="card card-pricing card-raised">
                 <div class="content">
                   
                     <h6 class="category">{{actividad.tipo_nombre}}</h6>
-                    <div  class="icon icon-info">
+                    <div  class="icon">
                         <button class="btn btn-simple btn-danger" href="javascript:void(0);" 
                         > 
                         <i (click)="abrirModalContent(modalContent,actividad)" class="material-icons">

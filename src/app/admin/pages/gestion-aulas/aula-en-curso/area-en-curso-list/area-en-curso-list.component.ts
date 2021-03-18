@@ -5,6 +5,10 @@ import { AulaEnCursoArea } from '@models/AulaEnCursoArea';
 import { Sesion } from '@models/Sesion';
 import { UsuarioResponse } from '@models/Usuario';
 import { environment } from 'src/environments/environment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AreaEnCursoModalComponent } from './area-en-curso-modal/area-en-curso-modal.component';
+import { FlujoService } from '@services/flujo.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-area-en-curso-list',
@@ -16,10 +20,8 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
   aulaEnCursoAreasHijo: AulaEnCursoArea[] = [];
   usuario: UsuarioResponse;
   tipo: number;
-  sesion: Sesion =
-    {
-    }
-
+  sesion: Sesion ={}
+  bsModalRef: BsModalRef;
   area: AulaEnCursoArea;
   accionEstado: string = "Activa";
   aula_anio_id: string;
@@ -27,8 +29,12 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
   urlAnterior: string;
   url: string = `${environment.API_URL}/`;
   p:number =1;
+  refrescarSuscription$: Subscription;
+
   constructor(private aulaEnCursoAreaService: AulaEnCursoAreaService,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService,
+    private flujoService: FlujoService
   ) { }
  
   ngOnInit(): void {
@@ -36,7 +42,16 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
     let usuarioString = localStorage.getItem('usuario');
     this.usuario = JSON.parse(usuarioString);
     this.tipo = this.usuario.tipo;
+    
     this.cargando = true;
+     // Listar areas
+     this.refrescarSuscription$ = this.flujoService.refrescar$
+     .subscribe(() => {
+       this.listar();
+     });
+  }
+
+  listar(){
     if (this.tipo === 1 || this.tipo === 2) {
       let aula_anio_id = localStorage.getItem('ai');  
       this.aulaEnCursoAreaService.listar(aula_anio_id).subscribe(
@@ -56,7 +71,6 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
       }, 1000);
     }
   }
-
   consultarArea(area: AulaEnCursoArea) {
 
     //almacenamos el area para listar sus sesiones mediante el id, 
@@ -68,9 +82,17 @@ export class AreaEnCursoListComponent implements OnInit, OnDestroy {
       this.router.navigate(['/principal/inicio/aula-en-curso/areas/sesiones']);
     }
   }
+  abrirModal(area: AulaEnCursoArea){
+    const initialState = {
+      area: area
+    };      
+    this.bsModalRef = this.modalService.show(AreaEnCursoModalComponent, { initialState });
+  }
 
   ngOnDestroy(): void {
-    // this.dtTrigger.unsubscribe();
+    if (this.refrescarSuscription$)
+    this.refrescarSuscription$.unsubscribe();
+
   }
 
 }

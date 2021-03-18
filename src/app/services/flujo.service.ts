@@ -14,6 +14,14 @@ export class FlujoService {
     this.enviarObjetoSource.next(objeto);
   }
 
+  //Refrescar Lista
+  readonly refrescarSource: BehaviorSubject<any> = new BehaviorSubject(null);
+  readonly refrescar$ = this.refrescarSource.asObservable();
+
+   refrescar(objeto: Object): void{
+    this.refrescarSource.next(objeto);
+  }
+
   //Accion de Formulario Registrar/Actualizar
   readonly enviarAccionSource: BehaviorSubject<string> = new BehaviorSubject("Registrar");
   readonly enviarAccion$ = this.enviarAccionSource.asObservable();

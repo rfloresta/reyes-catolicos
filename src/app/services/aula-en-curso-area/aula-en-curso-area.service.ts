@@ -20,18 +20,22 @@ export class AulaEnCursoAreaService {
   }
 
   buscar(id: string): Observable<AulaEnCursoArea>{
-    return this.httpClient.get(`${environment.API_URL}/api/aulas_en_curso/${id}`);
+    return this.httpClient.get(`${environment.API_URL}/api/aula_en_curso_areas/${id}`);
   }
 
   actualizar(aulaEnCursoArea: AulaEnCursoArea){
-    return this.httpClient.put(`${environment.API_URL}/api/aulas_en_curso/${aulaEnCursoArea.id}`, aulaEnCursoArea);
+    return this.httpClient.put(`${environment.API_URL}/api/aula_en_curso_areas/${aulaEnCursoArea.id}`, aulaEnCursoArea);
   }
 
   eliminar(id: number){
-    return this.httpClient.delete(`${environment.API_URL}/api/aulas_en_curso/${id}`)
+    return this.httpClient.delete(`${environment.API_URL}/api/aula_en_curso_areas/${id}`)
   }
 
   actualizarEstado(id: number, aulaEnCursoArea: AulaEnCursoArea): Observable<any>{
-    return this.httpClient.patch(`${environment.API_URL}/api/aulas_en_curso/${id}`, aulaEnCursoArea)
+    return this.httpClient.patch(`${environment.API_URL}/api/aula_en_curso_areas/${id}`, aulaEnCursoArea)
+  }
+
+  actualizarLink(id: number, aulaEnCursoArea: AulaEnCursoArea): Observable<any>{
+    return this.httpClient.patch(`${environment.API_URL}/api/aula_en_curso_areas/link/${id}`, aulaEnCursoArea)
   }
 }

@@ -29,7 +29,6 @@ import { ActividadModalContentComponent } from './sesion-list-nav/actividades/ac
 import { DataTablesModule } from 'angular-datatables';
 import { ForosComponent } from './sesion-list-nav/actividades/actividad-modal-content/foros/foros.component';
 import { InformacionForoModalComponent } from './sesion-list-nav/actividades/actividad-modal-content/foros/informacion/informacion-foro-modal.component';
-
 import { TareasComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/tareas.component';
 import { ArchivosEstudianteModalComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/archivos-estudiante-modal/archivos-estudiante-modal.component';
 import { ArchivosEstudianteComponent } from './sesion-list-nav/actividades/actividad-modal-content/tareas/archivos-estudiante/archivos-estudiante.component';

@@ -18,16 +18,19 @@ import { SesionService } from '@services/sesion/sesion.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ActividadService } from '@services/actividad/actividad.service';
 import { InformeModalComponent } from './informe/informe-modal/informe-modal.component';
+import { AreaEnCursoModalComponent } from "./area-en-curso-list/area-en-curso-modal/area-en-curso-modal.component";
 import { OwlDateTimeIntl, OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { ImageService } from '@services/image.service';
 @NgModule({
   declarations: [
     AulaEnCursoComponent,
     AreaEnCursoListComponent,
-    InformeModalComponent
+    InformeModalComponent,
+    AreaEnCursoModalComponent
   ],
   exports:[
-    AulaEnCursoComponent
+    AulaEnCursoComponent,
+    AreaEnCursoModalComponent
   ],
   imports: [
     CommonModule,
